@@ -42,7 +42,8 @@ async function Get(){
 	return JSON.parse(await w.evaluateJavaScript("get()", false));
 }
 async function Give(json){
-	return await w.evaluateJavaScript(`give('${JSON.stringify(json)}');`, false);
+	console.log(`give('${JSON.stringify(json)}');`)
+	return await w.evaluateJavaScript(`give('${JSON.stringify(json).split("'").join("\\\'")}');`, false);
 }
 async function Load(){
 	return await w.evaluateJavaScript("load()", false);
