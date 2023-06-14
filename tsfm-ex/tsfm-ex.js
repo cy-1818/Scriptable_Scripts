@@ -21,7 +21,7 @@ if(!f.fileExists(pass+"/tsfm-ex")){
 	console.log(await alert.present())
 	await f.createDirectory(pass + "/tsfm-ex", false)
 	var link = "https://raw.githubusercontent.com/cy-1818/Scriptable_Scripts/main/tsfm-ex/tsfm-ex/"
-	var setup = ["commands.json", "tsfm-ex.html", "cd.js", "ls.js", "exit.js", "script.js", "urls.js"]
+	var setup = ["commands.json", "tsfm-ex.html", "cd.js", "ls.js", "exit.js", "script.js", "urls.json"]
 	for(var n=0;n<setup.length;n++){
 		var rstr = await new Request(link+setup[n]).loadString();
 		await f.writeString(pass + "/tsfm-ex/" + setup[n], rstr)
