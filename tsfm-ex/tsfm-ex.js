@@ -14,7 +14,25 @@ elements = {
 		"str":"welcome to tsfm-ex!"
 	}]
 }
-var commands = JSON.parse(f.readString(doc+"/tsfm-ex/commands.json"));
+if(!f.fileExists(pass+"/tsfm-ex")){
+	var alert = new Alert()
+	alert.message = "start install"
+	alert.addAction("OK")
+	console.log(await alert.present())
+	await f.createDirectory(pass + "/tsfm-ex", false)
+	var link = "https://raw.githubusercontent.com/cy-1818/Scriptable_Scripts/main/tsfm-ex/tsfm-ex/"
+	var setup = ["commands.json", "tsfm-ex.html", "cd.js", "ls.js", "exit.js", "script.js", "urls.js"]
+	for(var n=0;n<setup.length;n++){
+		var rstr = await new Request(link+setup[n]).loadString();
+		await f.writeString(pass + "/tsfm-ex/" + setup[n], rstr)
+		console.log(setup[n] + " is installed")
+	}
+	alert = new Alert()
+	alert.addAction("OK")
+	alert.message = "finish install"
+	console.log(await alert.present())
+}
+commands = JSON.parse(f.readString(doc+"/tsfm-ex/commands.json"));
 var input;
 var func;
 async function Check(){
