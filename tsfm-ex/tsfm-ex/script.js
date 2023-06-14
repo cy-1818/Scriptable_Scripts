@@ -94,12 +94,14 @@ return (async function(){
 	    urls=urls.concat(parameter.slice(1))
 	    await f.writeString(doc+"/tsfm-ex/urls.json", JSON.stringify(urls))
 	  break;
+          case "version":
 	  case "-v":
 	    result.push({
 	      "style":"",
-	      "str":"1.0"
+	      "str":"1.2"
 	    })
 	  break;
+          case "help":
 	  case "-h":
 	  default:
 	    result.push({
