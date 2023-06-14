@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width" />
+  <title>tsfm-ex</title>
+  <style>
+body {
+    background-color: black;
+    color: #12abef;
+    font-family: Arial, sans-serif;
+}
+.form{
+    display:inline-block;
+    width: 100%;
+    height: 1em;
+}
+#terminal{
+    overflow:scroll;
+    height:100vh;
+    white-space: nowrap;
+}
+
+  </style>
+</head>
+<body>
+  <div id="terminal" onclick = "form.focus()"></div>
+  <script>
+    console.log("start");
+    var terminal = document.getElementById("terminal");
+    var log = document.getElementById("log");
+    var checker = false;
+    var elements = {}
+    var ans;
+    var form;
+    function logKey(e) {
+      console.log(e.code);
+      if(e.code=="Enter"){
+        elements.input = form.innerText;
+        form.contentEditable = false;
+        form.removeEventListener('keydown', logKey)
+        checker = true;
+      }
+      console.log(elements);
+    }
+    function give(str){
+      elements = JSON.parse(str)
+      return 0;
+    }
+    function get(){
+      return JSON.stringify(elements);
+    }
+    function check(){
+      return checker;
+    }
+    function load(){
+      console.log(elements);
+      checker = false;
+      var line = document.createElement("div");
+      for(var n=0;n<elements.output.length;n++){
+        var span = document.createElement("span");
+        span.style=elements.output[n].style;
+        span.innerHTML=elements.output[n].str;
+        line.append(span);
+      }
+      terminal.append(line);
+      line = document.createElement("div");
+      var left = document.createElement("span");
+      left.innerHTML = `${elements.name}:${elements.pass.replace(elements.doc, "Document")} $ `;
+      var right = document.createElement("span");
+      right.contentEditable = true;
+      right.className = "form"
+      line.append(left);
+      line.append(right);
+      form = right;
+      form.addEventListener('keydown', logKey);
+      terminal.append(line);
+      form.focus();
+      return 0;
+    }
+    console.log("setupend");
+    
+  </script>
+</body>
+</html>

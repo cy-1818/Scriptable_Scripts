@@ -1,0 +1,5 @@
+{
+  "exit":"/tsfm-ex/exit.js",
+  "ls":"/tsfm-ex/ls.js",
+  "cd":"/tsfm-ex/cd.js"
+}
