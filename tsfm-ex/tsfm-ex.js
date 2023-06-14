@@ -70,7 +70,7 @@ async function MainLoop(){
 		elements = await Get();
 		input = elements.input.split(" ");
 		if(commands.hasOwnProperty(input[0])){
-			output = (new Function("parameter",f.readString(doc+commands[input[0]])))(input.slice(1));
+			output = await (new Function("parameter",f.readString(doc+commands[input[0]])))(input.slice(1));
 			elements.pass = pass;
 			if(output=="break"){
 				break;
