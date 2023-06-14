@@ -1,0 +1,34 @@
+{
+  "ls":{
+    "url":"https://raw.githubusercontent.com/cy-1818/Scriptable_Scripts/main/tsfm-ex/tsfm-ex/ls.js",
+    "type":"command"
+  },
+  "cd":{
+    "url":"https://raw.githubusercontent.com/cy-1818/Scriptable_Scripts/main/tsfm-ex/tsfm-ex/cd.js",
+    "type":"command"
+  },
+  "exit":{
+    "url":"https://raw.githubusercontent.com/cy-1818/Scriptable_Scripts/main/tsfm-ex/tsfm-ex/exit.js",
+    "type":"command"
+  },
+  "tsfm-ex":{
+    "url":"https://raw.githubusercontent.com/cy-1818/Scriptable_Scripts/main/tsfm-ex/tsfm-ex.js",
+    "type":"Scriptable"
+  },
+  "tsfm":{
+    "url":"https://raw.githubusercontent.com/a-ori-a/Widgets/master/tsfm.js",
+    "type":"Scriptable"
+  },
+  "calendar":{
+    "url":"githubusercontent.com/cy-1818/Scriptable_Scripts/main/Calendar/calendar.js",
+    "type":"Scriptable"
+  },
+  "randomQuotes":{
+    "url":"https://raw.githubusercontent.com/a-ori-a/Widgets/master/randomQuotes.js",
+    "type":"Scriptable"
+  },
+  "dayCounter":{
+    "url":"https://raw.githubusercontent.com/a-ori-a/Widgets/master/dayCounter.js",
+    "type":"Scriptable"
+  }
+}
