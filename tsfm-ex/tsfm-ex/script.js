@@ -47,7 +47,7 @@ return (async function(){
 	          });
 	          result.push({
 	            "style":"",
-	            "str":parameter[n]+"was undefined"
+	            "str":parameter[n]+" was undefined<br/>"
 	          })
 	        }
 	      }
@@ -80,7 +80,7 @@ return (async function(){
 	        });
 	        result.push({
 	          "style":"",
-	          "str":parameter[n]+"was undefined"
+	          "str":parameter[n]+" was undefined<br/>"
 	        })
 	      }
 	    }
@@ -98,7 +98,7 @@ return (async function(){
 	  case "-v":
 	    result.push({
 	      "style":"",
-	      "str":"1.2"
+	      "str":"1.3"
 	    })
 	  break;
           case "help":
