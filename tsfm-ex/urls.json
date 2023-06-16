@@ -17,7 +17,12 @@
   "tsfm-ex":{
     "url":"https://raw.githubusercontent.com/cy-1818/Scriptable_Scripts/main/tsfm-ex/tsfm-ex.js",
     "type":"Scriptable",
-    "name":"tsfm-ex.js"
+    "name":"tsfm-ex.js",
+    "dependence":[
+      "ls",
+      "cd",
+      "script"
+    ]
   },
   "tsfm":{
     "url":"https://raw.githubusercontent.com/a-ori-a/Widgets/master/tsfm.js",
