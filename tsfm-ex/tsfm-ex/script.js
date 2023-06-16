@@ -32,13 +32,20 @@ return (async function(){
 	          var rqstr = await rq.loadString();
 	          switch(urlList[parameter[n]].type){
 	            case "command":
-	              await f.writeString(doc + "/tsfm-ex/" + parameter[n], rqstr)
-	              commands[parameter[n]]="/tsfm-ex/" + parameter[n];
+	              await f.writeString(doc + "/tsfm-ex/" + urlList[parameter[n]].name, rqstr)
+	              commands[parameter[n]]="/tsfm-ex/" + urlList[parameter[n]].name;
 	              await f.writeString(doc+"/tsfm-ex/commands.json", JSON.stringify(commands))
 	            break;
 	            case "Scriptable":
-	              await f.writeString(doc + "/" + parameter[n], rqstr)
+	              await f.writeString(doc + "/" + urlList[parameter[n]].name, rqstr)
 	            break;
+	          }
+	          if(urlList[parameter[n]].dependence){
+	            for(var i=1;i<urlList[parameter[n]].dependence.length;i++){
+	              if(!parameter.includes(urlList[parameter[n]].dependence[i]){
+	                parameter.push(urlList[parameter[n]].dependence[i])
+	              }
+	            }
 	          }
 	        }else{
 	          result.push({
