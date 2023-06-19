@@ -1,1 +1,7 @@
-{"exit":"/tsfm-ex/exit.js","script":"/tsfm-ex/script.js","ls":"/tsfm-ex/ls.js","cd":"/tsfm-ex/cd.js","clear":"/tsfm-ex/clear.js","badapple":"/tsfm-ex/badapple.js"}
+{
+	"exit": "/tsfm-ex/exit.js",
+	"script": "/tsfm-ex/script.js",
+	"ls": "/tsfm-ex/ls.js",
+	"cd": "/tsfm-ex/cd.js",
+	"clear": "/tsfm-ex/clear.js"
+}

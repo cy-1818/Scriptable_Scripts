@@ -35,7 +35,7 @@ return (async function(){
 		            case "command":
 		              await f.writeString(doc + "/tsfm-ex/" + urlList[parameter[n]].name, rqstr)
 		              commands[parameter[n]]="/tsfm-ex/" + urlList[parameter[n]].name;
-		              await f.writeString(doc+"/tsfm-ex/commands.json", JSON.stringify(commands))
+		              await f.writeString(doc+"/tsfm-ex/commands.json", JSON.stringify(commands, null, "\t"))
 		            break;
 		            case "Scriptable":
 		              await f.writeString(doc + "/" + urlList[parameter[n]].name, rqstr)
@@ -82,7 +82,7 @@ return (async function(){
 		      if(commands[parameter[n]]){
 		        await f.remove(doc + commands[parameter[n]]);
 		        delete commands[parameter[n]];
-		        await f.writeString(doc+"/tsfm-ex/commands.json", JSON.stringify(commands))
+		        await f.writeString(doc+"/tsfm-ex/commands.json", JSON.stringify(commands, null, "\t"))
 		        await Print([{
 		          "style":"",
 		          "str":parameter[n]+" was deleted"
@@ -105,7 +105,7 @@ return (async function(){
 		  case "addURL":
 		  case "-a":
 		    urls=urls.concat(parameter.slice(1))
-		    await f.writeString(doc+"/tsfm-ex/urls.json", JSON.stringify(urls))
+		    await f.writeString(doc+"/tsfm-ex/urls.json", JSON.stringify(urls, null, "\t"))
 		  break;
 		  case "version":
 		  case "-v":
