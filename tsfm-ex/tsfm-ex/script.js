@@ -42,7 +42,7 @@ return (async function(){
 	          }
 	          if(urlList[parameter[n]].dependence){
 	            for(var i=1;i<urlList[parameter[n]].dependence.length;i++){
-	              if(!parameter.includes(urlList[parameter[n]].dependence[i]){
+	              if(!parameter.includes(urlList[parameter[n]].dependence[i])){
 	                parameter.push(urlList[parameter[n]].dependence[i])
 	              }
 	            }
@@ -105,7 +105,7 @@ return (async function(){
 	  case "-v":
 	    result.push({
 	      "style":"",
-	      "str":"1.3"
+	      "str":"2.1"
 	    })
 	  break;
 	  case "help":
