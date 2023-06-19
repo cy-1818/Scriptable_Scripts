@@ -56,7 +56,7 @@ Get = (async function(){
 })
 Give = (async function(json){
 	console.log(`give('${JSON.stringify(json)}');`)
-	return await w.evaluateJavaScript(`give('${JSON.stringify(json).split("\\").join("\\\\").split("'").join("\\\'")}');`, false);
+	return await w.evaluateJavaScript(`give('${JSON.stringify(json).split("\\").join("\\\\").split("'").join("\\\'").split("\"").join("\\\"").split("\`").join("\\\`")}');`, false);
 })
 Load = (async function(){
 	return await w.evaluateJavaScript("load()", false);
