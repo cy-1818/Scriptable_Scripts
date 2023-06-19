@@ -19,11 +19,23 @@
     "type":"command",
     "name":"script.js"
   },
+  "tsfm-ex-html":{
+    "url":"https://raw.githubusercontent.com/cy-1818/Scriptable_Scripts/main/tsfm-ex/tsfm-ex/tsfm-ex.html",
+    "type":"addition",
+    "name":"tsfm-ex.html"
+  },
+  "commands-json":{
+    "url":"https://raw.githubusercontent.com/cy-1818/Scriptable_Scripts/main/tsfm-ex/tsfm-ex/commands.json",
+    "type":"addition",
+    "name":"commands.json"
+  },
   "tsfm-ex":{
     "url":"https://raw.githubusercontent.com/cy-1818/Scriptable_Scripts/main/tsfm-ex/tsfm-ex.js",
     "type":"Scriptable",
     "name":"tsfm-ex.js",
-    "dependence":[
+    "dependence":[,
+      "tsfm-ex-html",
+      "commands-json",
       "ls",
       "cd",
       "script"
