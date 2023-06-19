@@ -14,6 +14,7 @@ elements = {
 		"str":"welcome to tsfm-ex!"
 	}]
 }
+
 if(!f.fileExists(pass+"/tsfm-ex")){
 	var alert = new Alert()
 	alert.message = "start install"
@@ -33,21 +34,31 @@ if(!f.fileExists(pass+"/tsfm-ex")){
 	console.log(await alert.present())
 }
 commands = JSON.parse(f.readString(doc+"/tsfm-ex/commands.json"));
-var input;
-var func;
-async function Check(){
+Run = (async function(str){
+	return await w.evaluateJavaScript("str", false);
+})
+Print=(async function(obj){
+	console.log("print")
+	console.log(obj);
+	await Give(obj);
+	return await w.evaluateJavaScript("print(elements)", false);
+})
+Check = (async function(){
 	return await w.evaluateJavaScript("checker", false);
-}
-async function Get(){
+})
+Get = (async function(){
 	return JSON.parse(await w.evaluateJavaScript("get()", false));
-}
-async function Give(json){
+})
+Give = (async function(json){
 	console.log(`give('${JSON.stringify(json)}');`)
 	return await w.evaluateJavaScript(`give('${JSON.stringify(json).split("'").join("\\\'")}');`, false);
-}
-async function Load(){
+})
+Load = (async function(){
 	return await w.evaluateJavaScript("load()", false);
-}
+})
+
+var input;
+var func;
 async function Wait(){
 	while(true){
 		if(await Check()){
@@ -57,12 +68,6 @@ async function Wait(){
 	console.log("end")
 	return 0;
 }
-w.loadFile(doc+"/tsfm-ex/tsfm-ex.html");
-w.present(true);
-await w.waitForLoad();
-await Give(elements);
-await Load();
-await MainLoop();
 
 async function MainLoop(){
 	while(true){
@@ -71,12 +76,22 @@ async function MainLoop(){
 		elements = await Get();
 		input = elements.input.split(" ");
 		if(commands.hasOwnProperty(input[0])){
-			output = await (new Function("parameter",f.readString(doc+commands[input[0]])))(input.slice(1));
-			elements.pass = pass;
-			if(output=="break"){
-				break;
-			}else{
-				elements.output = output;
+			try{
+			  output = await (new Function("parameter",f.readString(doc+commands[input[0]])))(input.slice(1));
+			  elements.pass = pass;
+			  if(output=="break"){
+					if(elements.run){
+				    await (new Function("parameter",elements.run))(elements.runparameter);
+				  }
+				  break;
+		  	}else{
+				  elements.output = output;
+			  }
+		  }catch(e){
+				elements.output = [{
+				  "style":"color:#ff3333",
+				  "str":`[${e.name}] ${e.message}`
+		  	}]
 			}
 		}else{
 			elements.output = [{
@@ -92,3 +107,10 @@ async function MainLoop(){
 	}
 	return 0;
 }
+
+w.loadFile(doc+"/tsfm-ex/tsfm-ex.html");
+w.present(true);
+await w.waitForLoad();
+await Give(elements);
+await Load();
+await MainLoop();
