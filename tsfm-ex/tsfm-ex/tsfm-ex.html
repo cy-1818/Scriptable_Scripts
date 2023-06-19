@@ -8,7 +8,7 @@
 body {
     background-color: black;
     color: #12abef;
-    font-family: Arial, sans-serif;
+    font-family: 'Noto Sans Mono CJK JP','Source Han Code JP', monospace;
 }
 .form{
     display:inline-block;
@@ -33,6 +33,7 @@ body {
     var elements = {}
     var ans;
     var form;
+    var nodes=[];
     function logKey(e) {
       console.log(e.code);
       if(e.code=="Enter"){
@@ -53,18 +54,40 @@ body {
     function check(){
       return checker;
     }
-    function load(){
-      console.log(elements);
-      checker = false;
+    function print(obj){
       var line = document.createElement("div");
-      for(var n=0;n<elements.output.length;n++){
-        var span = document.createElement("span");
-        span.style=elements.output[n].style;
-        span.innerHTML=elements.output[n].str;
+      for(var n=0;n<obj.length;n++){
+        if(obj[n].tag){
+          var span = document.createElement(obj[n].tag);
+        }else{
+          var span = document.createElement("span");
+        }
+        if(obj[n].edit){
+          nodes.push(span);
+        }
+        span.style=obj[n].style;
+        span.innerHTML=obj[n].str;
         line.append(span);
       }
       terminal.append(line);
-      line = document.createElement("div");
+      return nodes.length-1;
+    }
+    function edit(num, obj){
+      nodes[num].style=obj.style;
+      nodes[num].innerHTML=obj.str;
+      return 0;
+    }
+    function delnode(num){
+      nodes[num].remove();
+      delete nodes[num];
+    }
+    function load(){
+      console.log(elements);
+        checker = false;
+      if(elements.output){
+        print(elements.output);
+      }
+      var line = document.createElement("div");
       var left = document.createElement("span");
       left.innerHTML = `${elements.name}:${elements.pass.replace(elements.doc, "Document")} $ `;
       var right = document.createElement("span");
