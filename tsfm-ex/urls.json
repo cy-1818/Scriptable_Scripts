@@ -33,7 +33,7 @@
     "url":"https://raw.githubusercontent.com/cy-1818/Scriptable_Scripts/main/tsfm-ex/tsfm-ex.js",
     "type":"Scriptable",
     "name":"tsfm-ex.js",
-    "dependence":[,
+    "dependence":[
       "tsfm-ex-html",
       "commands-json",
       "ls",
