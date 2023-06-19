@@ -5,8 +5,8 @@ https://github.com/Chion82/ASCII_bad_apple
 
 # Special thanks
 
-原作:ASCII_bad_apple (Chion82)
-その原作:【東方】Bad Apple!!　ＰＶ【影絵】(あにら)
-その原作:【ＵＰ主が見たい】Bad Apple!!　ＰＶ【誰か描いてくれ】(Μμ)
-その原作: Bad Apple!! feat. nomico (Alstroemeria Records)
+原作:ASCII_bad_apple (Chion82)<br/>
+その原作:【東方】Bad Apple!!　ＰＶ【影絵】(あにら)<br/>
+その原作:【ＵＰ主が見たい】Bad Apple!!　ＰＶ【誰か描いてくれ】(Μμ)<br/>
+その原作: Bad Apple!! feat. nomico (Alstroemeria Records)<br/>
 その原作: Bad Apple!! (上海アリス幻樂団)
