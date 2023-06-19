@@ -14,6 +14,11 @@
     "type":"command",
     "name":"exit.js"
   },
+  "clear":{
+    "url":"https://raw.githubusercontent.com/cy-1818/Scriptable_Scripts/main/tsfm-ex/tsfm-ex/clear.js",
+    "type":"command",
+    "name":"clear.js"
+  },
   "script":{
     "url":"https://raw.githubusercontent.com/cy-1818/Scriptable_Scripts/main/tsfm-ex/tsfm-ex/script.js",
     "type":"command",
@@ -38,6 +43,8 @@
       "commands-json",
       "ls",
       "cd",
+      "exit",
+      "clear",
       "script"
     ]
   },
@@ -65,5 +72,18 @@
     "url":"https://raw.githubusercontent.com/cy-1818/Scriptable_Scripts/main/random-bokete/random-bokete.js",
     "type":"Scriptable",
     "name":"random-bokete.js"
+  },
+  "badapple":{
+    "url":"https://raw.githubusercontent.com/cy-1818/Scriptable_Scripts/main/tsfm-ex/badapple/badapple.js",
+    "type":"command",
+    "name":"badapple.js",
+    "dependence":[
+      "badapple-json"
+    ]
+  },
+  "badapple-json":{
+    "url":"https://raw.githubusercontent.com/cy-1818/Scriptable_Scripts/main/tsfm-ex/badapple/badapple.json",
+    "type":"addition",
+    "name":"badapple.json"
   }
 }
