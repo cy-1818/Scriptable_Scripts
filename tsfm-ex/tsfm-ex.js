@@ -35,13 +35,18 @@ if(!f.fileExists(pass+"/tsfm-ex")){
 }
 commands = JSON.parse(f.readString(doc+"/tsfm-ex/commands.json"));
 Run = (async function(str){
-	return await w.evaluateJavaScript("str", false);
+	return await w.evaluateJavaScript(str, false);
 })
 Print=(async function(obj){
-	console.log("print")
-	console.log(obj);
 	await Give(obj);
 	return await w.evaluateJavaScript("print(elements)", false);
+})
+Edit=(async function(num, obj){
+	await Give(obj);
+	return await w.evaluateJavaScript(`edit(${num}, elements)`, false);
+})
+DelNode=(async function(num){
+	return await w.evaluateJavaScript(`delnode(${num})`, false);
 })
 Check = (async function(){
 	return await w.evaluateJavaScript("checker", false);
@@ -51,7 +56,7 @@ Get = (async function(){
 })
 Give = (async function(json){
 	console.log(`give('${JSON.stringify(json)}');`)
-	return await w.evaluateJavaScript(`give('${JSON.stringify(json).split("'").join("\\\'")}');`, false);
+	return await w.evaluateJavaScript(`give('${JSON.stringify(json).split("\\").join("\\\\").split("'").join("\\\'")}');`, false);
 })
 Load = (async function(){
 	return await w.evaluateJavaScript("load()", false);
@@ -82,6 +87,7 @@ async function MainLoop(){
 			  if(output=="break"){
 					if(elements.run){
 				    await (new Function("parameter",elements.run))(elements.runparameter);
+						delete elements.run;
 				  }
 				  break;
 		  	}else{
