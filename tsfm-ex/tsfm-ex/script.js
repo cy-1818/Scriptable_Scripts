@@ -40,6 +40,9 @@ return (async function(){
 		            case "Scriptable":
 		              await f.writeString(doc + "/" + urlList[parameter[n]].name, rqstr)
 		            break;
+		            case "addition":
+		              await f.writeString(doc + "/tsfm-ex/" + urlList[parameter[n]].name, rqstr);
+		            break;
 		          }
 		          if(urlList[parameter[n]].dependence){
 		            for(var i=0;i<urlList[parameter[n]].dependence.length;i++){
