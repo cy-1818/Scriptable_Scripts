@@ -15,7 +15,7 @@ elements = {
 	"doc":doc,
 	"output":[{
 		"style":"",
-		"str":"welcome to tsfm-ex! this is tsfm-ex version 4.3."
+		"str":"welcome to tsfm-ex! this is tsfm-ex version 4.4."
 	}]
 }
 
