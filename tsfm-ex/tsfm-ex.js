@@ -5,6 +5,8 @@ w = new WebView()
 f = FileManager.iCloud();
 doc = f.documentsDirectory()
 pass = doc;
+outDisplay = true;
+printOutput = [];
 elements = {
 	"name":Device.name(),
 	"pass":pass,
@@ -41,8 +43,13 @@ Command = (async function(command, parameter){
 	return await (new Function("parameter",f.readString(doc+commands[command])))(parameter);
 })
 Print=(async function(obj){
-	await Give(obj);
-	return await w.evaluateJavaScript("print(elements)", false);
+	if(outDisplay){
+	  await Give(obj);
+	  return await w.evaluateJavaScript("print(elements)", false);
+  }else{
+		printOutput.concat(obj);
+		return 0;
+	}
 })
 Edit=(async function(num, obj){
 	await Give(obj);
@@ -95,9 +102,12 @@ async function MainLoop(){
 		output = []
 		for(var pipeIndex=0;pipeIndex<input.length;pipeIndex++){
 			input[pipeIndex]=input[pipeIndex].split(" ").filter(Boolean)
+			outDisplay = pipeIndex == input.length-1
+			printOutput = []
 		  if(commands.hasOwnProperty(input[pipeIndex][0])){
 			  try{
 			    output = await Command(input[pipeIndex][0], formatPara(input[pipeIndex].slice(1), output));
+					output = printOutput.concat(output)
 		    }catch(e){
 				  output = [{
 				    "style":"color:#ff3333",
