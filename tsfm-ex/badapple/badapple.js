@@ -1,5 +1,5 @@
 return(async function(){
-  var apple = JSON.parse(f.readString(doc+"/tsfm-ex/badapple.json"));
+  var apple = JSON.parse(fmi.readString(doci+"/tsfm-ex/badapple.json"));
   var startTime = Date.now()
   var appleNum = await Print([{
       "style":"color:white",
