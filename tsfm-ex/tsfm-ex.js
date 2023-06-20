@@ -13,7 +13,7 @@ elements = {
 	"doc":doc,
 	"output":[{
 		"style":"",
-		"str":"welcome to tsfm-ex!"
+		"str":"welcome to tsfm-ex! this is tsfm-ex version 4.3."
 	}]
 }
 
@@ -74,7 +74,7 @@ Load = (async function(){
 formatPara = function(inputList, oldOutput){
 	var paraOutput = []
 	for(var paraN=0;paraN<oldOutput.length;paraN++){
-		if(!oldOutput[paraN].SPLIT){
+		if(!oldOutput[paraN].notPara){
 			paraOutput.push(oldOutput[paraN].str)
 		}
 	}
