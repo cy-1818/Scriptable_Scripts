@@ -22,7 +22,7 @@ if(!f.fileExists(pass+"/tsfm-ex")){
 	console.log(await alert.present())
 	await f.createDirectory(pass + "/tsfm-ex", false)
 	var link = "https://raw.githubusercontent.com/cy-1818/Scriptable_Scripts/main/tsfm-ex/tsfm-ex/"
-	var setup = ["commands.json", "tsfm-ex.html", "cd.js", "ls.js", "exit.js", "script.js", "urls.json"]
+	var setup = ["commands.json", "tsfm-ex.html", "cd.js", "ls.js", "exit.js", "script.js", "clear.js", "urls.json"]
 	for(var n=0;n<setup.length;n++){
 		var rstr = await new Request(link+setup[n]).loadString();
 		await f.writeString(pass + "/tsfm-ex/" + setup[n], rstr)
@@ -36,6 +36,9 @@ if(!f.fileExists(pass+"/tsfm-ex")){
 commands = JSON.parse(f.readString(doc+"/tsfm-ex/commands.json"));
 Run = (async function(str){
 	return await w.evaluateJavaScript(str, false);
+})
+Command = (async function(command, parameter){
+	return await (new Function("parameter",f.readString(doc+commands[command])))(parameter);
 })
 Print=(async function(obj){
 	await Give(obj);
@@ -61,6 +64,15 @@ Give = (async function(json){
 Load = (async function(){
 	return await w.evaluateJavaScript("load()", false);
 })
+formatPara = function(inputList, oldOutput){
+	var paraOutput = []
+	for(var paraN=0;paraN<oldOutput.length;paraN++){
+		if(!oldOutput[paraN].SPLIT){
+			paraOutput.push(oldOutput[paraN].str)
+		}
+	}
+	return inputList.concat(paraOutput).filter(Boolean);
+}
 
 var input;
 var func;
@@ -79,34 +91,39 @@ async function MainLoop(){
 		console.log(1)
 		await Wait();
 		elements = await Get();
-		input = elements.input.split(" ");
-		if(commands.hasOwnProperty(input[0])){
-			try{
-			  output = await (new Function("parameter",f.readString(doc+commands[input[0]])))(input.slice(1));
-			  elements.pass = pass;
-			  if(output=="break"){
-					if(elements.run){
-				    await (new Function("parameter",elements.run))(elements.runparameter);
-						delete elements.run;
-				  }
-				  break;
-		  	}else{
-				  elements.output = output;
+		input = elements.input.split("|");
+		output = []
+		for(var pipeIndex=0;pipeIndex<input.length;pipeIndex++){
+			input[pipeIndex]=input[pipeIndex].split(" ").filter(Boolean)
+		  if(commands.hasOwnProperty(input[pipeIndex][0])){
+			  try{
+			    output = await Command(input[pipeIndex][0], formatPara(input[pipeIndex].slice(1), output));
+		    }catch(e){
+				  output = [{
+				    "style":"color:#ff3333",
+				    "str":`[${e.name}] ${e.message}`
+		  	  }]
+					break;
 			  }
-		  }catch(e){
-				elements.output = [{
+		  }else{
+			  output = [{
 				  "style":"color:#ff3333",
-				  "str":`[${e.name}] ${e.message}`
-		  	}]
+				  "str":"[ERROR] "
+			  },{
+				  "style":"",
+				  "str":input[pipeIndex][0]+" was undefined as a command"
+			  }]
+		  }
+		}
+		elements.pass = pass;
+		if(output=="break"){
+		  if(elements.run){
+			  await (new Function("parameter",elements.run))(elements.runparameter);
+				delete elements.run;
 			}
+			break;
 		}else{
-			elements.output = [{
-				"style":"color:#ff3333",
-				"str":"[ERROR] "
-			},{
-				"style":"",
-				"str":input[0]+" was undefined as a command"
-			}]
+			elements.output = output;
 		}
 		await Give(elements);
 		await Load();
