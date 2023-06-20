@@ -4,6 +4,11 @@ tsfm-ex上でbadappleを再生するコマンドです。
 
 https://github.com/Chion82/ASCII_bad_apple
 
+
+# インストール方法
+`script -i badapple`
+をtsfm-exで実行してください。
+
 # Special thanks
 
 原作:ASCII_bad_apple (Chion82)<br/>
