@@ -91,5 +91,10 @@
     "url":"https://raw.githubusercontent.com/cy-1818/Scriptable_Scripts/main/tsfm-ex/badapple/badapple.json",
     "type":"addition",
     "name":"badapple.json"
+  },
+  "show":{
+    "url":"https://raw.githubusercontent.com/cy-1818/Scriptable_Scripts/main/tsfm-ex/show/show.js",
+    "type":"command",
+    "name":"show.js"
   }
 }
