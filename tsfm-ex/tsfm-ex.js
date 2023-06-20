@@ -9,13 +9,15 @@ doc = f.documentsDirectory()
 pass = doc;
 outDisplay = true;
 printOutput = [];
+space = "iCloud";
 elements = {
 	"name":Device.name(),
 	"pass":pass,
 	"doc":doc,
+	"space":space,
 	"output":[{
 		"style":"",
-		"str":"welcome to tsfm-ex! this is tsfm-ex version 4.4."
+		"str":"welcome to tsfm-ex! this is tsfm-ex version 4.5."
 	}]
 }
 
@@ -26,7 +28,7 @@ if(!fmi.fileExists(pass+"/tsfm-ex")){
 	console.log(await alert.present())
 	await fmi.createDirectory(pass + "/tsfm-ex", false)
 	var link = "https://raw.githubusercontent.com/cy-1818/Scriptable_Scripts/main/tsfm-ex/tsfm-ex/"
-	var setup = ["commands.json", "tsfm-ex.html", "cd.js", "ls.js", "exit.js", "script.js", "clear.js", "urls.json"]
+	var setup = ["commands.json", "tsfm-ex.html", "cd.js", "ls.js", "exit.js", "script.js", "clear.js", "pwd.js", "urls.json"]
 	for(var n=0;n<setup.length;n++){
 		var rstr = await new Request(link+setup[n]).loadString();
 		await fmi.writeString(pass + "/tsfm-ex/" + setup[n], rstr)
@@ -129,6 +131,7 @@ async function MainLoop(){
 		}
 		elements.pass = pass;
 		elements.doc = doc;
+		elements.space = space;
 		if(output=="break"){
 		  if(elements.run){
 			  await (new Function("parameter",elements.run))(elements.runparameter);
