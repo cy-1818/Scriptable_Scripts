@@ -34,6 +34,11 @@
     "type":"addition",
     "name":"commands.json"
   },
+  "urls-json":{
+    "url":"https://raw.githubusercontent.com/cy-1818/Scriptable_Scripts/main/tsfm-ex/tsfm-ex/urls.json",
+    "type":"addition",
+    "name":"urls.json"
+  },
   "tsfm-ex":{
     "url":"https://raw.githubusercontent.com/cy-1818/Scriptable_Scripts/main/tsfm-ex/tsfm-ex.js",
     "type":"Scriptable",
@@ -41,6 +46,7 @@
     "dependence":[
       "tsfm-ex-html",
       "commands-json",
+      "urls-json",
       "ls",
       "cd",
       "exit",
