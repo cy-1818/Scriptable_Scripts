@@ -33,15 +33,15 @@ return (async function(){
 		          var rqstr = await rq.loadString();
 		          switch(urlList[parameter[n]].type){
 		            case "command":
-		              await f.writeString(doc + "/tsfm-ex/" + urlList[parameter[n]].name, rqstr)
+		              await fmi.writeString(doci + "/tsfm-ex/" + urlList[parameter[n]].name, rqstr)
 		              commands[parameter[n]]="/tsfm-ex/" + urlList[parameter[n]].name;
-		              await f.writeString(doc+"/tsfm-ex/commands.json", JSON.stringify(commands, null, "\t"))
+		              await fmi.writeString(doci+"/tsfm-ex/commands.json", JSON.stringify(commands, null, "\t"))
 		            break;
 		            case "Scriptable":
-		              await f.writeString(doc + "/" + urlList[parameter[n]].name, rqstr)
+		              await fmi.writeString(doci + "/" + urlList[parameter[n]].name, rqstr)
 		            break;
 		            case "addition":
-		              await f.writeString(doc + "/tsfm-ex/" + urlList[parameter[n]].name, rqstr);
+		              await fmi.writeString(doci + "/tsfm-ex/" + urlList[parameter[n]].name, rqstr);
 		            break;
 		          }
 		          if(urlList[parameter[n]].dependence){
@@ -80,9 +80,9 @@ return (async function(){
 		  case "-d":
 		    for(var n=1;n<parameter.length;n++){
 		      if(commands[parameter[n]]){
-		        await f.remove(doc + commands[parameter[n]]);
+		        await fmi.remove(doci + commands[parameter[n]]);
 		        delete commands[parameter[n]];
-		        await f.writeString(doc+"/tsfm-ex/commands.json", JSON.stringify(commands, null, "\t"))
+		        await fmi.writeString(doci+"/tsfm-ex/commands.json", JSON.stringify(commands, null, "\t"))
 		        await Print([{
 		          "style":"",
 		          "str":parameter[n]+" was deleted"
