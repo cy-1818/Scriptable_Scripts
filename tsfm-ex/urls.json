@@ -24,6 +24,11 @@
     "type":"command",
     "name":"script.js"
   },
+  "pwd":{
+    "url":"https://raw.githubusercontent.com/cy-1818/Scriptable_Scripts/main/tsfm-ex/tsfm-ex/pwd.js",
+    "type":"command",
+    "name":"pwd.js"
+  },
   "tsfm-ex-html":{
     "url":"https://raw.githubusercontent.com/cy-1818/Scriptable_Scripts/main/tsfm-ex/tsfm-ex/tsfm-ex.html",
     "type":"addition",
@@ -51,7 +56,8 @@
       "cd",
       "exit",
       "clear",
-      "script"
+      "script",
+      "pwd"
     ]
   },
   "tsfm":{
