@@ -1,6 +1,8 @@
 // Variables used by Scriptable.
 // These must be at the very top of the file. Do not edit.
 // icon-color: cyan; icon-glyph: angle-double-right;
+fmi = FileManager.iCloud();
+doci = fmi.documentsDirectory();
 w = new WebView()
 f = FileManager.iCloud();
 doc = f.documentsDirectory()
@@ -17,17 +19,17 @@ elements = {
 	}]
 }
 
-if(!f.fileExists(pass+"/tsfm-ex")){
+if(!fmi.fileExists(pass+"/tsfm-ex")){
 	var alert = new Alert()
 	alert.message = "start install"
 	alert.addAction("OK")
 	console.log(await alert.present())
-	await f.createDirectory(pass + "/tsfm-ex", false)
+	await fmi.createDirectory(pass + "/tsfm-ex", false)
 	var link = "https://raw.githubusercontent.com/cy-1818/Scriptable_Scripts/main/tsfm-ex/tsfm-ex/"
 	var setup = ["commands.json", "tsfm-ex.html", "cd.js", "ls.js", "exit.js", "script.js", "clear.js", "urls.json"]
 	for(var n=0;n<setup.length;n++){
 		var rstr = await new Request(link+setup[n]).loadString();
-		await f.writeString(pass + "/tsfm-ex/" + setup[n], rstr)
+		await fmi.writeString(pass + "/tsfm-ex/" + setup[n], rstr)
 		console.log(setup[n] + " is installed")
 	}
 	alert = new Alert()
@@ -35,12 +37,12 @@ if(!f.fileExists(pass+"/tsfm-ex")){
 	alert.message = "finish install"
 	console.log(await alert.present())
 }
-commands = JSON.parse(f.readString(doc+"/tsfm-ex/commands.json"));
+commands = JSON.parse(fmi.readString(doci+"/tsfm-ex/commands.json"));
 Run = (async function(str){
 	return await w.evaluateJavaScript(str, false);
 })
 Command = (async function(command, parameter){
-	return await (new Function("parameter",f.readString(doc+commands[command])))(parameter);
+	return await (new Function("parameter",fmi.readString(doci+commands[command])))(parameter);
 })
 Print=(async function(obj){
 	if(outDisplay){
@@ -126,6 +128,7 @@ async function MainLoop(){
 		  }
 		}
 		elements.pass = pass;
+		elements.doc = doc;
 		if(output=="break"){
 		  if(elements.run){
 			  await (new Function("parameter",elements.run))(elements.runparameter);
@@ -141,7 +144,7 @@ async function MainLoop(){
 	return 0;
 }
 
-w.loadFile(doc+"/tsfm-ex/tsfm-ex.html");
+w.loadFile(doci+"/tsfm-ex/tsfm-ex.html");
 w.present(true);
 await w.waitForLoad();
 await Give(elements);
