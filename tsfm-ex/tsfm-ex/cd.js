@@ -6,6 +6,7 @@ if(parameter[0]=="//local"){
   }];
   doc = f.documentsDirectory();
   pass = doc;
+  space = "local";
 }else if(parameter[0]=="//iCloud"){
   f=FileManager.iCloud();
   result = [{
@@ -14,6 +15,7 @@ if(parameter[0]=="//local"){
   }];
   doc = f.documentsDirectory();
   pass = doc;
+  space = "iCloud";
 }else{
   var tmp = pass
   if (parameter[0]) {
