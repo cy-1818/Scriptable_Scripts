@@ -33,7 +33,7 @@ return (async function(){
           showOptions.str = parameter.slice(n+1)
           break showOptionLoop;
         default:
-          if(f.fileExists(pass+'/'+parameter[n])){
+          if(f.fileExists(formatPath(parameter[n], pass))){
             showOptions.d = true;
           }else{
             showOptions.d = false;
@@ -44,17 +44,19 @@ return (async function(){
     }
     if(showOptions.d){
       var strList = [];
+      var showPass;
       for(var n=0;n<showOptions.str.length;n++){
-        if(f.fileExists(pass+'/'+showOptions.str[n])){
-          if(f.isDirectory(pass+'/'+showOptions.str[n])){
-            strList.push(pass+'/'+showOptions.str[n]+" is directory");
+        showPass = formatPath(showOptions.str[n], pass);
+        if(f.fileExists(showPass)){
+          if(f.isDirectory(showPass)){
+            strList.push(showOptions.str[n]+" is directory");
             strList.push("");
           }else{
-            strList = strList.concat(f.readString(pass+'/'+showOptions.str[n]).split("\n"));
+            strList = strList.concat(f.readString(showPass).split("\n"));
             strList.push("");
           }
         }else{
-          strList.push(pass+'/'+showOptions.str[n]+" was undefined");
+          strList.push(showOptions.str[n]+" was undefined");
           strList.push("");
         }
       }
