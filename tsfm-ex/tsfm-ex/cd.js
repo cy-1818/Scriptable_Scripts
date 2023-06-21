@@ -18,11 +18,7 @@ if(parameter[0]=="//local"){
   space = "iCloud";
 }else{
   var tmp = pass
-  if (parameter[0]) {
-    pass += "/" + parameter[0]
-  } else {
-    pass = pass.split("/").slice(0,-1).join("/")
-  }
+  pass = formatPath(parameter[0], pass);
   if (!f.fileExists(pass)) {
     pass = tmp
     result = [{
