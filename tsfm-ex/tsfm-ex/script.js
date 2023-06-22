@@ -3,8 +3,8 @@ return (async function(){
       var scripts = {}
       var commandKeys = Object.keys(commands);
       for(var n=0;n<commandKeys.length;n++){
-        scripts[commandKeys] = {
-          "path":doci+commands[commandKeys],
+        scripts[commandKeys[n]] = {
+          "path":doci+commands[commandKeys[n]],
           "type":"command"
         }
       }
@@ -50,7 +50,7 @@ return (async function(){
 		  break;
 		  case "update":
 		  case "-u":
-		    for(var n=0;i<Object.keys(scripts).length;n++){
+		    for(var n=0;n<Object.keys(scripts).length;n++){
 		      parameter.push(Object.keys(scripts)[n])
 		    }
 		  case "install":
@@ -171,7 +171,7 @@ return (async function(){
 		  case "-v":
 		    result.push({
 		      "style":"",
-		      "str":"3.2"
+		      "str":"3.3"
 		    })
 		  break;
 		  case "help":
