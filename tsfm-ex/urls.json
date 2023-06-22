@@ -29,10 +29,10 @@
     "type":"command",
     "name":"pwd.js"
   },
-  "delete":{
-    "url":"https://raw.githubusercontent.com/cy-1818/Scriptable_Scripts/main/tsfm-ex/tsfm-ex/delete.js",
+  "del":{
+    "url":"https://raw.githubusercontent.com/cy-1818/Scriptable_Scripts/main/tsfm-ex/tsfm-ex/del.js",
     "type":"command",
-    "name":"delete.js"
+    "name":"del.js"
   },
   "tsfm-ex-html":{
     "url":"https://raw.githubusercontent.com/cy-1818/Scriptable_Scripts/main/tsfm-ex/tsfm-ex/tsfm-ex.html",
