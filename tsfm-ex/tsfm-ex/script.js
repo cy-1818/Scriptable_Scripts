@@ -128,16 +128,16 @@ return (async function(){
 		          delete commands[parameter[n]];
 		          await fmi.writeString(doci+"/tsfm-ex/commands.json", JSON.stringify(commands, null, "\t"))
 		        }
+		        if(notOnly && scripts[parameter[n]].dependence){
+		          for(var i=0;i<scripts[parameter[n]].dependence.length;i++){
+		            if(!parameter.includes(scripts[parameter[n]].dependence[i])){
+		              parameter.push(scripts[parameter[n]].dependence[i])
+		            }
+		          }
+		        }
 		        await fmi.remove(scripts[parameter[n]].path);
 		        delete scripts[parameter[n]];
 		        await fmi.writeString(doci+"/tsfm-ex/scripts.json", JSON.stringify(scripts, null, "\t"))
-		        if(notOnly && scripts[parameter[n]].dependence){
-		            for(var i=0;i<scripts[parameter[n]].dependence.length;i++){
-		              if(!parameter.includes(scripts[parameter[n]].dependence[i])){
-		                parameter.push(scripts[parameter[n]].dependence[i])
-		              }
-		            }
-		          }
 		        await Print([{
 		          "style":"",
 		          "str":parameter[n]+" was deleted"
@@ -171,7 +171,7 @@ return (async function(){
 		  case "-v":
 		    result.push({
 		      "style":"",
-		      "str":"3.3"
+		      "str":"3.4"
 		    })
 		  break;
 		  case "help":
