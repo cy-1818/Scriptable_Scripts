@@ -8,7 +8,7 @@ return (async function(){
           "type":"command"
         }
       }
-      await fmi.writeString(doci+"/tsfm-ex/scripts.json", JSON.Stringify(scripts, null, "\t")
+      await fmi.writeString(doci+"/tsfm-ex/scripts.json", JSON.Stringify(scripts, null, "\t"))
     }else{
       scripts = JSON.parse(fmi.readString(doci+"/tsfm-ex/scripts.json"));
     }
@@ -38,7 +38,7 @@ return (async function(){
 		      }
 		    }
 		  break;
-		  case "List":
+		  case "list":
 		  case "-l":
 		    var nameList = Object.keys(scripts);
 		    for(var n=0;n<nameList.length;n++){
@@ -48,8 +48,8 @@ return (async function(){
 		      });
 		    }
 		  break;
-		  case "Update"
-		  case "-u"
+		  case "update":
+		  case "-u":
 		    for(var n=0;i<Object.keys(scripts).length;n++){
 		      parameter.push(Object.keys(scripts)[n])
 		    }
@@ -171,7 +171,7 @@ return (async function(){
 		  case "-v":
 		    result.push({
 		      "style":"",
-		      "str":"3.0"
+		      "str":"3.1"
 		    })
 		  break;
 		  case "help":
