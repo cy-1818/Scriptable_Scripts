@@ -18,6 +18,7 @@ pre {
     display:inline-block;
     width: 100%;
     height: 1em;
+    outline: none;
 }
 #terminal{
     overflow:scroll;
@@ -38,6 +39,9 @@ pre {
     var ans;
     var form;
     var nodes=[];
+    var keyPressed = false;
+    var pressedKey = "";
+    var keyGetting = false;
     function logKey(e) {
       console.log(e.code);
       if(e.code=="Enter"){
@@ -60,21 +64,34 @@ pre {
     }
     function print(obj){
       var line = document.createElement("div");
+      var result = NaN;
       for(var n=0;n<obj.length;n++){
         if(obj[n].tag){
           var span = document.createElement(obj[n].tag);
         }else{
           var span = document.createElement("span");
         }
-        if(obj[n].edit){
-          nodes.push(span);
+        if(obj[n].getKey){
+          endGetKey();
+          form = span;
+          span.className = "form";
+          span.contentEditable = true;
+          span.addEventListener('keydown', getKey);
+          keyGetting = true;
         }
         span.style=obj[n].style;
         span.innerHTML=obj[n].str;
         line.append(span);
+        if(obj[n].edit){
+          nodes.push(span);
+          result = nodes.length-1;
+        }
       }
       terminal.append(line);
-      return nodes.length-1;
+      if(keyGetting){
+        form.focus();
+      }
+      return result;
     }
     function edit(num, obj){
       nodes[num].style=obj.style;
@@ -84,6 +101,21 @@ pre {
     function delnode(num){
       nodes[num].remove();
       delete nodes[num];
+      return 0;
+    }
+    function getKey(e){
+      pressedKey = e.code;
+      keyPressed = true;
+    }
+    function tellKey(){
+      keyPressed = false;
+      return pressedKey;
+    }
+    function endGetKey(){
+      if(keyGetting){
+        form.contentEditable = false;
+        form.removeEventListener('keydown', getKey)
+      }
     }
     function load(){
       console.log(elements);
@@ -91,6 +123,7 @@ pre {
       if(elements.output){
         print(elements.output);
       }
+      endGetKey();
       var line = document.createElement("div");
       var left = document.createElement("span");
       left.innerHTML = `${elements.name}:${elements.space}:${elements.pass.replace(elements.doc, "Document")} $ `;
