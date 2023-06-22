@@ -9,6 +9,11 @@
     "type":"command",
     "name":"cd.js"
   },
+  "get":{
+    "url":"https://raw.githubusercontent.com/cy-1818/Scriptable_Scripts/main/tsfm-ex/tsfm-ex/get.js",
+    "type":"command",
+    "name":"get.js"
+  },
   "exit":{
     "url":"https://raw.githubusercontent.com/cy-1818/Scriptable_Scripts/main/tsfm-ex/tsfm-ex/exit.js",
     "type":"command",
