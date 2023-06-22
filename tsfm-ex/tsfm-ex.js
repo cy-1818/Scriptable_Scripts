@@ -17,7 +17,7 @@ elements = {
 	"space":space,
 	"output":[{
 		"style":"",
-		"str":"welcome to tsfm-ex! this is tsfm-ex version 4.7."
+		"str":"welcome to tsfm-ex! this is tsfm-ex version 5.0."
 	}]
 }
 
@@ -74,6 +74,22 @@ Give = (async function(json){
 })
 Load = (async function(){
 	return await w.evaluateJavaScript("load()", false);
+})
+KeyPressed = (async function(){
+	return await w.evaluateJavaScript("keyPressed", false);
+})
+GetKey = (async function(){
+	return await w.evaluateJavaScript("tellKey()", false);
+})
+EndGetKey = (async function(){
+	return await w.evaluateJavaScript("endGetKey()", false);
+})
+GetText = (async function(str){
+	if(str == "keyForm"){
+	  return await w.evaluateJavaScript("form.innerText", false);
+  }else{
+		return await w.evaluateJavaScript(`nodes[${str}].innerText`, false);
+	}
 })
 formatPara = function(inputList, oldOutput){
 	var paraOutput = []
