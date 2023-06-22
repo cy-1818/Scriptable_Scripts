@@ -18,7 +18,7 @@ elements = {
 	"space":space,
 	"output":[{
 		"style":"",
-		"str":"welcome to tsfm-ex! this is tsfm-ex version 5.1."
+		"str":"welcome to tsfm-ex! this is tsfm-ex version 5.2."
 	}]
 }
 
@@ -27,7 +27,9 @@ if(!(fmi.fileExists(doci+"/tsfm-ex/commands.json") && fmi.fileExists(doci+"/tsfm
 	alert.message = "start install"
 	alert.addAction("OK")
 	console.log(await alert.present())
-	await fmi.createDirectory(doci + "/tsfm-ex", false)
+	if(!fmi.fileExists(doci+"/tsfm-ex")){
+	  await fmi.createDirectory(doci + "/tsfm-ex", false)
+	}
 	var link = "https://raw.githubusercontent.com/cy-1818/Scriptable_Scripts/main/tsfm-ex/tsfm-ex/"
 	var setup = ["commands.json", "tsfm-ex.html", "cd.js", "ls.js", "pwd.js", "del.js", "get.js", "exit.js", "script.js", "clear.js", "urls.json"]
 	for(var n=0;n<setup.length;n++){
@@ -108,9 +110,11 @@ formatPath = function(str, nowPath){
 		return str;
 	}else if(str.startsWith("iCloud:")){
 		f = FileManager.iCloud()
+		space = "iCloud"
 		return str.replace("iCloud:", "");
 	}else if(str.startsWith("local:")){
 		f = FileManager.local()
+		space = "local"
 		return str.replace("local:","");
 	}else {
 		return nowPath+"/"+str;
