@@ -116,6 +116,7 @@ return (async function(){
 		        "str":"To install script, write \'script install [script name]\'."
 		      })
 		    }
+		    await fmi.writeString(doci+"/tsfm-ex/commands.json", JSON.stringify(commands, null, "\t"))
 		  break;
 		  case "delete":
 		  case "-d":
@@ -171,7 +172,7 @@ return (async function(){
 		  case "-v":
 		    result.push({
 		      "style":"",
-		      "str":"3.4"
+		      "str":"3.5"
 		    })
 		  break;
 		  case "help":
