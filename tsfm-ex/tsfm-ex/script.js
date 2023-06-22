@@ -8,7 +8,7 @@ return (async function(){
           "type":"command"
         }
       }
-      await fmi.writeString(doci+"/tsfm-ex/scripts.json", JSON.Stringify(scripts, null, "\t"))
+      await fmi.writeString(doci+"/tsfm-ex/scripts.json", JSON.stringify(scripts, null, "\t"))
     }else{
       scripts = JSON.parse(fmi.readString(doci+"/tsfm-ex/scripts.json"));
     }
@@ -171,7 +171,7 @@ return (async function(){
 		  case "-v":
 		    result.push({
 		      "style":"",
-		      "str":"3.1"
+		      "str":"3.2"
 		    })
 		  break;
 		  case "help":
