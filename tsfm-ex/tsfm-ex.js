@@ -1,6 +1,7 @@
 // Variables used by Scriptable.
 // These must be at the very top of the file. Do not edit.
-// icon-color: cyan; icon-glyph: angle-double-right;
+// always-run-in-app: true; icon-color: cyan;
+// icon-glyph: angle-double-right;
 fmi = FileManager.iCloud();
 doci = fmi.documentsDirectory();
 w = new WebView()
@@ -17,7 +18,7 @@ elements = {
 	"space":space,
 	"output":[{
 		"style":"",
-		"str":"welcome to tsfm-ex! this is tsfm-ex version 5.0."
+		"str":"welcome to tsfm-ex! this is tsfm-ex version 5.1."
 	}]
 }
 
@@ -28,7 +29,7 @@ if(!(fmi.fileExists(doci+"/tsfm-ex/commands.json") && fmi.fileExists(doci+"/tsfm
 	console.log(await alert.present())
 	await fmi.createDirectory(doci + "/tsfm-ex", false)
 	var link = "https://raw.githubusercontent.com/cy-1818/Scriptable_Scripts/main/tsfm-ex/tsfm-ex/"
-	var setup = ["commands.json", "tsfm-ex.html", "cd.js", "ls.js", "pwd.js", "del.js", "exit.js", "script.js", "clear.js", "urls.json"]
+	var setup = ["commands.json", "tsfm-ex.html", "cd.js", "ls.js", "pwd.js", "del.js", "get.js", "exit.js", "script.js", "clear.js", "urls.json"]
 	for(var n=0;n<setup.length;n++){
 		var rstr = await new Request(link+setup[n]).loadString();
 		await fmi.writeString(pass + "/tsfm-ex/" + setup[n], rstr)
