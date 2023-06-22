@@ -17,16 +17,16 @@ elements = {
 	"space":space,
 	"output":[{
 		"style":"",
-		"str":"welcome to tsfm-ex! this is tsfm-ex version 4.6."
+		"str":"welcome to tsfm-ex! this is tsfm-ex version 4.7."
 	}]
 }
 
-if(!fmi.fileExists(pass+"/tsfm-ex")){
+if(!(fmi.fileExists(doci+"/tsfm-ex/commands.json") && fmi.fileExists(doci+"/tsfm-ex/urls.json") && fmi.fileExists(doci+"/tsfm-ex/tsfm-ex.html"))){
 	var alert = new Alert()
 	alert.message = "start install"
 	alert.addAction("OK")
 	console.log(await alert.present())
-	await fmi.createDirectory(pass + "/tsfm-ex", false)
+	await fmi.createDirectory(doci + "/tsfm-ex", false)
 	var link = "https://raw.githubusercontent.com/cy-1818/Scriptable_Scripts/main/tsfm-ex/tsfm-ex/"
 	var setup = ["commands.json", "tsfm-ex.html", "cd.js", "ls.js", "pwd.js", "del.js", "exit.js", "script.js", "clear.js", "urls.json"]
 	for(var n=0;n<setup.length;n++){
