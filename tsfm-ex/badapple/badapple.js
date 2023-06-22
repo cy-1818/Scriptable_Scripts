@@ -7,7 +7,7 @@ return(async function(){
       "tag":"pre",
       "edit":true
   }])
-  var index = Math.floor((Date.now()-startTime)/100)
+  index = Math.floor((Date.now()-startTime)/100)
   for(var n=0;n<29;n++){
     await Print([{
       "style":"color:white;margin:0;padding:0;",
@@ -16,6 +16,11 @@ return(async function(){
       "edit":true
     }])
   }
+  await Print([{
+    "style":"",
+    "str":">",
+    "getKey":true
+  }])
   while(index!=apple.length){
     for(var n=0;n<30;n++){
       await Edit(appleNum+n, {
@@ -24,6 +29,12 @@ return(async function(){
       });
     }
     index = Math.floor((Date.now()-startTime)/100)
+    if(await KeyPressed()){
+      if(await GetKey()=="KeyC"){
+        await EndGetKey();
+        break;
+      }
+    }
   }
   for(var n=0;n<30;n++){
     await DelNode(appleNum+n);
