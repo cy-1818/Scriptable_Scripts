@@ -36,12 +36,12 @@ return(async function(){
           await Print([{
             "style":"",
             "str":obj.text
-          ]});
+          }]);
         }else{
           await Print([{
             "style":"color:#ff3333",
             "str":`${obj.type} on line ${obj.line} : ${obj.text}`
-          ]});
+          }]);
         }
       });
       goto.printOutput=function(){
@@ -54,7 +54,7 @@ return(async function(){
       }
       goto.input = parameter.slice(1);
     }
-    var gotoProgram=f.readString(formatPath(parameter[0]));
+    var gotoProgram=await f.readString(formatPath(parameter[0], pass));
     var gotoOutput = await goto.main(gotoProgram);
     if(gotoOutput != "end"){
       for(var n=0;n<gotoOutput.length;n++){
@@ -62,7 +62,7 @@ return(async function(){
           result.push({
             "style":"",
             "str":gotoOutput[n].text
-          ]);
+          });
         }else{
           result.push({
             "style":"color:#ff3333",
@@ -84,8 +84,8 @@ goto -v                               : show version.`.split("\n").join("")
   }else{
     result.push({
       "style":"",
-      "str":"1.0"
+      "str":"1.1"
     });
   }
-  return 0;
+  return result;
 })()
