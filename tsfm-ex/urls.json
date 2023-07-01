@@ -102,6 +102,19 @@
     "type":"addition",
     "name":"badapple.json"
   },
+  "goto":{
+    "url":"https://raw.githubusercontent.com/cy-1818/Scriptable_Scripts/main/tsfm-ex/goto/goto.js",
+    "type":"command",
+    "name":"goto.js",
+    "dependence":[
+      "goto-interpreter"
+    ]
+  },
+  "goto-interpreter":{
+    "url":"https://raw.githubusercontent.com/cy-1818/goto/main/goto_interpreter.js",
+    "type":"addition",
+    "name":"goto_interpreter.js"
+  },
   "show":{
     "url":"https://raw.githubusercontent.com/cy-1818/Scriptable_Scripts/main/tsfm-ex/show/show.js",
     "type":"command",
