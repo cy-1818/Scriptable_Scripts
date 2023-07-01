@@ -1,7 +1,7 @@
 return (async function(){
   var result = []
   try{
-    await f.writeString(formatPath(parameter[1], pass), await new Request(parameter[0]).loadString());
+    await f.writeString(formatPath(parameter[1], pass), await new Request(parameter[0]).loadString().trim());
     result = [{
       "style":"",
       "str":"success!"
