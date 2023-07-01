@@ -1,5 +1,5 @@
 return(async function(){
-  var goto = eval(fmi.readString(doci+"/tsfm-ex/goto_interpreter.js"));
+  var goto = eval(await fmi.readString(doci+"/tsfm-ex/goto_interpreter.js"));
   var result = [];
   if(parameter[0]!="-h"&&parameter[0]!="-v"){
     if(parameter[0]=="-a"){
@@ -44,14 +44,14 @@ return(async function(){
           }]);
         }
       });
-      goto.printOutput=function(){
+      goto.End = (async function(){
         return "end";
-      }
+      })
       parameter.shift();
     }else{
-      goto.getInput=function(){
-        return this.input.shift();
-      }
+      goto.getInput=(async function(){
+        return this.input.shift();;
+      })
       goto.input = parameter.slice(1);
     }
     var gotoProgram=await f.readString(formatPath(parameter[0], pass));
@@ -60,12 +60,12 @@ return(async function(){
       for(var n=0;n<gotoOutput.length;n++){
         if(gotoOutput[n].type == "output"){
           result.push({
-            "style":"",
+            "style":"display:block;",
             "str":gotoOutput[n].text
           });
         }else{
           result.push({
-            "style":"color:#ff3333",
+            "style":"color:#ff3333;display:block;",
             "str":`${gotoOutput[n].type} on line ${gotoOutput[n].line} : ${gotoOutput[n].text}`
           });
         }
@@ -84,7 +84,7 @@ goto -v                               : show version.`.split("\n").join("")
   }else{
     result.push({
       "style":"",
-      "str":"1.1"
+      "str":"1.2"
     });
   }
   return result;
