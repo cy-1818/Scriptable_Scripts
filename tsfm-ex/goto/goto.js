@@ -9,8 +9,7 @@ return(async function(){
           "style":"",
           "str":">>>",
           "edit":true
-        }])
-        await Print([{
+        },{
           "style":"",
           "str":"",
           "edit":true,
@@ -24,11 +23,12 @@ return(async function(){
           }
         }
         ans = await GetText("keyForm");
-        await Edit(gotoNum+1, {
+        await Edit(gotoNum, {
           "style":"",
           "str":">>>"+ans
         });
         await EndGetKey();
+        await DelNode(gotoNum-1);
         return ans;
       });
       goto.printOutput=(async function(obj){
@@ -47,6 +47,9 @@ return(async function(){
       goto.End = (async function(){
         return "end";
       })
+      goto.setUp=function(){
+        this.values.limit=Infinity;
+      }
       parameter.shift();
     }else{
       goto.getInput=(async function(){
