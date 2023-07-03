@@ -19,6 +19,9 @@ return(async function(){
   await Print([{
     "style":"",
     "str":">",
+  },{
+    "style":"",
+    "str":"",
     "getKey":true
   }])
   while(index!=apple.length){
@@ -30,7 +33,7 @@ return(async function(){
     }
     index = Math.floor((Date.now()-startTime)/100)
     if(await KeyPressed()){
-      if(await GetKey()=="KeyC"){
+      if(await GetKey()=="c"){
         await EndGetKey();
         break;
       }
