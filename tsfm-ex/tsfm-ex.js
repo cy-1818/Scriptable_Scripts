@@ -18,7 +18,7 @@ elements = {
 	"space":space,
 	"output":[{
 		"style":"",
-		"str":"welcome to tsfm-ex! this is tsfm-ex version 6.0."
+		"str":"welcome to tsfm-ex! this is tsfm-ex version 6.1."
 	}]
 }
 
