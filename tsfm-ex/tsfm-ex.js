@@ -18,11 +18,11 @@ elements = {
 	"space":space,
 	"output":[{
 		"style":"",
-		"str":"welcome to tsfm-ex! this is tsfm-ex version 5.2."
+		"str":"welcome to tsfm-ex! this is tsfm-ex version 6.0."
 	}]
 }
 
-if(!(fmi.fileExists(doci+"/tsfm-ex/commands.json") && fmi.fileExists(doci+"/tsfm-ex/urls.json") && fmi.fileExists(doci+"/tsfm-ex/tsfm-ex.html"))){
+if(!(fmi.fileExists(doci+"/tsfm-ex/commands.json") && fmi.fileExists(doci+"/tsfm-ex/urls.json") && fmi.fileExists(doci+"/tsfm-ex/tsfm-ex.html") && fmi.fileExists(doci+"/tsfm-ex/saves.json"))){
 	var alert = new Alert()
 	alert.message = "start install"
 	alert.addAction("OK")
@@ -31,7 +31,7 @@ if(!(fmi.fileExists(doci+"/tsfm-ex/commands.json") && fmi.fileExists(doci+"/tsfm
 	  await fmi.createDirectory(doci + "/tsfm-ex", false)
 	}
 	var link = "https://raw.githubusercontent.com/cy-1818/Scriptable_Scripts/main/tsfm-ex/tsfm-ex/"
-	var setup = ["commands.json", "tsfm-ex.html", "cd.js", "ls.js", "pwd.js", "del.js", "get.js", "exit.js", "script.js", "clear.js", "urls.json"]
+	var setup = ["commands.json", "tsfm-ex.html", "cd.js", "ls.js", "pwd.js", "del.js", "get.js", "exit.js", "script.js", "clear.js", "urls.json", "saves.json"]
 	for(var n=0;n<setup.length;n++){
 		var rstr = await new Request(link+setup[n]).loadString();
 		await fmi.writeString(pass + "/tsfm-ex/" + setup[n], rstr)
@@ -43,6 +43,7 @@ if(!(fmi.fileExists(doci+"/tsfm-ex/commands.json") && fmi.fileExists(doci+"/tsfm
 	console.log(await alert.present())
 }
 commands = JSON.parse(fmi.readString(doci+"/tsfm-ex/commands.json"));
+saves = JSON.parse(fmi.readString(doci+"/tsfm-ex/saves.json"));
 Run = (async function(str){
 	return await w.evaluateJavaScript(str, false);
 })
@@ -72,11 +73,13 @@ Get = (async function(){
 	return JSON.parse(await w.evaluateJavaScript("get()", false));
 })
 Give = (async function(json){
-	console.log(`give('${JSON.stringify(json)}');`)
 	return await w.evaluateJavaScript(`give('${JSON.stringify(json).split("\\").join("\\\\").split("'").join("\\\'").split("\"").join("\\\"").split("\`").join("\\\`")}');`, false);
 })
 Load = (async function(){
 	return await w.evaluateJavaScript("load()", false);
+})
+LoadSaves = (async function(json){
+	return await w.evaluateJavaScript(`loadSaves('${JSON.stringify(json).split("\\").join("\\\\").split("'").join("\\\'").split("\"").join("\\\"").split("\`").join("\\\`")}');`, false);
 })
 KeyPressed = (async function(){
 	return await w.evaluateJavaScript("keyPressed", false);
@@ -135,7 +138,6 @@ async function Wait(){
 
 async function MainLoop(){
 	while(true){
-		console.log(1)
 		await Wait();
 		elements = await Get();
 		input = elements.input.split("|");
@@ -186,6 +188,7 @@ async function MainLoop(){
 w.loadFile(doci+"/tsfm-ex/tsfm-ex.html");
 w.present(true);
 await w.waitForLoad();
+await LoadSaves(saves);
 await Give(elements);
 await Load();
 await MainLoop();
