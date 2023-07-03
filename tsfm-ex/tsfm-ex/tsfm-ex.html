@@ -81,6 +81,7 @@ pre {
     var selection;
     var saves;
     var hisNum;
+    var keyboardHeight=0;
     function logKey(e) {
       console.log(e.key);
       if(e.key=="Enter"){
@@ -236,7 +237,10 @@ pre {
       form = right;
       form.addEventListener('keydown', logKey);
       terminal.append(line);
+      terminal.scrollTop = terminal.scrollHeight;
       form.focus();
+      allowbar.style.bottom=keyboardHeight+"px";
+      console.log(allowbar.style.bottom);
       return 0;
     }
     function loadSaves(obj){
@@ -245,8 +249,9 @@ pre {
       return 0;
     }
     visualViewport.addEventListener("resize", ({ target }) => {
-      if(window.innerHeight-target.height!==0){
-        allowbar.style.bottom=window.innerHeight-target.height-window.scrollY+"px";
+      keyboardHeight=window.innerHeight-target.height;
+      if(keyboardHeight!==0){
+        allowbar.style.bottom=keyboardHeight+"px";
       }else{
         allowbar.style.bottom=0;
       }
