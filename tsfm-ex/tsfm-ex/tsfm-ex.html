@@ -14,25 +14,61 @@ pre {
     font-size:1em;
     font-family: 'Noto Sans Mono CJK JP','Source Han Code JP', monospace;
 }
-.form{
+.form {
     display:inline-block;
     width: 100%;
     height: 1em;
     outline: none;
 }
-#terminal{
+#terminal {
+    display:inline-block;
     overflow:scroll;
+    width: 100%;
     height:100vh;
+    padding-bottom:5vh;
     white-space: nowrap;
 }
-
+#allowbar {
+  display:flex;
+  position:fixed;
+  bottom:0;
+  left:0;
+  font-size:1.6em;
+  width:100%;
+  height:2em;
+  background-color:#333;
+  margin:0;
+  padding:0;
+  border:0;
+  justify-content:flex-end;
+  align-items: center;
+}
+.button {
+  display:flex;
+  background-color:#888;
+  color:white;
+  margin:3px;
+  border:0;
+  padding:3px;
+  border-radius:3px;
+  width:1.4em;
+  height:1.4em;
+  justify-content:center;
+  align-items: center;
+}
   </style>
 </head>
 <body>
   <div id="terminal" onclick = "form.focus()"></div>
+  <div id="allowbar">
+    <p class="button" onclick="keyEvent('ArrowLeft')">←</p>
+    <p class="button" onclick="keyEvent('ArrowDown')">↓</p>
+    <p class="button" onclick="keyEvent('ArrowUp')">↑</p>
+    <p class="button" onclick="keyEvent('ArrowRight')">→</p>
+  </div>
   <script>
-    console.log("start");
     var terminal = document.getElementById("terminal");
+    var allowbar = document.getElementById("allowbar");
     var log = document.getElementById("log");
     var checker = false;
     var elements = {}
@@ -42,15 +78,58 @@ pre {
     var keyPressed = false;
     var pressedKey = "";
     var keyGetting = false;
+    var selection;
+    var saves;
+    var hisNum;
     function logKey(e) {
-      console.log(e.code);
-      if(e.code=="Enter"){
-        elements.input = form.innerText;
+      console.log(e.key);
+      if(e.key=="Enter"){
+        var text = form.innerText;
+        var num = saves.history.indexOf(text);
+        elements.input = text;
+        if(num!=-1){
+          saves.history.splice(num, 1);
+        }
+        saves.history.push(text);
+        hisNum = saves.history.length;
         form.contentEditable = false;
         form.removeEventListener('keydown', logKey)
         checker = true;
+      }else if(e.key=="ArrowRight"){
+        form.focus();
+        var select=selection.start+1;
+        if(select>form.innerText.length){
+          select=form.innerText.length;
+        }
+        getSelection().collapse(form.childNodes[0], select);
+      }else if(e.key=="ArrowLeft"){
+        form.focus();
+        var select=selection.start-1;
+        if(select<0){
+          select=0;
+        }
+        getSelection().collapse(form.childNodes[0], select);
+      }else if(e.key=="ArrowUp"){
+        hisNum-=1;
+        if(hisNum<0){
+          hisNum = 0;
+        }
+        form.innerText = saves.history[hisNum];
+        form.focus();
+        getSelection().collapse(form.childNodes[0], form.innerText.length);
+      }else if(e.key=="ArrowDown"){
+        hisNum+=1;
+        if(hisNum==saves.history.length){
+          hisNum-=1;
+          form.innerText="";
+          form.focus();
+        }else{
+          form.innerText = saves.history[hisNum];
+          form.focus();
+          getSelection().collapse(form.childNodes[0], form.innerText.length);
+        }
       }
-      console.log(elements);
+      selection=getSelect();
     }
     function give(str){
       elements = JSON.parse(str)
@@ -96,6 +175,15 @@ pre {
     function edit(num, obj){
       nodes[num].style=obj.style;
       nodes[num].innerHTML=obj.str;
+      if(obj.getKey){
+        endGetKey();
+        form = nodes[num];
+        span.className = "form";
+        span.contentEditable = true;
+        span.addEventListener('keydown', getKey);
+        keyGetting = true;
+        form.focus();
+      }
       return 0;
     }
     function delnode(num){
@@ -104,7 +192,8 @@ pre {
       return 0;
     }
     function getKey(e){
-      pressedKey = e.code;
+      selection=getSelect();
+      pressedKey = e.key;
       keyPressed = true;
     }
     function tellKey(){
@@ -117,8 +206,20 @@ pre {
         form.removeEventListener('keydown', getKey)
       }
     }
+    function keyEvent(str){
+      form.dispatchEvent(new KeyboardEvent("keydown",{"key":str}));
+    }
+    function getSelect(){
+      var select = getSelection();
+      var anser =  {
+        "start":select.anchorOffset,
+        "startSTR":select.anchorNode.data,
+        "end":select.focusOffset,
+        "endSTR":select.focusNode.data
+      }
+      return anser;
+    }
     function load(){
-      console.log(elements);
         checker = false;
       if(elements.output){
         print(elements.output);
@@ -138,8 +239,18 @@ pre {
       form.focus();
       return 0;
     }
-    console.log("setupend");
-    
+    function loadSaves(obj){
+      saves = JSON.parse(obj);
+      hisNum = saves.history.length;
+      return 0;
+    }
+    visualViewport.addEventListener("resize", ({ target }) => {
+      if(window.innerHeight-target.height!==0){
+        allowbar.style.bottom=window.innerHeight-target.height-window.scrollY+"px";
+      }else{
+        allowbar.style.bottom=0;
+      }
+    });
   </script>
 </body>
 </html>
