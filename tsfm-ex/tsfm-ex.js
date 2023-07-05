@@ -22,7 +22,7 @@ elements = {
 	}]
 }
 
-if(!(fmi.fileExists(doci+"/tsfm-ex/commands.json") && fmi.fileExists(doci+"/tsfm-ex/urls.json") && fmi.fileExists(doci+"/tsfm-ex/tsfm-ex.html") && fmi.fileExists(doci+"/tsfm-ex/saves.json"))){
+if(!(fmi.fileExists(doci+"/tsfm-ex/commands.json") && fmi.fileExists(doci+"/tsfm-ex/urls.json") && fmi.fileExists(doci+"/tsfm-ex/tsfm-ex.html") && fmi.fileExists(doci+"/tsfm-ex/saves.json") && fmi.fileExists(doci+"/tsfm-ex/script.js"))){
 	var alert = new Alert()
 	alert.message = "start install"
 	alert.addAction("OK")
@@ -31,7 +31,7 @@ if(!(fmi.fileExists(doci+"/tsfm-ex/commands.json") && fmi.fileExists(doci+"/tsfm
 	  await fmi.createDirectory(doci + "/tsfm-ex", false)
 	}
 	var link = "https://raw.githubusercontent.com/cy-1818/Scriptable_Scripts/main/tsfm-ex/tsfm-ex/"
-	var setup = ["commands.json", "tsfm-ex.html", "cd.js", "ls.js", "pwd.js", "del.js", "get.js", "exit.js", "script.js", "clear.js", "urls.json", "saves.json"]
+	var setup = ["commands.json", "tsfm-ex.html", "cd.js", "ls.js", "pwd.js", "del.js", "get.js", "exit.js", "script.js", "clear.js", "editor.js", "urls.json", "saves.json"]
 	for(var n=0;n<setup.length;n++){
 		var rstr = await new Request(link+setup[n]).loadString();
 		await fmi.writeString(pass + "/tsfm-ex/" + setup[n], rstr)
