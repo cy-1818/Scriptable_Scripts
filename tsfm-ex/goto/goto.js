@@ -75,19 +75,23 @@ return(async function(){
       }
     }
   }else if(parameter[0]=="-h"){
-    result.push({
-      "style":"",
-      "tag":"pre",
-      "str":`
-goto [program file path] [parameters] : run goto program.<br/>
-goto -a [program file path]           : run goto program asynchronously.<br/>
-goto -h                               : show help document.<br/>
-goto -v                               : show version.`.split("\n").join("")
-    });
+    var text = `
+goto [program file path] [parameters] : run goto program.
+goto -a [program file path]           : run goto program asynchronously.
+goto -h                               : show help document.
+goto -v                               : show version.
+`.split("\n")
+    for(var n=0;n<text.length;n++){
+      result.push({
+        "style":"display:block",
+        "tag":"pre",
+        "str":text[n]
+      });
+    }
   }else{
     result.push({
       "style":"",
-      "str":"1.2"
+      "str":"1.3"
     });
   }
   return result;
