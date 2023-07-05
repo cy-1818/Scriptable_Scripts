@@ -160,7 +160,7 @@ pre {
           keyGetting = true;
         }
         span.style=obj[n].style;
-        span.innerHTML=obj[n].str;
+        span.append(document.createTextNode(obj[n].str))
         line.append(span);
         if(obj[n].edit){
           nodes.push(span);
@@ -175,7 +175,8 @@ pre {
     }
     function edit(num, obj){
       nodes[num].style=obj.style;
-      nodes[num].innerHTML=obj.str;
+      nodes[num].innerHTML="";
+      nodes[num].append(document.createTextNode(obj.str))
       if(obj.getKey){
         endGetKey();
         form = nodes[num];
@@ -188,14 +189,21 @@ pre {
       return 0;
     }
     function delnode(num){
-      nodes[num].remove();
-      delete nodes[num];
+      try{
+        nodes[num].remove();
+        nodes.splice(num,1);
+      }catch(e){
+        console.log(nodes);
+        console.log(num);
+      }
       return 0;
     }
     function getKey(e){
-      selection=getSelect();
       pressedKey = e.key;
       keyPressed = true;
+      if(e.key.include("Arrow")){
+        form.focus();
+      }
     }
     function tellKey(){
       keyPressed = false;
@@ -211,12 +219,22 @@ pre {
       form.dispatchEvent(new KeyboardEvent("keydown",{"key":str}));
     }
     function getSelect(){
-      var select = getSelection();
-      var anser =  {
-        "start":select.anchorOffset,
-        "startSTR":select.anchorNode.data,
-        "end":select.focusOffset,
-        "endSTR":select.focusNode.data
+      var anser;
+      try{
+        var select = getSelection();
+        anser =  {
+          "start":select.anchorOffset,
+          "startSTR":select.anchorNode.data,
+          "end":select.focusOffset,
+          "endSTR":select.focusNode.data
+        }
+      }catch(e){
+        anser =  {
+          "start":0,
+          "startSTR":"",
+          "end":0,
+          "endSTR":""
+        }
       }
       return anser;
     }
