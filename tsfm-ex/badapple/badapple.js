@@ -40,7 +40,7 @@ return(async function(){
     }
   }
   for(var n=0;n<30;n++){
-    await DelNode(appleNum+n);
+    await DelNode(appleNum);
   }
   apple = null;
   startTime = null;
