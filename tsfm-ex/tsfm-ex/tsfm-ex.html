@@ -19,6 +19,16 @@ pre {
     width: 100%;
     height: 1em;
     outline: none;
+    margin:0;
+    padding:0;
+    border:0;
+}
+.line {
+    display:inline-block;
+    height: 1em;
+    margin:0;
+    padding:0;
+    border:0;
 }
 #terminal {
     display:inline-block;
@@ -150,6 +160,7 @@ pre {
         }else{
           var span = document.createElement("span");
         }
+        span.className = "line";
         if(obj[n].getKey){
           endGetKey();
           form = span;
@@ -211,6 +222,7 @@ pre {
     function endGetKey(){
       if(keyGetting){
         form.contentEditable = false;
+        span.className = "line";
         form.removeEventListener('keydown', getKey)
       }
     }
