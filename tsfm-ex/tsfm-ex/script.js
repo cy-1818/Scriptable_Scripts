@@ -82,7 +82,8 @@ return (async function(){
 		            "path":newPath,
 		            "type":urlList[parameter[n]].type,
 		            "name":urlList[parameter[n]].name,
-		            "dependence":urlList[parameter[n]].dependence
+		            "dependence":urlList[parameter[n]].dependence,
+		            "shortcuts":[]
 		          }
 		          await fmi.writeString(doci + "/tsfm-ex/scripts.json", JSON.stringify(scripts, null, "\t"))
 		          if(notOnly && urlList[parameter[n]].dependence){
@@ -136,6 +137,11 @@ return (async function(){
 		            }
 		          }
 		        }
+		        if(scripts[parameter[n]].shortcuts){
+		          for(var i=0;i<scripts[parameter[n]].shortcuts.length;i++){
+		            delete commands[scripts[parameter[n]].shortcuts[i]];
+		          }
+		        }
 		        await fmi.remove(scripts[parameter[n]].path);
 		        delete scripts[parameter[n]];
 		        await fmi.writeString(doci+"/tsfm-ex/scripts.json", JSON.stringify(scripts, null, "\t"))
@@ -168,34 +174,59 @@ return (async function(){
 		    urls.splice(urls.indexOf(parameter[1]), 1)
 		    await f.writeString(doc+"/tsfm-ex/urls.json", JSON.stringify(urls, null, "\t"))
 		  break;
+		  case "package":
+		  case "-p":
+		    scripts[parameter[1]] = {
+		      "path":formatPath(parameter[2], pass),
+		      "type":"command",
+		      "name":[parameter[2].split("/").pop()].name,
+		      "dependence":parameter.slice(3),
+		      "shortcuts":[]
+		    }
+		    commands[parameter[1]] = formatPath(parameter[2], pass).replace(doci, '')
+		    await fmi.writeString(doci+"/tsfm-ex/scripts.json", JSON.stringify(scripts, null, "\t"))
+		    await fmi.writeString(doci+"/tsfm-ex/commands.json", JSON.stringify(commands, null, "\t"))
+		  break;
+		  case "name":
+		  case "-n":
+		    commands[parameter[2]] = commands[parameter[1]]
+		    scripts[parameter[1]].shortcuts.push(parameter[2]);
+		    await fmi.writeString(doci+"/tsfm-ex/scripts.json", JSON.stringify(scripts, null, "\t"))
+		    await fmi.writeString(doci+"/tsfm-ex/commands.json", JSON.stringify(commands, null, "\t"))
+		  break;
 		  case "version":
 		  case "-v":
 		    result.push({
 		      "style":"",
-		      "str":"3.5"
+		      "str":"4.0"
 		    })
 		  break;
 		  case "help":
 		  case "-h":
 		  default:
-		    result.push({
-		      "style":"",
-		      "tag":"pre",
-              "notPara":true,
-		      "str":`
-install [script name] : You can install scripts.<br/>
-delete [script name]  : You can delete scripts.<br/>
-search [String]       : You can search scripts.<br/>
-list                  : You can check installed scripts list.<br/>
-update                : You can update installed scripts.<br/>
-addURL [URL]          : You can add URL of JSON which includes script names and urls.<br/>
-removeURL [URL]       : you can delete a URL.<br/>
-version               : show version.<br/>
-help                  : show help.<br/>
-installOnly           : install without dependences.<br/>
-deleteOnly            : install without dependences.<br/>
-You can use -i, -d, -s, -l, -u, -a, -r, -v, -h, -io, -do instead of them.`.split("\n").join("")
-		    })
+		    var text = `
+install [script name]    : You can install scripts.
+delete [script name]     : You can delete scripts.
+search [String]          : You can search scripts.
+list                     : You can check installed scripts list.
+update                   : You can update installed scripts.
+addURL [URL]             : You can add URL of JSON which includes script names and urls.
+removeURL [URL]          : You can delete a URL.
+package [name] [path]    : You can make command from your local file.
+name [command] [shorcut] : You can make shortcut.
+version                  : show version.
+help                     : show help.
+installOnly              : install without dependences.
+deleteOnly               : install without dependences.
+You can use -i, -d, -s, -l, -u, -a, -r, -p, -n, -v, -h, -io, -do instead of them.`.split("\n");
+            for(var n=0;n<text.length;n++){
+		      result.push({
+		        "style":"display:block",
+		        "tag":"pre",
+                "notPara":true,
+		        "str":text[n]
+		      });
+		    }
 		  break;
 		}
 	}catch(e){
