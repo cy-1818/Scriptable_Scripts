@@ -110,22 +110,26 @@ return (async function(){
       }
     }
   }else{
-    result = [{
-      "tag":"pre",
-      "style":"",
-      "notPara":true,
-      "str":`
--n          : show line number<br/>
--b          : show line number except empty line<br/>
--E          : add "$" the end of line<br/>
--s          : compress empty lines<br/>
--S [string] : search line including string<br/>
--C [color]  : set color<br/>
--d          : regard input as file path<br/>
--c          : regard input as string<br/>
-<br/>
-if you didn't set -d or -c, this command will guess file path or string.`.split("\n").join("")
-    }];
+    var text = `
+-n          : show line number
+-b          : show line number except empty line
+-E          : add "$" the end of line
+-s          : compress empty lines
+-S [string] : search line including string
+-C [color]  : set color
+-d          : regard input as file path
+-c          : regard input as string
+
+if you didn't set -d or -c, this command will guess file path or string.
+`.split("\n")
+    for(var n=0;n<text.length;n++){
+      result.push({
+        "tag":"pre",
+        "style":"display:block",
+        "notPara":true,
+        "str":text[n]
+      })
+    }
   }
   return result;
 })()
