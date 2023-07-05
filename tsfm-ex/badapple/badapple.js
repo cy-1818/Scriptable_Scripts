@@ -28,7 +28,7 @@ return(async function(){
     for(var n=0;n<30;n++){
       await Edit(appleNum+n, {
         "style":"color:white;margin:0;padding:0;",
-        "str":apple[index][n].split("<").join("&lt")
+        "str":apple[index][n]
       });
     }
     index = Math.floor((Date.now()-startTime)/100)
