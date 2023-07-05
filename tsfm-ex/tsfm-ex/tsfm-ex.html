@@ -222,7 +222,7 @@ pre {
     function endGetKey(){
       if(keyGetting){
         form.contentEditable = false;
-        span.className = "line";
+        form.className = "line";
         form.removeEventListener('keydown', getKey)
       }
     }
