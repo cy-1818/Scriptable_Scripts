@@ -14,6 +14,11 @@
     "type":"command",
     "name":"get.js"
   },
+  "editor":{
+    "url":"https://raw.githubusercontent.com/cy-1818/Scriptable_Scripts/main/tsfm-ex/tsfm-ex/editor.js",
+    "type":"command",
+    "name":"editor.js"
+  },
   "exit":{
     "url":"https://raw.githubusercontent.com/cy-1818/Scriptable_Scripts/main/tsfm-ex/tsfm-ex/exit.js",
     "type":"command",
