@@ -179,9 +179,9 @@ pre {
       if(obj.getKey){
         endGetKey();
         form = nodes[num];
-        span.className = "form";
-        span.contentEditable = true;
-        span.addEventListener('keydown', getKey);
+        nodes[num].className = "form";
+        nodes[num].contentEditable = true;
+        nodes[num].addEventListener('keydown', getKey);
         keyGetting = true;
         form.focus();
       }
@@ -240,7 +240,7 @@ pre {
       terminal.scrollTop = terminal.scrollHeight;
       form.focus();
       allowbar.style.bottom=keyboardHeight+"px";
-      console.log(allowbar.style.bottom);
+      visualViewport.dispatchEvent(new Event("resize"));
       return 0;
     }
     function loadSaves(obj){
