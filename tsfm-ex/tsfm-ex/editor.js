@@ -32,7 +32,7 @@ return (async function(){
       }]);
       await Print([{
         "str":"save",
-        "style":"",
+        "style":"color:green",
         "edit":true
       },{
         "str":" save&quit ",
