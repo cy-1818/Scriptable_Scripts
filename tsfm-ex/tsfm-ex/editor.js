@@ -31,14 +31,17 @@ return (async function(){
         "edit":true
       }]);
       await Print([{
+        "tag":"pre",
         "str":"save",
         "style":"color:green",
         "edit":true
       },{
+        "tag":"pre",
         "str":" save&quit ",
         "style":"",
         "edit":true
       },{
+        "tag":"pre",
         "str":"quit",
         "style":"",
         "edit":true
@@ -139,6 +142,18 @@ return (async function(){
                   "str":"",
                   "style":"",
                   "getKey":true
+                });
+                await Edit(editNum+1,{
+                  "str":"save",
+                  "style":(sqNum===0)? "color:orange":""
+                });
+                await Edit(editNum+2,{
+                  "str":" save&quit ",
+                  "style":(sqNum===1)? "color:orange":""
+                });
+                await Edit(editNum+3,{
+                  "str":"quit",
+                  "style":(sqNum===2)? "color:orange":""
                 });
                 await Run(`getSelection().collapse(form.childNodes[0], 0)`);
               }
