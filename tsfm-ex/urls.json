@@ -95,6 +95,11 @@
     "type":"Scriptable",
     "name":"dayCounter.js"
   },
+  "wultidly":{
+    "url":"https://github.com/a-ori-a/Widgets/blob/master/wultidly.js",
+    "type":"Scriptable",
+    "name":"wultidly.js"
+  },
   "random-bokete":{
     "url":"https://raw.githubusercontent.com/cy-1818/Scriptable_Scripts/main/random-bokete/random-bokete.js",
     "type":"Scriptable",
