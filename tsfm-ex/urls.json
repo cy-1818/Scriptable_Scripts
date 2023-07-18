@@ -100,6 +100,11 @@
     "type":"Scriptable",
     "name":"wultidly.js"
   },
+  "timeTable":{
+    "url":"https://raw.githubusercontent.com/a-ori-a/Widgets/master/timeTable.js",
+    "type":"Scriptable",
+    "name":"timeTable.js"
+  },
   "random-bokete":{
     "url":"https://raw.githubusercontent.com/cy-1818/Scriptable_Scripts/main/random-bokete/random-bokete.js",
     "type":"Scriptable",
