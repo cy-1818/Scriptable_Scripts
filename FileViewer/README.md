@@ -1,0 +1,3 @@
+UITbaleを使う練習がてら作ったFileViewerです。
+
+iCloud版とLocal版の2種類があります。使い方は同じです。
