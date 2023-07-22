@@ -85,6 +85,16 @@
     "type":"Scriptable",
     "name":"calendar.js"
   },
+  "FileViewerIcloud":{
+    "url":"https://raw.githubusercontent.com/cy-1818/Scriptable_Scripts/main/FileViewer/FileViewerIcloud.js",
+    "type":"Scriptable",
+    "name":"FileViewerIcloud.js"
+  },
+  "FileViewerLocal":{
+    "url":"https://raw.githubusercontent.com/cy-1818/Scriptable_Scripts/main/FileViewer/FileViewerLocal.js",
+    "type":"Scriptable",
+    "name":"FileViewerLocal.js"
+  },
   "randomQuotes":{
     "url":"https://raw.githubusercontent.com/a-ori-a/Widgets/master/randomQuotes.js",
     "type":"Scriptable",
