@@ -85,6 +85,19 @@
     "type":"Scriptable",
     "name":"calendar.js"
   },
+  "MultiWidget":{
+    "url":"https://raw.githubusercontent.com/cy-1818/Scriptable_Scripts/main/MultiWidget/MultiWidget.js",
+    "type":"Scriptable",
+    "dependence":[
+      "MultiWidgetManual"
+    ],
+    "name":"MultiWidget.js"
+  },
+  "MultiWidgetManual":{
+    "url":"https://raw.githubusercontent.com/cy-1818/Scriptable_Scripts/main/MultiWidget/MultiWidgetManual.js",
+    "type":"Scriptable",
+    "name":"MultiWidgetManual.js"
+  },
   "FileViewerIcloud":{
     "url":"https://raw.githubusercontent.com/cy-1818/Scriptable_Scripts/main/FileViewer/FileViewerIcloud.js",
     "type":"Scriptable",
