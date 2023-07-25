@@ -1,0 +1,3 @@
+MultiWidgetは1つのWidget内に複数のWidgetを表示できるWidgetです。
+
+使い方は、とりあえず実行すればわかると思います。
