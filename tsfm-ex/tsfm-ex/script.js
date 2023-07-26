@@ -92,11 +92,11 @@ return (async function(){
 		            for(var i=0;i<urlList[parameter[n]].dependence.length;i++){
 		              if(!parameter.includes(urlList[parameter[n]].dependence[i])){
 		                parameter.push(urlList[parameter[n]].dependence[i])
-		                if(depended[urlList[parameter[n]].dependence[i]] === undefined){
-		                  depended[urlList[parameter[n]].dependence[i]] = [];
-		                }
-		                depended[urlList[parameter[n]].dependence[i]].push(parameter[n]);
 		              }
+		              if(depended[urlList[parameter[n]].dependence[i]] === undefined){
+		                depended[urlList[parameter[n]].dependence[i]] = [];
+		              }
+		              depended[urlList[parameter[n]].dependence[i]].push(parameter[n]);
 		            }
 		          }
 		          await Print([{
@@ -223,7 +223,7 @@ return (async function(){
 		  case "-v":
 		    result.push({
 		      "style":"",
-		      "str":"5.0"
+		      "str":"5.1"
 		    })
 		  break;
 		  case "help":
