@@ -97,14 +97,14 @@ return (async function(){
       if(showOptions.n || (showOptions.b && strList[n])){
         result.push({
           "tag":"pre",
-          "style":"margin:0;padding:0;"+showColor,
+          "style":"display:block;margin:0;padding:0;"+showColor,
           "str":(Array(numlen).join(' ')+showNum).slice(-numlen)+" "+strList[n]
         })
         showNum+=1;
       }else{
         result.push({
           "tag":"pre",
-          "style":"margin:0;padding:0;"+showColor,
+          "style":"display:block;margin:0;padding:0;"+showColor,
           "str":strList[n]+" "
         })
       }
