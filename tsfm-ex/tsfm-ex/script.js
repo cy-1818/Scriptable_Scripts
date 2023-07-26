@@ -56,6 +56,7 @@ return (async function(){
 		  case "install":
 		  case "-i":
 		    notOnly = true;
+		    var depended={};
 		  case "installOnly":
 		  case "-io":
 		    if(parameter[1]){
@@ -83,6 +84,7 @@ return (async function(){
 		            "type":urlList[parameter[n]].type,
 		            "name":urlList[parameter[n]].name,
 		            "dependence":urlList[parameter[n]].dependence,
+		            "depended":[],
 		            "shortcuts":[]
 		          }
 		          await fmi.writeString(doci + "/tsfm-ex/scripts.json", JSON.stringify(scripts, null, "\t"))
@@ -90,6 +92,10 @@ return (async function(){
 		            for(var i=0;i<urlList[parameter[n]].dependence.length;i++){
 		              if(!parameter.includes(urlList[parameter[n]].dependence[i])){
 		                parameter.push(urlList[parameter[n]].dependence[i])
+		                if(depended[urlList[parameter[n]].dependence[i]] === undefined){
+		                  depended[urlList[parameter[n]].dependence[i]] = [];
+		                }
+		                depended[urlList[parameter[n]].dependence[i]].push(parameter[n]);
 		              }
 		            }
 		          }
@@ -107,6 +113,11 @@ return (async function(){
 		          }])
 		        }
 		      }
+		      var dlist = Object.keys(depended);
+		      for(var n=0;n<dlist.length;n++){
+		        scripts[dlist[n]].depended = depended[dlist[n]].concat()
+		      }
+		      await fmi.writeString(doci + "/tsfm-ex/scripts.json", JSON.stringify(scripts, null, "\t"))
 		      result.push({
 		        "style":"",
 		        "str":"install complete"
@@ -125,15 +136,29 @@ return (async function(){
 		  case "deleteOnly":
 		  case "-do":
 		    for(var n=1;n<parameter.length;n++){
-		      if(scripts[parameter[n]]){
+		      if(notOnly && scripts[parameter[n]].depended.length>0){
+		        await Print([{
+		            "style":"color:#ff3333",
+		            "str":"[ERROR] "
+		          },{
+		            "style":"",
+		            "str":parameter[n]+" is depended on other scripts. Use \"deleteOnly\" to delete."
+		          }])
+		      }else if(scripts[parameter[n]]){
 		        if(scripts[parameter[n]].type == "command"){
 		          delete commands[parameter[n]];
 		          await fmi.writeString(doci+"/tsfm-ex/commands.json", JSON.stringify(commands, null, "\t"))
 		        }
-		        if(notOnly && scripts[parameter[n]].dependence){
-		          for(var i=0;i<scripts[parameter[n]].dependence.length;i++){
-		            if(!parameter.includes(scripts[parameter[n]].dependence[i])){
-		              parameter.push(scripts[parameter[n]].dependence[i])
+		        var dependence = scripts[parameter[n]].dependence
+		        if(notOnly && dependence){
+		          for(var i=0;i<dependence.length;i++){
+		            if(scripts[dependence[i]] !== undefined){
+		              scripts[dependence[i]].depended.splice(scripts[dependence[i]].depended.indexOf(parameter[n]), 1)
+		              if(scripts[dependence[i]].depended.length === 0){
+		                if(!parameter.includes(dependence[i])){
+		                  parameter.push(dependence[i])
+		                }
+		              }
 		            }
 		          }
 		        }
@@ -198,7 +223,7 @@ return (async function(){
 		  case "-v":
 		    result.push({
 		      "style":"",
-		      "str":"4.0"
+		      "str":"5.0"
 		    })
 		  break;
 		  case "help":
