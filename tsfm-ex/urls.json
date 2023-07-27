@@ -85,11 +85,17 @@
     "type":"Scriptable",
     "name":"calendar.js"
   },
+  "WidgetSize":{
+    "url":"https://raw.githubusercontent.com/cy-1818/Scriptable_Scripts/main/WidgetSize/WidgetSize.js",
+    "type":"Scriptable",
+    "name":"WidgetSize.js"
+  },
   "MultiWidget":{
     "url":"https://raw.githubusercontent.com/cy-1818/Scriptable_Scripts/main/MultiWidget/MultiWidget.js",
     "type":"Scriptable",
     "dependence":[
-      "MultiWidgetManual"
+      "MultiWidgetManual",
+      "WidgetSize"
     ],
     "name":"MultiWidget.js"
   },
