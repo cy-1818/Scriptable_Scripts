@@ -10,7 +10,14 @@ var AsyncFunction = Object.getPrototypeOf(async function(){}).constructor;
 var stacks=[]
 var sliceStrings = [".presentAccessory", ".presentExtraLarge", ".presentMedium", ".presentLarge()", ".presentSmall()", "Script."]
 if(para===null){
-	para = "v(MultiWidgetManual.js 600 300)"
+	if(config.widgetFamily){
+		var wf = config.widgetFamily;
+	}else{
+		var wf = "extraLarge"
+	}
+	var WidgetSize = importModule("WidgetSize")
+	var manualSize = WidgetSize.getSize(wf, multiWidget)
+	para = `v(MultiWidgetManual.js ${manualSize.width} ${manualSize.height})`
 }
 para = para.split(")").join(" )")
 function sliceProgram(str){
