@@ -117,7 +117,7 @@ return (async function(){
 		  case "-v":
 		    result.push({
 		      "style":"",
-		      "str":"2.5"
+		      "str":"2.6"
 		    })
 		  break;
 		  case "help":
