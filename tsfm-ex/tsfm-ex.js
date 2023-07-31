@@ -18,7 +18,7 @@ elements = {
 	"space":space,
 	"output":[{
 		"style":"",
-		"str":"welcome to tsfm-ex! this is tsfm-ex version 7.0."
+		"str":"welcome to tsfm-ex! this is tsfm-ex version 7.1."
 	}]
 }
 
@@ -143,6 +143,9 @@ async function MainLoop(){
 		input = elements.input.split("|");
 		output = []
 		for(var pipeIndex=0;pipeIndex<input.length;pipeIndex++){
+			if(input[pipeIndex] === ""){
+				break;
+			}
 			input[pipeIndex]=input[pipeIndex].split(" ").filter(Boolean)
 			outDisplay = pipeIndex == input.length-1
 			printOutput = []
