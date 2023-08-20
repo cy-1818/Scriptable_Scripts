@@ -3,7 +3,7 @@
 // icon-color: gray; icon-glyph: expand;
 module.exports.getSize = (family, widget) => {
 	var screenSize = Device.screenSize();
-	if(Device.isInLandscapeLeft() || Device.isInLandscapeRight()){
+	if(screenSize.height < screenSize.width){
 		var screenSTR = screenSize.height+"×"+screenSize.width
 	}else{
 	  var screenSTR = screenSize.width+"×"+screenSize.height
@@ -147,6 +147,7 @@ module.exports.getSize = (family, widget) => {
 			"large":new Size(292, 311)
 		}
 	}
+	console.log(screenSTR)
 	if(widget === undefined || widget.presentSmall !== undefined){
 	  return sizes[screenSTR][family]
 	}else{
