@@ -16,8 +16,19 @@ if(para===null){
 		var wf = "extraLarge"
 	}
 	var WidgetSize = importModule("WidgetSize")
-	var manualSize = WidgetSize.getSize(wf, multiWidget)
+	var manualSize = WidgetSize(wf, multiWidget)
 	para = `v(MultiWidgetManual.js ${manualSize.width} ${manualSize.height})`
+}else{
+	if(para.startsWith("r ")){
+		var FormatPath = importModule("FormatPath")
+		var formatedPath = FormatPath(para.split(" ")[1], doc, "iCloud")
+		if(formatedPath.type=="iCloud"){
+			para = f.readString(formatedPath.path)
+		}else if(formatedPath.type=="local"){
+			var fl = FileManager.local()
+			para = fl.readString(formatedPath.path)
+		}
+	}
 }
 para = para.split(")").join(" )")
 function sliceProgram(str){
