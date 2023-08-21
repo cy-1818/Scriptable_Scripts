@@ -1,7 +1,7 @@
 // Variables used by Scriptable.
 // These must be at the very top of the file. Do not edit.
 // icon-color: gray; icon-glyph: expand;
-module.exports.getSize = (family, widget) => {
+module.exports = (family, widget) => {
 	var screenSize = Device.screenSize();
 	if(screenSize.height < screenSize.width){
 		var screenSTR = screenSize.height+"×"+screenSize.width
@@ -147,7 +147,6 @@ module.exports.getSize = (family, widget) => {
 			"large":new Size(292, 311)
 		}
 	}
-	console.log(screenSTR)
 	if(widget === undefined || widget.presentSmall !== undefined){
 	  return sizes[screenSTR][family]
 	}else{
