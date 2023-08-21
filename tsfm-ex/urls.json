@@ -90,12 +90,18 @@
     "type":"Scriptable",
     "name":"WidgetSize.js"
   },
+  "FormatPath":{
+    "url":"https://raw.githubusercontent.com/cy-1818/Scriptable_Scripts/main/FormatPath/FormatPath.js",
+    "type":"Scriptable",
+    "name":"FormatPath.js"
+  },
   "MultiWidget":{
     "url":"https://raw.githubusercontent.com/cy-1818/Scriptable_Scripts/main/MultiWidget/MultiWidget.js",
     "type":"Scriptable",
     "dependence":[
       "MultiWidgetManual",
-      "WidgetSize"
+      "WidgetSize",
+      "FormatPath"
     ],
     "name":"MultiWidget.js"
   },
