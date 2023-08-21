@@ -15,5 +15,5 @@ module.exports = (str, nowPath, type) => {
 	}else {
 		str = nowPath+"/"+str;
 	}
-	return ["path":str, "type":type];
+	return {"path":str, "type":type};
 }
