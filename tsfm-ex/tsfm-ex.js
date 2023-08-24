@@ -11,16 +11,6 @@ pass = doc;
 outDisplay = true;
 printOutput = [];
 space = "iCloud";
-elements = {
-	"name":Device.name(),
-	"pass":pass,
-	"doc":doc,
-	"space":space,
-	"output":[{
-		"style":"",
-		"str":"welcome to tsfm-ex! this is tsfm-ex version 7.1."
-	}]
-}
 
 if(!(fmi.fileExists(doci+"/tsfm-ex/commands.json") && fmi.fileExists(doci+"/tsfm-ex/urls.json") && fmi.fileExists(doci+"/tsfm-ex/tsfm-ex.html") && fmi.fileExists(doci+"/tsfm-ex/saves.json") && fmi.fileExists(doci+"/tsfm-ex/script.js"))){
 	var alert = new Alert()
@@ -44,6 +34,16 @@ if(!(fmi.fileExists(doci+"/tsfm-ex/commands.json") && fmi.fileExists(doci+"/tsfm
 }
 commands = JSON.parse(fmi.readString(doci+"/tsfm-ex/commands.json"));
 saves = JSON.parse(fmi.readString(doci+"/tsfm-ex/saves.json"));
+elements = {
+	"name":Device.name(),
+	"pass":pass,
+	"doc":doc,
+	"space":space,
+	"output":[{
+		"style":"",
+		"str":saves.welcome ? saves.welcome : "welcome to tsfm-ex! this is tsfm-ex version 7.2."
+	}]
+}
 Run = (async function(str){
 	return await w.evaluateJavaScript(str, false);
 })
