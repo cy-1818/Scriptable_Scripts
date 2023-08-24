@@ -50,6 +50,42 @@ return (async function(){
 		      });
 		    }
 		  break;
+		  case "commandlist":
+		  case "-cl":
+		    var nameList = Object.keys(scripts);
+		    for(var n=0;n<nameList.length;n++){
+		      if(scripts[nameList[n]].type == "command"){
+		        result.push({
+		          "style":"display:block;",
+		          "str":nameList[n]
+		        });
+		      }
+		    }
+		  break;
+		  case "Scriptablelist":
+		  case "-Sl":
+		    var nameList = Object.keys(scripts);
+		    for(var n=0;n<nameList.length;n++){
+		      if(scripts[nameList[n]].type == "Scriptable"){
+		        result.push({
+		          "style":"display:block;",
+		          "str":nameList[n]
+		        });
+		      }
+		    }
+		  break;
+		  case "additionlist":
+		  case "-al":
+		    var nameList = Object.keys(scripts);
+		    for(var n=0;n<nameList.length;n++){
+		      if(scripts[nameList[n]].type == "addition"){
+		        result.push({
+		          "style":"display:block;",
+		          "str":nameList[n]
+		        });
+		      }
+		    }
+		  break;
 		  case "update":
 		  case "-u":
 		    for(var n=0;n<Object.keys(scripts).length;n++){
@@ -227,7 +263,7 @@ return (async function(){
 		  case "-v":
 		    result.push({
 		      "style":"",
-		      "str":"5.2"
+		      "str":"5.3"
 		    })
 		  break;
 		  case "help":
@@ -247,7 +283,10 @@ version                  : show version.
 help                     : show help.
 installOnly              : install without dependences.
 deleteOnly               : install without dependences.
-You can use -i, -d, -s, -l, -u, -a, -r, -p, -n, -v, -h, -io, -do instead of them.`.split("\n");
+commandlist              : You can check installed command scripts list.
+Scriptablelist           : You can check installed Scriptable scripts list.
+additionlist             : You can check installed additional scripts list.
+You can use -i, -d, -s, -l, -u, -a, -r, -p, -n, -v, -h, -io, -do, -cl, -Sl, -al instead of them.`.split("\n");
             for(var n=0;n<text.length;n++){
 		      result.push({
 		        "style":"display:block",
