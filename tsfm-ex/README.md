@@ -4,10 +4,13 @@ tsfm-exはterminal systemed file manager - extra edition の略です。なお�
 
 # インストール方法
 ## 方法1
-tsfm-ex.jsをダウンロードし、Scriptableフォルダに移動、実行。
+1. [Scriptable](https://apps.apple.com/app/id1405459188)をインストール。
+2. 一旦Scriptableを起動する。
+3. tsfm-ex.jsをScriptableフォルダにダウンロード。
+4. Scriptableを開くとtsfm-exというスクリプトができているので、実行。
 
 ## 方法2
-本家tsfmをダウンロードし、tsfmにて「script tsfm-ex」と打ち込んで実行。
+[これ](https://github.com/a-ori-a/Widgets)を参考に本家tsfmをダウンロードし、tsfmにて「script tsfm-ex」と打ち込んで実行。
 
 # 使い方
 気が向いたら書きます。
