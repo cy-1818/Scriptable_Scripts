@@ -110,6 +110,14 @@
     "type":"Scriptable",
     "name":"MultiWidgetManual.js"
   },
+  "WikiRC":{
+    "url":"https://raw.githubusercontent.com/cy-1818/Scriptable_Scripts/main/WikiRC/WikiRC.js",
+    "type":"Scriptable",
+    "name":"WikiRC.js",
+    "dependence":[
+      "WidgetSize"
+    ]
+  },
   "FileViewerIcloud":{
     "url":"https://raw.githubusercontent.com/cy-1818/Scriptable_Scripts/main/FileViewer/FileViewerIcloud.js",
     "type":"Scriptable",
