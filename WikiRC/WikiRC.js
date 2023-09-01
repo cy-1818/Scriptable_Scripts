@@ -2,7 +2,11 @@
 // These must be at the very top of the file. Do not edit.
 // icon-color: pink; icon-glyph: align-left;
 var urls = {};
-var para = JSON.parse(args.widgetParameter)
+if(typeof(args.widgetParameter)=="String"){
+  var para = JSON.parse(args.widgetParameter)
+}else{
+	var para = args.widgetParameter;
+}
 if(!para){
 	para = {}
 }
