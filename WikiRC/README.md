@@ -17,3 +17,6 @@ JSON形式での記述が可能です。
 | line | 表示する行数です。 | 10 |
 | font | ウィジェット内の文字のフォントです。 | "Arial" |
 | fontSize | 文字の大きさです。 | ウィジェットの縦の幅/行数+1です。 |
+
+# 備考
+[https://github.com/cy-1818/Scriptable_Scripts/tree/main/MultiWidget](MultiWidget)との併用が便利です。
