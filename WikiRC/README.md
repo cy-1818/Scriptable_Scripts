@@ -1,7 +1,7 @@
-これは、[https://ja.wikipedia.org](ウィキペディア)等の[https://mediawiki.org](MediaWiki)を使用したwikiサイトの最近の更新(Special:RecentChanges)を監視できるウィジェットです。
+これは、[ウィキペディア](https://ja.wikipedia.org)等の[MediaWiki](https://mediawiki.org)を使用したwikiサイトの最近の更新(Special:RecentChanges)を監視できるウィジェットです。
 
 # インストール方法
-1. [https://github.com/cy-1818/Scriptable_Scripts/tree/main/tsfm-ex](tsfm-ex)をインストールします。
+1. [tsfm-ex](https://github.com/cy-1818/Scriptable_Scripts/tree/main/tsfm-ex)をインストールします。
 2. tsfm-exを実行し、`script -i WikiRC`というコマンドを実行してください。
 
 ※手動でのインストールも可能ですが、依存関係の解決などができません。tsfm-ex経由でのインストールを推奨します。
@@ -19,4 +19,4 @@ JSON形式での記述が可能です。
 | fontSize | 文字の大きさです。 | ウィジェットの縦の幅/行数+1です。 |
 
 # 備考
-[https://github.com/cy-1818/Scriptable_Scripts/tree/main/MultiWidget](MultiWidget)との併用が便利です。
+[MultiWidget](https://github.com/cy-1818/Scriptable_Scripts/tree/main/MultiWidget)との併用が便利です。
