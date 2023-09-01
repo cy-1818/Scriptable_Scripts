@@ -6,4 +6,4 @@ Widgetとして実行する時は星の数の制限をparameterに記述して�
 
 # インストール方法
 `script -i random-bokete`
-をtsfm-exで実行してください。
+を[tsfm-ex](https://github.com/cy-1818/Scriptable_Scripts/tree/main/tsfm-ex)で実行してください。
