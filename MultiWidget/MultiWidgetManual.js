@@ -10,4 +10,6 @@ stack.addText('If you want to set parameter or widget family, write"yyy.js pf [w
 stack.addText('p and f is optional, so you can also use only "p" or "f". And "fp" means same as "pf".')
 stack.addText('You can arrange widgets. Usin "v()" or "h()", you can arrange them vertically or horizontally.')
 stack.addText('If the parameter is too long, you can write "r [text file path]".')
+stack.addText('Now, JSON version is developing. you can write also JSON. For detail, see gothub.')
+stack.url = "https://github.com/cy-1818/Scriptable_Scripts/tree/main/MultiWidget"
 ex.presentExtraLarge()
