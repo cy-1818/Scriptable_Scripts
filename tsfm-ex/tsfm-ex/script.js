@@ -74,6 +74,18 @@ return (async function(){
 		      }
 		    }
 		  break;
+		  case "Modulelist":
+		  case "-Ml":
+		    var nameList = Object.keys(scripts);
+		    for(var n=0;n<nameList.length;n++){
+		      if(scripts[nameList[n]].type == "Module"){
+		        result.push({
+		          "style":"display:block;",
+		          "str":nameList[n]
+		        });
+		      }
+		    }
+		  break;
 		  case "additionlist":
 		  case "-al":
 		    var nameList = Object.keys(scripts);
@@ -112,6 +124,7 @@ return (async function(){
 		              await fmi.writeString(doci+"/tsfm-ex/commands.json", JSON.stringify(commands, null, "\t"))
 		            break;
 		            case "Scriptable":
+		            case "Module":
 		              newPath = doci + "/" + urlList[parameter[n]].name
 		            break;
 		            case "addition":
@@ -263,7 +276,7 @@ return (async function(){
 		  case "-v":
 		    result.push({
 		      "style":"",
-		      "str":"5.3"
+		      "str":"5.4"
 		    })
 		  break;
 		  case "help":
@@ -285,8 +298,9 @@ installOnly              : install without dependences.
 deleteOnly               : install without dependences.
 commandlist              : You can check installed command scripts list.
 Scriptablelist           : You can check installed Scriptable scripts list.
+Modulelist               : You can check installed Module scripts list.
 additionlist             : You can check installed additional scripts list.
-You can use -i, -d, -s, -l, -u, -a, -r, -p, -n, -v, -h, -io, -do, -cl, -Sl, -al instead of them.`.split("\n");
+You can use -i, -d, -s, -l, -u, -a, -r, -p, -n, -v, -h, -io, -do, -cl, -Sl, -Ml, -al instead of them.`.split("\n");
             for(var n=0;n<text.length;n++){
 		      result.push({
 		        "style":"display:block",
