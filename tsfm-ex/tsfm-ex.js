@@ -41,7 +41,7 @@ elements = {
 	"space":space,
 	"output":[{
 		"style":"",
-		"str":saves.welcome ? saves.welcome : "welcome to tsfm-ex! this is tsfm-ex version 7.2."
+		"str":saves.welcome ? saves.welcome : "welcome to tsfm-ex! this is tsfm-ex version 7.3."
 	}]
 }
 Run = (async function(str){
@@ -187,11 +187,16 @@ async function MainLoop(){
 	}
 	return 0;
 }
-
-w.loadFile(doci+"/tsfm-ex/tsfm-ex.html");
-w.present(true);
-await w.waitForLoad();
-await LoadSaves(saves);
-await Give(elements);
-await Load();
-await MainLoop();
+var qpara = args.queryParameters
+if(qpara.command){
+	outDisplay = false
+	await Command(qpara.command, qpara.parameter.split("|"))
+}else{
+	w.loadFile(doci+"/tsfm-ex/tsfm-ex.html");
+	w.present(true);
+	await w.waitForLoad();
+	await LoadSaves(saves);
+	await Give(elements);
+	await Load();
+	await MainLoop();
+}
