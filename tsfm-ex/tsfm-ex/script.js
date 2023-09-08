@@ -1,5 +1,7 @@
 return (async function(){
+    var firstRun = false;
     if(!fmi.fileExists(doci+"/tsfm-ex/scripts.json")){
+      firstRun = true;
       var scripts = {}
       var commandKeys = Object.keys(commands);
       for(var n=0;n<commandKeys.length;n++){
@@ -156,7 +158,7 @@ return (async function(){
 		            "style":"",
 		            "str":parameter[n]+" was "+istr
 		          }])
-		        }else{
+		        }else if(!scripts[parameter[n]].LOCAL){
 		          await Print([{
 		            "style":"color:#ff3333",
 		            "str":"[ERROR] "
@@ -207,7 +209,7 @@ return (async function(){
 		          for(var i=0;i<dependence.length;i++){
 		            if(scripts[dependence[i]] !== undefined){
 		              scripts[dependence[i]].depended.splice(scripts[dependence[i]].depended.indexOf(parameter[n]), 1)
-		              if(scripts[dependence[i]].depended.length === 0){
+		              if(scripts[dependence[i]].depended.length === 0 && (scripts[dependence[i]].type == "additional" || scripts[dependence[i]].type == "Module")){
 		                if(!parameter.includes(dependence[i])){
 		                  parameter.push(dependence[i])
 		                }
@@ -259,9 +261,15 @@ return (async function(){
 		      "type":"command",
 		      "name":[parameter[2].split("/").pop()].name,
 		      "dependence":parameter.slice(3),
-		      "shortcuts":[]
+		      "shortcuts":[],
+		      "LOCAL":true
 		    }
-		    commands[parameter[1]] = formatPath(parameter[2], pass).replace(doci, '')
+		    if(parameter[3]){
+		      scripts[parameter[1]].type = parameter[3];
+		    }
+		    if(scripts[parameter[1]].type == "command"){
+		      commands[parameter[1]] = formatPath(parameter[2], pass).replace(doci, '')
+		    }
 		    await fmi.writeString(doci+"/tsfm-ex/scripts.json", JSON.stringify(scripts, null, "\t"))
 		    await fmi.writeString(doci+"/tsfm-ex/commands.json", JSON.stringify(commands, null, "\t"))
 		  break;
@@ -272,35 +280,59 @@ return (async function(){
 		    await fmi.writeString(doci+"/tsfm-ex/scripts.json", JSON.stringify(scripts, null, "\t"))
 		    await fmi.writeString(doci+"/tsfm-ex/commands.json", JSON.stringify(commands, null, "\t"))
 		  break;
+		  case "AddDepend":
+		  case "-AD":
+		    if(scripts[parameter[1]].dependence===undefined){
+		      scripts[parameter[1]].dependence = []
+		    }
+		    if(scripts[parameter[2]].depended===undefined){
+		      scripts[parameter[2]].depended = []
+		    }
+		    scripts[parameter[1]].dependence.push(parameter[2]);
+		    scripts[parameter[2]].depended.push(parameter[1]);
+		    await fmi.writeString(doci+"/tsfm-ex/scripts.json", JSON.stringify(scripts, null, "\t"))
+		  break;
+		  case "DelDepend":
+		  case "-DD":
+		    if(scripts[parameter[1]].dependence){
+		      scripts[parameter[1]].dependence.splice(scripts[parameter[1]].dependence.indexOf(parameter[2]), 1)
+		    }
+		    if(scripts[parameter[2]].depended){
+		      scripts[parameter[2]].depended.splice(scripts[parameter[2]].depended.indexOf(parameter[1]), 1)
+		    }
+		    await fmi.writeString(doci+"/tsfm-ex/scripts.json", JSON.stringify(scripts, null, "\t"))
+		  break;
 		  case "version":
 		  case "-v":
 		    result.push({
 		      "style":"",
-		      "str":"5.4"
+		      "str":"6.0"
 		    })
 		  break;
 		  case "help":
 		  case "-h":
 		  default:
 		    var text = `
-install [script name]    : You can install scripts.
-delete [script name]     : You can delete scripts.
-search [String]          : You can search scripts.
-list                     : You can check installed scripts list.
-update                   : You can update installed scripts.
-addURL [URL]             : You can add URL of JSON which includes script names and urls.
-removeURL [URL]          : You can delete a URL.
-package [name] [path]    : You can make command from your local file.
-name [command] [shorcut] : You can make shortcut.
-version                  : show version.
-help                     : show help.
-installOnly              : install without dependences.
-deleteOnly               : install without dependences.
-commandlist              : You can check installed command scripts list.
-Scriptablelist           : You can check installed Scriptable scripts list.
-Modulelist               : You can check installed Module scripts list.
-additionlist             : You can check installed additional scripts list.
-You can use -i, -d, -s, -l, -u, -a, -r, -p, -n, -v, -h, -io, -do, -cl, -Sl, -Ml, -al instead of them.`.split("\n");
+install [script name]        : You can install scripts.
+delete [script name]         : You can delete scripts.
+search [String]              : You can search scripts.
+list                         : You can check installed scripts list.
+update                       : You can update installed scripts.
+addURL [URL]                 : You can add URL of JSON which includes script names and urls.
+removeURL [URL]              : You can delete a URL.
+package [name] [path] [type] : You can make command from your local file.
+name [command] [shorcut]     : You can make shortcut.
+version                      : show version.
+help                         : show help.
+installOnly                  : install without dependences.
+deleteOnly                   : install without dependences.
+commandlist                  : You can check installed command scripts list.
+Scriptablelist               : You can check installed Scriptable scripts list.
+Modulelist                   : You can check installed Module scripts list.
+additionlist                 : You can check installed additional scripts list.
+AddDepend [name 1] [name 2]  : add dependence from script 1 to script 2.
+DelDepend [name 1] [name 2]  : delete dependence from script 1 to script 2.
+You can use -i, -d, -s, -l, -u, -a, -r, -p, -n, -v, -h, -io, -do, -cl, -Sl, -Ml, -al, -AD, -DD instead of them.`.split("\n");
             for(var n=0;n<text.length;n++){
 		      result.push({
 		        "style":"display:block",
@@ -316,6 +348,10 @@ You can use -i, -d, -s, -l, -u, -a, -r, -p, -n, -v, -h, -io, -do, -cl, -Sl, -Ml,
 	    "style":"color:#ff3333",
 	    "str":`[${e.name}] ${e.message}`
 	  }]);
+	}
+	if(firstRun){
+	  await Command("script", ["package", "scripts-json", "additional"]);
+	  await Command("script", ["AddDepend", "script", "scripts-json"]);
 	}
 	return result;
 })()
