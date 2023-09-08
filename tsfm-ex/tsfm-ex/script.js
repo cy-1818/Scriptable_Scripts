@@ -260,7 +260,6 @@ return (async function(){
 		      "path":formatPath(parameter[2], pass),
 		      "type":"command",
 		      "name":[parameter[2].split("/").pop()].name,
-		      "dependence":parameter.slice(3),
 		      "shortcuts":[],
 		      "LOCAL":true
 		    }
@@ -306,7 +305,7 @@ return (async function(){
 		  case "-v":
 		    result.push({
 		      "style":"",
-		      "str":"6.0"
+		      "str":"6.2"
 		    })
 		  break;
 		  case "help":
