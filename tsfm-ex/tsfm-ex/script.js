@@ -350,7 +350,7 @@ You can use -i, -d, -s, -l, -u, -a, -r, -p, -n, -v, -h, -io, -do, -cl, -Sl, -Ml,
 	  }]);
 	}
 	if(firstRun){
-	  await Command("script", ["package", "scripts-json", "additional"]);
+	  await Command("script", ["package", "scripts-json", "tsfm-ex/scripts.json", "additional"]);
 	  await Command("script", ["AddDepend", "script", "scripts-json"]);
 	}
 	return result;
