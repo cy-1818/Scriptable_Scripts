@@ -1,7 +1,6 @@
 // Variables used by Scriptable.
 // These must be at the very top of the file. Do not edit.
-// always-run-in-app: true; icon-color: cyan;
-// icon-glyph: angle-double-right;
+// icon-color: cyan; icon-glyph: angle-double-right;
 fmi = FileManager.iCloud();
 doci = fmi.documentsDirectory();
 w = new WebView()
@@ -41,7 +40,7 @@ elements = {
 	"space":space,
 	"output":[{
 		"style":"",
-		"str":saves.welcome ? saves.welcome : "welcome to tsfm-ex! this is tsfm-ex version 7.3."
+		"str":saves.welcome ? saves.welcome : "welcome to tsfm-ex! this is tsfm-ex version 7.4."
 	}]
 }
 Run = (async function(str){
@@ -55,7 +54,7 @@ Print=(async function(obj){
 	  await Give(obj);
 	  return await w.evaluateJavaScript("print(elements)", false);
   }else{
-		printOutput.concat(obj);
+		printOutput = printOutput.concat(obj);
 		return 0;
 	}
 })
@@ -190,7 +189,33 @@ async function MainLoop(){
 var qpara = args.queryParameters
 if(qpara.command){
 	outDisplay = false
-	await Command(qpara.command, qpara.parameter.split("|"))
+	printOutput = []
+	var ans = await Command(qpara.command, qpara.parameter.split("|"))
+	saves.LatestRequestEnd = Date.now()
+	saves.LatestRequestResult = printOutput.concat(ans)
+	await fmi.writeString(doci+"/tsfm-ex/saves.json", JSON.stringify(saves, null, "\t"))
+	if(qpara.url){
+	  Safari.open(qpara.url)
+  }
+}else if(qpara.command1){
+	var qn = 1;
+	var qresult = []
+	outDisplay = false
+	while(true){
+		printOutput = []
+		var ans = await Command(qpara["command"+qn], qpara["parameter"+qn].split("|"))
+		qresult.push(printOutput.concat(ans))
+		qn++;
+		if(qpara[command+qn]===undefined){
+			break;
+		}
+	}
+	saves.LatestRequestEnd = Date.now()
+	saves.LatestRequestResult = printOutput.concat(ans)
+	await fmi.writeString(doci+"/tsfm-ex/saves.json", JSON.stringify(saves, null, "\t"))
+	if(qpara.url){
+	  Safari.open(qpara.url)
+  }
 }else{
 	w.loadFile(doci+"/tsfm-ex/tsfm-ex.html");
 	w.present(true);
