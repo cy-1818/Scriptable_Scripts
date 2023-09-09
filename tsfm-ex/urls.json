@@ -125,6 +125,14 @@
     "describe":"terminal styled file manager",
     "document":"https://github.com/a-ori-a/Widgets/blob/master/README.md#tsfm"
   },
+  "widgetsUpdater":{
+    "url":"https://raw.githubusercontent.com/a-ori-a/Widgets/master/widgetsUpdater.js",
+    "type":"Scriptable",
+    "name":"widgetsUpdater.js",
+    "creater":"a-ori-a",
+    "describe":"update a-ori-a's scripts",
+    "document":"https://github.com/a-ori-a/Widgets/blob/master/README.md#widgetsUpdator"
+  },
   "calendar":{
     "url":"https://raw.githubusercontent.com/cy-1818/Scriptable_Scripts/main/Calendar/calendar.js",
     "type":"Scriptable",
