@@ -229,6 +229,27 @@
     "describe":"managing study time and concentration",
     "document":"https://github.com/a-ori-a/Widgets/blob/master/README.md#wultidly"
   },
+  "Weather":{
+    "url":"https://raw.githubusercontent.com/a-ori-a/Widgets/master/Weather.js",
+    "type":"Scriptable",
+    "name":"Weather.js",
+    "creater":"a-ori-a",
+    "describe":"widget showing weather"
+  },
+  "Reminder":{
+    "url":"https://raw.githubusercontent.com/a-ori-a/Widgets/master/Reminder.js",
+    "type":"Scriptable",
+    "name":"Reminder.js",
+    "creater":"a-ori-a",
+    "describe":"widget showing reminder"
+  },
+  "Calendar":{
+    "url":"https://raw.githubusercontent.com/a-ori-a/Widgets/master/Calendar.js",
+    "type":"Scriptable",
+    "name":"Calendar.js",
+    "creater":"a-ori-a",
+    "describe":"widget showing calendar"
+  },
   "timeTable":{
     "url":"https://raw.githubusercontent.com/a-ori-a/Widgets/master/timeTable.js",
     "type":"Scriptable",
