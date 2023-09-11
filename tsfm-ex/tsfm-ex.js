@@ -40,7 +40,7 @@ elements = {
 	"space":space,
 	"output":[{
 		"style":"",
-		"str":saves.welcome ? saves.welcome : "welcome to tsfm-ex! this is tsfm-ex version 7.4."
+		"str":saves.welcome ? saves.welcome : "welcome to tsfm-ex! this is tsfm-ex version 7.5."
 	}]
 }
 Run = (async function(str){
@@ -206,7 +206,7 @@ if(qpara.command){
 		var ans = await Command(qpara["command"+qn], qpara["parameter"+qn].split("|"))
 		qresult.push(printOutput.concat(ans))
 		qn++;
-		if(qpara[command+qn]===undefined){
+		if(qpara["command"+qn]===undefined){
 			break;
 		}
 	}
