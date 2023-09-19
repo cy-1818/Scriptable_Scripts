@@ -117,6 +117,18 @@
     "describe":"terminal styled file manager extra",
     "document":"https://github.com/cy-1818/Scriptable_Scripts/blob/main/tsfm-ex/README.md"
   },
+  "utsm":{
+    "url":"https://raw.githubusercontent.com/cy-1818/Scriptable_Scripts/main/utsm/utsm.js",
+    "type":"Scriptable",
+    "name":"utsm.js",
+    "dependence":[
+      "tsfm-ex",
+      "script"
+    ],
+    "creater":"Yukí (cy-1818)",
+    "describe":"UITable script manager",
+    "document":"https://github.com/cy-1818/Scriptable_Scripts/blob/main/utsm/README.md"
+  },
   "tsfm":{
     "url":"https://raw.githubusercontent.com/a-ori-a/Widgets/master/tsfm.js",
     "type":"Scriptable",
