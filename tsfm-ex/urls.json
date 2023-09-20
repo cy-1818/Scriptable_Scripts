@@ -5,7 +5,9 @@
     "name":"ls.js",
     "creater":"Yukí (cy-1818)",
     "describe":"show file names in current directory",
-    "document":"https://github.com/cy-1818/Scriptable_Scripts/blob/main/tsfm-ex/tsfm-ex/README.md"
+    "document":"https://github.com/cy-1818/Scriptable_Scripts/blob/main/tsfm-ex/tsfm-ex/README.md",
+    "version":"1.0",
+    "update":true
   },
   "cd":{
     "url":"https://raw.githubusercontent.com/cy-1818/Scriptable_Scripts/main/tsfm-ex/tsfm-ex/cd.js",
@@ -13,7 +15,9 @@
     "name":"cd.js",
     "creater":"Yukí (cy-1818)",
     "describe":"move current directory",
-    "document":"https://github.com/cy-1818/Scriptable_Scripts/blob/main/tsfm-ex/tsfm-ex/README.md"
+    "document":"https://github.com/cy-1818/Scriptable_Scripts/blob/main/tsfm-ex/tsfm-ex/README.md",
+    "version":"2.3",
+    "update":true
   },
   "get":{
     "url":"https://raw.githubusercontent.com/cy-1818/Scriptable_Scripts/main/tsfm-ex/tsfm-ex/get.js",
@@ -21,7 +25,9 @@
     "name":"get.js",
     "creater":"Yukí (cy-1818)",
     "describe":"get file from URL",
-    "document":"https://github.com/cy-1818/Scriptable_Scripts/blob/main/tsfm-ex/tsfm-ex/README.md"
+    "document":"https://github.com/cy-1818/Scriptable_Scripts/blob/main/tsfm-ex/tsfm-ex/README.md",
+    "version":"2.0",
+    "update":true
   },
   "editor":{
     "url":"https://raw.githubusercontent.com/cy-1818/Scriptable_Scripts/main/tsfm-ex/tsfm-ex/editor.js",
@@ -29,7 +35,9 @@
     "name":"editor.js",
     "creater":"Yukí (cy-1818)",
     "describe":"text editor",
-    "document":"https://github.com/cy-1818/Scriptable_Scripts/blob/main/tsfm-ex/tsfm-ex/README.md"
+    "document":"https://github.com/cy-1818/Scriptable_Scripts/blob/main/tsfm-ex/tsfm-ex/README.md",
+    "version":"1.2",
+    "update":true
   },
   "exit":{
     "url":"https://raw.githubusercontent.com/cy-1818/Scriptable_Scripts/main/tsfm-ex/tsfm-ex/exit.js",
@@ -37,7 +45,9 @@
     "name":"exit.js",
     "creater":"Yukí (cy-1818)",
     "describe":"exit from tsfm-ex",
-    "document":"https://github.com/cy-1818/Scriptable_Scripts/blob/main/tsfm-ex/tsfm-ex/README.md"
+    "document":"https://github.com/cy-1818/Scriptable_Scripts/blob/main/tsfm-ex/tsfm-ex/README.md",
+    "version":"2.0",
+    "update":true
   },
   "clear":{
     "url":"https://raw.githubusercontent.com/cy-1818/Scriptable_Scripts/main/tsfm-ex/tsfm-ex/clear.js",
@@ -45,7 +55,9 @@
     "name":"clear.js",
     "creater":"Yukí (cy-1818)",
     "describe":"clear terminal",
-    "document":"https://github.com/cy-1818/Scriptable_Scripts/blob/main/tsfm-ex/tsfm-ex/README.md"
+    "document":"https://github.com/cy-1818/Scriptable_Scripts/blob/main/tsfm-ex/tsfm-ex/README.md",
+    "version":"1.0",
+    "update":true
   },
   "script":{
     "url":"https://raw.githubusercontent.com/cy-1818/Scriptable_Scripts/main/tsfm-ex/tsfm-ex/script.js",
@@ -53,7 +65,9 @@
     "name":"script.js",
     "creater":"Yukí (cy-1818)",
     "describe":"script manager",
-    "document":"https://github.com/cy-1818/Scriptable_Scripts/blob/main/tsfm-ex/tsfm-ex/README.md"
+    "document":"https://github.com/cy-1818/Scriptable_Scripts/blob/main/tsfm-ex/tsfm-ex/README.md",
+    "version":"6.3",
+    "update":true
   },
   "pwd":{
     "url":"https://raw.githubusercontent.com/cy-1818/Scriptable_Scripts/main/tsfm-ex/tsfm-ex/pwd.js",
@@ -61,7 +75,9 @@
     "name":"pwd.js",
     "creater":"Yukí (cy-1818)",
     "describe":"show path of current directory",
-    "document":"https://github.com/cy-1818/Scriptable_Scripts/blob/main/tsfm-ex/tsfm-ex/README.md"
+    "document":"https://github.com/cy-1818/Scriptable_Scripts/blob/main/tsfm-ex/tsfm-ex/README.md",
+    "version":"1.0",
+    "update":true
   },
   "del":{
     "url":"https://raw.githubusercontent.com/cy-1818/Scriptable_Scripts/main/tsfm-ex/tsfm-ex/del.js",
@@ -69,7 +85,9 @@
     "name":"del.js",
     "creater":"Yukí (cy-1818)",
     "describe":"delete file",
-    "document":"https://github.com/cy-1818/Scriptable_Scripts/blob/main/tsfm-ex/tsfm-ex/README.md"
+    "document":"https://github.com/cy-1818/Scriptable_Scripts/blob/main/tsfm-ex/tsfm-ex/README.md",
+    "version":"1.0",
+    "update":true
   },
   "tsfm-ex-html":{
     "url":"https://raw.githubusercontent.com/cy-1818/Scriptable_Scripts/main/tsfm-ex/tsfm-ex/tsfm-ex.html",
@@ -77,7 +95,9 @@
     "name":"tsfm-ex.html",
     "creater":"Yukí (cy-1818)",
     "describe":"tsfm-ex's terminal",
-    "document":"https://github.com/cy-1818/Scriptable_Scripts/blob/main/tsfm-ex/tsfm-ex/README.md"
+    "document":"https://github.com/cy-1818/Scriptable_Scripts/blob/main/tsfm-ex/tsfm-ex/README.md",
+    "version":"7.5",
+    "update":true
   },
   "commands-json":{
     "url":"https://raw.githubusercontent.com/cy-1818/Scriptable_Scripts/main/tsfm-ex/tsfm-ex/commands.json",
@@ -85,7 +105,9 @@
     "name":"commands.json",
     "creater":"Yukí (cy-1818)",
     "describe":"paths of tsfm-ex's commands",
-    "document":"https://github.com/cy-1818/Scriptable_Scripts/blob/main/tsfm-ex/tsfm-ex/README.md"
+    "document":"https://github.com/cy-1818/Scriptable_Scripts/blob/main/tsfm-ex/tsfm-ex/README.md",
+    "version":"1.0",
+    "update":false
   },
   "urls-json":{
     "url":"https://raw.githubusercontent.com/cy-1818/Scriptable_Scripts/main/tsfm-ex/tsfm-ex/urls.json",
@@ -93,7 +115,9 @@
     "name":"urls.json",
     "creater":"Yukí (cy-1818)",
     "describe":"URLs of script's urls",
-    "document":"https://github.com/cy-1818/Scriptable_Scripts/blob/main/tsfm-ex/tsfm-ex/README.md"
+    "document":"https://github.com/cy-1818/Scriptable_Scripts/blob/main/tsfm-ex/tsfm-ex/README.md",
+    "version":"1.0",
+    "update":true
   },
   "saves-json":{
     "url":"https://raw.githubusercontent.com/cy-1818/Scriptable_Scripts/main/tsfm-ex/tsfm-ex/saves.json",
@@ -101,7 +125,9 @@
     "name":"saves.json",
     "creater":"Yukí (cy-1818)",
     "describe":"save data",
-    "document":"https://github.com/cy-1818/Scriptable_Scripts/blob/main/tsfm-ex/tsfm-ex/README.md"
+    "document":"https://github.com/cy-1818/Scriptable_Scripts/blob/main/tsfm-ex/tsfm-ex/README.md",
+    "version":"1.0",
+    "update":false
   },
   "tsfm-ex":{
     "url":"https://raw.githubusercontent.com/cy-1818/Scriptable_Scripts/main/tsfm-ex/tsfm-ex.js",
@@ -115,7 +141,9 @@
     ],
     "creater":"Yukí (cy-1818)",
     "describe":"terminal styled file manager extra",
-    "document":"https://github.com/cy-1818/Scriptable_Scripts/blob/main/tsfm-ex/README.md"
+    "document":"https://github.com/cy-1818/Scriptable_Scripts/blob/main/tsfm-ex/README.md",
+    "version":"7.5",
+    "update":true
   },
   "utsm":{
     "url":"https://raw.githubusercontent.com/cy-1818/Scriptable_Scripts/main/utsm/utsm.js",
@@ -127,7 +155,9 @@
     ],
     "creater":"Yukí (cy-1818)",
     "describe":"UITable script manager",
-    "document":"https://github.com/cy-1818/Scriptable_Scripts/blob/main/utsm/README.md"
+    "document":"https://github.com/cy-1818/Scriptable_Scripts/blob/main/utsm/README.md",
+    "version":"1.0",
+    "update":true
   },
   "tsfm":{
     "url":"https://raw.githubusercontent.com/a-ori-a/Widgets/master/tsfm.js",
@@ -135,7 +165,9 @@
     "name":"tsfm.js",
     "creater":"a-ori-a",
     "describe":"terminal styled file manager",
-    "document":"https://github.com/a-ori-a/Widgets/blob/master/README.md#tsfm"
+    "document":"https://github.com/a-ori-a/Widgets/blob/master/README.md#tsfm",
+    "version":"2.0",
+    "update":true
   },
   "widgetsUpdater":{
     "url":"https://raw.githubusercontent.com/a-ori-a/Widgets/master/widgetsUpdater.js",
@@ -143,7 +175,9 @@
     "name":"widgetsUpdater.js",
     "creater":"a-ori-a",
     "describe":"update a-ori-a's scripts",
-    "document":"https://github.com/a-ori-a/Widgets/blob/master/README.md#widgetsUpdator"
+    "document":"https://github.com/a-ori-a/Widgets/blob/master/README.md#widgetsUpdator",
+    "version":"3.0",
+    "update":true
   },
   "calendar":{
     "url":"https://raw.githubusercontent.com/cy-1818/Scriptable_Scripts/main/Calendar/calendar.js",
@@ -151,7 +185,9 @@
     "name":"calendar.js",
     "creater":"Yukí (cy-1818)",
     "describe":"show today's events",
-    "document":"https://github.com/cy-1818/Scriptable_Scripts/blob/main/Calendar/readme.md"
+    "document":"https://github.com/cy-1818/Scriptable_Scripts/blob/main/Calendar/readme.md",
+    "version":"1.0",
+    "update":true
   },
   "WidgetSize":{
     "url":"https://raw.githubusercontent.com/cy-1818/Scriptable_Scripts/main/WidgetSize/WidgetSize.js",
@@ -159,7 +195,9 @@
     "name":"WidgetSize.js",
     "creater":"Yukí (cy-1818)",
     "describe":"module to get size of widget",
-    "document":"https://github.com/cy-1818/Scriptable_Scripts/blob/main/WidgetSize/README.md"
+    "document":"https://github.com/cy-1818/Scriptable_Scripts/blob/main/WidgetSize/README.md",
+    "version":"1.2",
+    "update":true
   },
   "FormatPath":{
     "url":"https://raw.githubusercontent.com/cy-1818/Scriptable_Scripts/main/FormatPath/FormatPath.js",
@@ -167,7 +205,9 @@
     "name":"FormatPath.js",
     "creater":"Yukí (cy-1818)",
     "describe":"module to format path",
-    "document":"https://github.com/cy-1818/Scriptable_Scripts/blob/main/FormatPath/README.md"
+    "document":"https://github.com/cy-1818/Scriptable_Scripts/blob/main/FormatPath/README.md",
+    "version":"1.1",
+    "update":true
   },
   "MultiWidget":{
     "url":"https://raw.githubusercontent.com/cy-1818/Scriptable_Scripts/main/MultiWidget/MultiWidget.js",
@@ -180,7 +220,9 @@
     "name":"MultiWidget.js",
     "creater":"Yukí (cy-1818)",
     "describe":"widget to nest widget",
-    "document":"https://github.com/cy-1818/Scriptable_Scripts/blob/main/MultiWidget/README.md"
+    "document":"https://github.com/cy-1818/Scriptable_Scripts/blob/main/MultiWidget/README.md",
+    "version":"2.0",
+    "update":true
   },
   "MultiWidgetManual":{
     "url":"https://raw.githubusercontent.com/cy-1818/Scriptable_Scripts/main/MultiWidget/MultiWidgetManual.js",
@@ -188,7 +230,9 @@
     "name":"MultiWidgetManual.js",
     "creater":"Yukí (cy-1818)",
     "describe":"MultiWidget's manual",
-    "document":"https://github.com/cy-1818/Scriptable_Scripts/blob/main/MultiWidget/README.md"
+    "document":"https://github.com/cy-1818/Scriptable_Scripts/blob/main/MultiWidget/README.md",
+    "version":"1.2",
+    "update":true
   },
   "WikiRC":{
     "url":"https://raw.githubusercontent.com/cy-1818/Scriptable_Scripts/main/WikiRC/WikiRC.js",
@@ -199,7 +243,9 @@
     ],
     "creater":"Yukí (cy-1818)",
     "describe":"widget showing MediaWiki site's Reacent Changes",
-    "document":"https://github.com/cy-1818/Scriptable_Scripts/blob/main/WikiRC/README.md"
+    "document":"https://github.com/cy-1818/Scriptable_Scripts/blob/main/WikiRC/README.md",
+    "version":"1.1",
+    "update":true
   },
   "FileViewerIcloud":{
     "url":"https://raw.githubusercontent.com/cy-1818/Scriptable_Scripts/main/FileViewer/FileViewerIcloud.js",
@@ -207,7 +253,9 @@
     "name":"FileViewerIcloud.js",
     "creater":"Yukí (cy-1818)",
     "describe":"ICloud file viewer using UI Table",
-    "document":"https://github.com/cy-1818/Scriptable_Scripts/blob/main/FileViewer/README.md"
+    "document":"https://github.com/cy-1818/Scriptable_Scripts/blob/main/FileViewer/README.md",
+    "version":"1.0",
+    "update":true
   },
   "FileViewerLocal":{
     "url":"https://raw.githubusercontent.com/cy-1818/Scriptable_Scripts/main/FileViewer/FileViewerLocal.js",
@@ -215,7 +263,9 @@
     "name":"FileViewerLocal.js",
     "creater":"Yukí (cy-1818)",
     "describe":"Local file viewer using UI Table",
-    "document":"https://github.com/cy-1818/Scriptable_Scripts/blob/main/FileViewer/README.md"
+    "document":"https://github.com/cy-1818/Scriptable_Scripts/blob/main/FileViewer/README.md",
+    "version":"1.0",
+    "update":true
   },
   "randomQuotes":{
     "url":"https://raw.githubusercontent.com/a-ori-a/Widgets/master/randomQuotes.js",
@@ -223,7 +273,9 @@
     "name":"randomQuotes.js",
     "creater":"a-ori-a",
     "describe":"widget showing random quotes",
-    "document":"https://github.com/a-ori-a/Widgets/blob/master/README.md#randomQuotes"
+    "document":"https://github.com/a-ori-a/Widgets/blob/master/README.md#randomQuotes",
+    "version":"3.0",
+    "update":true
   },
   "dayCounter":{
     "url":"https://raw.githubusercontent.com/a-ori-a/Widgets/master/dayCounter.js",
@@ -231,7 +283,9 @@
     "name":"dayCounter.js",
     "creater":"a-ori-a",
     "describe":"day counter before a day",
-    "document":"https://github.com/a-ori-a/Widgets/blob/master/README.md#dayCounter"
+    "document":"https://github.com/a-ori-a/Widgets/blob/master/README.md#dayCounter",
+    "version":"3.3",
+    "update":true
   },
   "wultidly":{
     "url":"https://raw.githubusercontent.com/a-ori-a/Widgets/master/wultidly.js",
@@ -239,28 +293,36 @@
     "name":"wultidly.js",
     "creater":"a-ori-a",
     "describe":"managing study time and concentration",
-    "document":"https://github.com/a-ori-a/Widgets/blob/master/README.md#wultidly"
+    "document":"https://github.com/a-ori-a/Widgets/blob/master/README.md#wultidly",
+    "version":"4.0",
+    "update":true
   },
   "Weather":{
     "url":"https://raw.githubusercontent.com/a-ori-a/Widgets/master/Weather.js",
     "type":"Scriptable",
     "name":"Weather.js",
     "creater":"a-ori-a",
-    "describe":"widget showing weather"
+    "describe":"widget showing weather",
+    "version":"1.2",
+    "update":true
   },
   "Reminder":{
     "url":"https://raw.githubusercontent.com/a-ori-a/Widgets/master/Reminder.js",
     "type":"Scriptable",
     "name":"Reminder.js",
     "creater":"a-ori-a",
-    "describe":"widget showing reminder"
+    "describe":"widget showing reminder",
+    "version":"1.3",
+    "update":true
   },
   "Calendar":{
     "url":"https://raw.githubusercontent.com/a-ori-a/Widgets/master/Calendar.js",
     "type":"Scriptable",
     "name":"Calendar.js",
     "creater":"a-ori-a",
-    "describe":"widget showing calendar"
+    "describe":"widget showing calendar",
+    "version":"1.3",
+    "update":true
   },
   "timeTable":{
     "url":"https://raw.githubusercontent.com/a-ori-a/Widgets/master/timeTable.js",
@@ -268,7 +330,9 @@
     "name":"timeTable.js",
     "creater":"a-ori-a",
     "describe":"widget showing time table",
-    "document":"https://github.com/a-ori-a/Widgets/blob/master/README.md#timeTable"
+    "document":"https://github.com/a-ori-a/Widgets/blob/master/README.md#timeTable",
+    "version":"1.4",
+    "update":true
   },
   "random-bokete":{
     "url":"https://raw.githubusercontent.com/cy-1818/Scriptable_Scripts/main/random-bokete/random-bokete.js",
@@ -276,7 +340,9 @@
     "name":"random-bokete.js",
     "creater":"Yukí (cy-1818)",
     "describe":"widget showing random bokete",
-    "document":"https://github.com/cy-1818/Scriptable_Scripts/blob/main/random-bokete/README.md"
+    "document":"https://github.com/cy-1818/Scriptable_Scripts/blob/main/random-bokete/README.md",
+    "version":"1.0",
+    "update":true
   },
   "badapple":{
     "url":"https://raw.githubusercontent.com/cy-1818/Scriptable_Scripts/main/tsfm-ex/badapple/badapple.js",
@@ -287,7 +353,9 @@
     ],
     "creater":"Yukí (cy-1818)",
     "describe":"show badapple in tsfm-ex",
-    "document":"https://github.com/cy-1818/Scriptable_Scripts/blob/main/tsfm-ex/badapple/README.md"
+    "document":"https://github.com/cy-1818/Scriptable_Scripts/blob/main/tsfm-ex/badapple/README.md",
+    "version":"2.3",
+    "update":true
   },
   "badapple-json":{
     "url":"https://raw.githubusercontent.com/cy-1818/Scriptable_Scripts/main/tsfm-ex/badapple/badapple.json",
@@ -295,7 +363,9 @@
     "name":"badapple.json",
     "creater":"Yukí (cy-1818)",
     "describe":"badapple's ascii art file",
-    "document":"https://github.com/cy-1818/Scriptable_Scripts/blob/main/tsfm-ex/badapple/README.md"
+    "document":"https://github.com/cy-1818/Scriptable_Scripts/blob/main/tsfm-ex/badapple/README.md",
+    "version":"1.3",
+    "update":true
   },
   "goto":{
     "url":"https://raw.githubusercontent.com/cy-1818/Scriptable_Scripts/main/tsfm-ex/goto/goto.js",
@@ -306,7 +376,9 @@
     ],
     "creater":"Yukí (cy-1818)",
     "describe":"run goto in tsfm-ex",
-    "document":"https://github.com/cy-1818/Scriptable_Scripts/blob/main/tsfm-ex/goto/README.md"
+    "document":"https://github.com/cy-1818/Scriptable_Scripts/blob/main/tsfm-ex/goto/README.md",
+    "version":"1.3",
+    "update":true
   },
   "goto-interpreter":{
     "url":"https://raw.githubusercontent.com/cy-1818/goto/main/goto_interpreter.js",
@@ -315,7 +387,9 @@
     "creater":"Yukí (cy-1818)",
     "describe":"goto interpreter",
     "document":"https://github.com/cy-1818/goto/blob/main/README.md",
-    "document-ja":"https://github.com/cy-1818/goto/blob/main/WATASHIWOYOME.md"
+    "document-ja":"https://github.com/cy-1818/goto/blob/main/WATASHIWOYOME.md",
+    "version":"1.3.1",
+    "update":true
   },
   "show":{
     "url":"https://raw.githubusercontent.com/cy-1818/Scriptable_Scripts/main/tsfm-ex/show/show.js",
@@ -323,6 +397,8 @@
     "name":"show.js",
     "creater":"Yukí (cy-1818)",
     "describe":"show file's contents",
-    "document":"https://github.com/cy-1818/Scriptable_Scripts/blob/main/tsfm-ex/show/README.md"
+    "document":"https://github.com/cy-1818/Scriptable_Scripts/blob/main/tsfm-ex/show/README.md",
+    "version":"1.3",
+    "update":true
   }
 }
