@@ -36,7 +36,7 @@
     "creater":"Yukí (cy-1818)",
     "describe":"text editor",
     "document":"https://github.com/cy-1818/Scriptable_Scripts/blob/main/tsfm-ex/tsfm-ex/README.md",
-    "version":"1.2",
+    "version":"1.3",
     "update":true
   },
   "exit":{
@@ -96,7 +96,7 @@
     "creater":"Yukí (cy-1818)",
     "describe":"tsfm-ex's terminal",
     "document":"https://github.com/cy-1818/Scriptable_Scripts/blob/main/tsfm-ex/tsfm-ex/README.md",
-    "version":"7.5",
+    "version":"7.6",
     "update":true
   },
   "commands-json":{
@@ -142,7 +142,7 @@
     "creater":"Yukí (cy-1818)",
     "describe":"terminal styled file manager extra",
     "document":"https://github.com/cy-1818/Scriptable_Scripts/blob/main/tsfm-ex/README.md",
-    "version":"7.5",
+    "version":"7.6",
     "update":true
   },
   "utsm":{
