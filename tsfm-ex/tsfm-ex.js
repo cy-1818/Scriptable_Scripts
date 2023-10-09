@@ -40,7 +40,7 @@ elements = {
 	"space":space,
 	"output":[{
 		"style":"",
-		"str":saves.welcome ? saves.welcome : "welcome to tsfm-ex! this is tsfm-ex version 7.5."
+		"str":saves.welcome ? saves.welcome : "welcome to tsfm-ex! this is tsfm-ex version 7.6."
 	}]
 }
 Run = (async function(str){
