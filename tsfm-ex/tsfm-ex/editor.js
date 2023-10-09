@@ -21,13 +21,13 @@ return (async function(){
       for(var n=0;n<text.length;n++){
         await Print([{
           "str":text[n],
-          "style":"",
+          "style":"color:#ffffff",
           "edit":true
         }])
       }
       var editNum = await Print([{
         "str":"",
-        "style":"",
+        "style":"color:#ffffff",
         "edit":true
       }]);
       await Print([{
@@ -38,19 +38,19 @@ return (async function(){
       },{
         "tag":"pre",
         "str":" save&quit ",
-        "style":"",
+        "style":"color:#12abef",
         "edit":true
       },{
         "tag":"pre",
         "str":"quit",
-        "style":"",
+        "style":"color:#12abef",
         "edit":true
       }]);
       var FirstNum = editNum - text.length;
       var NowEdit = FirstNum;
       await Edit(NowEdit,{
         "str":text[0],
-        "style":"",
+        "style":"color:#12abef",
         "getKey":true
       })
       await Run(`getSelection().collapse(form.childNodes[0], ${text[0].length})`);
@@ -69,7 +69,7 @@ return (async function(){
               editColor = "green";
               await Edit(NowEdit, {
                 "str":text[NowEdit-FirstNum],
-                "style":"",
+                "style":"color:#12abef",
                 "getKey":true
               });
             }else if(editKey == "s"){
@@ -95,15 +95,15 @@ return (async function(){
             });
             await Edit(editNum+1,{
               "str":"save",
-              "style":(sqNum===0)? "color:"+editColor:""
+              "style":(sqNum===0)? "color:"+editColor:"color:#12abef"
             });
             await Edit(editNum+2,{
               "str":" save&quit ",
-              "style":(sqNum===1)? "color:"+editColor:""
+              "style":(sqNum===1)? "color:"+editColor:"color:#12abef"
             });
             await Edit(editNum+3,{
               "str":"quit",
-              "style":(sqNum===2)? "color:"+editColor:""
+              "style":(sqNum===2)? "color:"+editColor:"color:#12abef"
             });
             await Run(`getSelection().collapse(form.childNodes[0], 0)`);
             await Run("selection=getSelect();");
@@ -125,12 +125,16 @@ return (async function(){
               }
               await Run(`getSelection().collapse(form.childNodes[0], ${select})`);
             }else if(editKey == "ArrowDown"){
+	          await Edit(NowEdit, {
+                "str":text[NowEdit-FirstNum],
+                "style":"color:#ffffff"
+              });
               var select = await Run("selection.start");
               NowEdit+=1
               if(NowEdit != editNum){
                 await Edit(NowEdit, {
                   "str":text[NowEdit-FirstNum],
-                  "style":"",
+                  "style":"color:#12abef",
                   "getKey":true
                 });
                 if(select>text[NowEdit-FirstNum].length){
@@ -145,24 +149,29 @@ return (async function(){
                 });
                 await Edit(editNum+1,{
                   "str":"save",
-                  "style":(sqNum===0)? "color:orange":""
+                  "style":(sqNum===0)? "color:orange":"color:#12abef"
                 });
                 await Edit(editNum+2,{
                   "str":" save&quit ",
-                  "style":(sqNum===1)? "color:orange":""
+                  "style":(sqNum===1)? "color:orange":"color:#12abef"
                 });
                 await Edit(editNum+3,{
                   "str":"quit",
-                  "style":(sqNum===2)? "color:orange":""
+                  "style":(sqNum===2)? "color:orange":"color:#12abef"
                 });
                 await Run(`getSelection().collapse(form.childNodes[0], 0)`);
               }
             }else if(editKey == "ArrowUp" && NowEdit!=FirstNum){
               var select = await Run("selection.start");
+              await Edit(NowEdit, {
+                "str":text[NowEdit-FirstNum],
+                "style":"color:#ffffff",
+                "getKey":true
+              });
               NowEdit-=1
               await Edit(NowEdit, {
                 "str":text[NowEdit-FirstNum],
-                "style":"",
+                "style":"color:#12abef",
                 "getKey":true
               });
               if(select>text[NowEdit-FirstNum].length){
@@ -176,11 +185,11 @@ return (async function(){
               await DelNode(editNum+1);
               await Edit(NowEdit, {
                 "str":text[NowEdit-FirstNum].slice(0, select),
-                "style":""
+                "style":"color:#ffffff"
               });
               await Edit(NowEdit+1, {
                 "str":text[NowEdit-FirstNum].slice(select),
-                "style":"",
+                "style":"color:#12abef",
                 "getKey":true
               });
               text.splice(NowEdit-FirstNum, 0, text[NowEdit-FirstNum].slice(0, select));
@@ -190,7 +199,7 @@ return (async function(){
               for(var n=NowEdit+1;n<editNum;n++){
                 await Edit(n, {
                   "str":text[n-FirstNum],
-                  "style":""
+                  "style":"color:#ffffff"
                 });
               }
               await Print([{
@@ -200,15 +209,15 @@ return (async function(){
               }]);
               await Print([{
                 "str":"save",
-                "style":(sqNum===0)? "color:green":"",
+                "style":(sqNum===0)? "color:green":"color:#12abef",
                 "edit":true
               },{
                 "str":" save&quit ",
-                "style":(sqNum===1)? "color:green":"",
+                "style":(sqNum===1)? "color:green":"color:#12abef",
                 "edit":true
               },{
                 "str":"quit",
-                "style":(sqNum===2)? "color:green":"",
+                "style":(sqNum===2)? "color:green":"color:#12abef",
                 "edit":true
               }]);
               await Run(`getSelection().collapse(form.childNodes[0], 0)`);
@@ -224,14 +233,14 @@ return (async function(){
                 editNum-=1;
                 await Edit(NowEdit, {
                   "str":text[NowEdit-FirstNum]+text[NowEdit-FirstNum+1],
-                  "style":"",
+                  "style":"color:#12abef",
                   "getKey":true
                 });
                 text.splice(NowEdit-FirstNum, 2, text[NowEdit-FirstNum]+text[NowEdit-FirstNum+1]);
                 for(var n=NowEdit+1;n<editNum;n++){
                   await Edit(n, {
                     "str":text[n-FirstNum],
-                    "style":""
+                    "style":"color:#ffffff"
                   });
                 }
                 await Edit(editNum, {
@@ -240,15 +249,15 @@ return (async function(){
                 });
                 await Print([{
                   "str":"save",
-                  "style":(sqNum===0)? "color:green":"",
+                  "style":(sqNum===0)? "color:green":"color:#12abef",
                   "edit":true
                 },{
                   "str":" save&quit ",
-                  "style":(sqNum===1)? "color:green":"",
+                  "style":(sqNum===1)? "color:green":"color:#12abef",
                   "edit":true
                 },{
                   "str":"quit",
-                  "style":(sqNum===2)? "color:green":"",
+                  "style":(sqNum===2)? "color:green":"color:#12abef",
                   "edit":true
                 }]);
                 await Run(`getSelection().collapse(form.childNodes[0], ${select})`);

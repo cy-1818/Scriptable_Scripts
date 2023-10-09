@@ -7,7 +7,7 @@
   <style>
 body {
     background-color: black;
-    color: #12abef;
+    color: #ffffff;
     font-family: 'Noto Sans Mono CJK JP','Source Han Code JP', monospace;
 }
 pre {
@@ -29,6 +29,9 @@ pre {
     margin:0;
     padding:0;
     border:0;
+}
+.terminalLine {
+	color: #12abef;
 }
 #terminal {
     display:inline-block;
@@ -165,6 +168,7 @@ pre {
           endGetKey();
           form = span;
           span.className = "form";
+          line.className = "terminalLine"
           span.contentEditable = true;
           span.addEventListener('keydown', getKey);
           keyGetting = true;
@@ -191,6 +195,7 @@ pre {
         endGetKey();
         form = nodes[num];
         nodes[num].className = "form";
+        nodes[num].parentElement.className = "terminalLine";
         nodes[num].contentEditable = true;
         nodes[num].addEventListener('keydown', getKey);
         keyGetting = true;
@@ -261,6 +266,7 @@ pre {
       var right = document.createElement("span");
       right.contentEditable = true;
       right.className = "form"
+      line.className = "terminalLine"
       line.append(left);
       line.append(right);
       form = right;
