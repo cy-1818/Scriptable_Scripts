@@ -40,8 +40,18 @@ elements = {
 	"space":space,
 	"output":[{
 		"style":"",
-		"str":saves.welcome ? saves.welcome : "welcome to tsfm-ex! this is tsfm-ex version 7.6."
+		"str":saves.welcome ? saves.welcome : "welcome to tsfm-ex! this is tsfm-ex version 8.0."
 	}]
+}
+if(!saves.hasOwnProperty("guessedTexts")){
+	saves.guessedTexts = {
+		"|type|": "command",
+		"|command|": "script",
+		"|parameter|": [
+			"commandlist"
+		],
+		"|next|":{}
+	}
 }
 Run = (async function(str){
 	return await w.evaluateJavaScript(str, false);
@@ -127,7 +137,12 @@ var input;
 var func;
 async function Wait(){
 	while(true){
-		if(await Check()){
+		var check = await Check()
+		if(check == "command"){
+			var commandObj = JSON.parse(await Run("JSON.stringify(commandObj)"))
+			var commandOutput = await Command(commandObj.command, commandObj.parameter)
+			await w.evaluateJavaScript(`commandGet('${JSON.stringify(commandOutput).split("\\").join("\\\\").split("'").join("\\\'").split("\"").join("\\\"").split("\`").join("\\\`")}');`, false)
+		}else if(check){
 			break;
 		}
 	}
@@ -139,6 +154,7 @@ async function MainLoop(){
 	while(true){
 		await Wait();
 		elements = await Get();
+		saves = await Run("saves")
 		input = elements.input.split("|");
 		output = []
 		for(var pipeIndex=0;pipeIndex<input.length;pipeIndex++){
@@ -181,6 +197,7 @@ async function MainLoop(){
 		}else{
 			elements.output = output;
 		}
+		await LoadSaves(saves)
 		await Give(elements);
 		await Load();
 	}
