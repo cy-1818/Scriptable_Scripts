@@ -37,7 +37,10 @@
     "describe":"text editor",
     "document":"https://github.com/cy-1818/Scriptable_Scripts/blob/main/tsfm-ex/tsfm-ex/README.md",
     "version":"1.3",
-    "update":true
+    "update":true,
+    "guessedTexts":{
+      "|type|":"file path"
+    }
   },
   "exit":{
     "url":"https://raw.githubusercontent.com/cy-1818/Scriptable_Scripts/main/tsfm-ex/tsfm-ex/exit.js",
