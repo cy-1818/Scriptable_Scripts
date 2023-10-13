@@ -228,11 +228,7 @@
     "describe":"show path of current directory",
     "document":"https://github.com/cy-1818/Scriptable_Scripts/blob/main/tsfm-ex/tsfm-ex/README.md",
     "version":"1.0",
-    "update":true,
-    "guessedTexts":{
-      "|type|":"file path",
-      "|command|":"ls"
-    }
+    "update":true
   },
   "del":{
     "url":"https://raw.githubusercontent.com/cy-1818/Scriptable_Scripts/main/tsfm-ex/tsfm-ex/del.js",
@@ -242,7 +238,11 @@
     "describe":"delete file",
     "document":"https://github.com/cy-1818/Scriptable_Scripts/blob/main/tsfm-ex/tsfm-ex/README.md",
     "version":"1.0",
-    "update":true
+    "update":true,
+    "guessedTexts":{
+      "|type|":"file path",
+      "|command|":"ls"
+    }
   },
   "tsfm-ex-html":{
     "url":"https://raw.githubusercontent.com/cy-1818/Scriptable_Scripts/main/tsfm-ex/tsfm-ex/tsfm-ex.html",
