@@ -15,13 +15,18 @@ pre {
     font-family: 'Noto Sans Mono CJK JP','Source Han Code JP', monospace;
 }
 .form {
-    display:inline-block;
-    width: 100%;
+    display:inline;
     height: 1em;
     outline: none;
     margin:0;
     padding:0;
     border:0;
+}
+.guessedText{
+    color:#555555
+}
+.guessType{
+    color:#40e0d0
 }
 .line {
     display:inline-block;
@@ -45,8 +50,30 @@ pre {
   position:fixed;
   bottom:0;
   left:0;
-  font-size:1.6em;
   width:100%;
+  height:2em;
+  background-color:#333;
+  margin:0;
+  padding:0;
+  border:0;
+  align-items: center;
+}
+#allowbarLeft {
+  display:flex;
+  font-size:1.2em;
+  width:50%;
+  height:2em;
+  background-color:#333;
+  margin:0;
+  padding:0;
+  border:0;
+  justify-content:flex-start;
+  align-items: center;
+}
+#allowbarRight {
+  display:flex;
+  font-size:1.6em;
+  width:50%;
   height:2em;
   background-color:#333;
   margin:0;
@@ -55,7 +82,20 @@ pre {
   justify-content:flex-end;
   align-items: center;
 }
-.button {
+.buttonLeft {
+  display:flex;
+  background-color:#888;
+  color:white;
+  margin:3px;
+  border:0;
+  padding:3px;
+  border-radius:3px;
+  width:2.1em;
+  height:1.4em;
+  justify-content:center;
+  align-items: center;
+}
+.buttonRight {
   display:flex;
   background-color:#888;
   color:white;
@@ -73,10 +113,16 @@ pre {
 <body>
   <div id="terminal" onclick = "form.focus()"></div>
   <div id="allowbar">
-    <p class="button" onclick="keyEvent('ArrowLeft')">←</p>
-    <p class="button" onclick="keyEvent('ArrowDown')">↓</p>
-    <p class="button" onclick="keyEvent('ArrowUp')">↑</p>
-    <p class="button" onclick="keyEvent('ArrowRight')">→</p>
+    <div id="allowbarLeft">
+      <p class="buttonLeft" onclick="keyEvent('Escape')">Esc</p>
+      <p class="buttonLeft" onclick="keyEvent('Tab')">Tab</p>
+    </div>
+    <div id="allowbarRight">
+      <p class="buttonRight" onclick="keyEvent('ArrowLeft')">←</p>
+      <p class="buttonRight" onclick="keyEvent('ArrowDown')">↓</p>
+      <p class="buttonRight" onclick="keyEvent('ArrowUp')">↑</p>
+      <p class="buttonRight" onclick="keyEvent('ArrowRight')">→</p>
+    </div>
   </div>
   <script>
     var terminal = document.getElementById("terminal");
@@ -86,6 +132,20 @@ pre {
     var elements = {}
     var ans;
     var form;
+    var commandLine;
+    var guessedText;
+    var guessType;
+    var guessTexts;
+    var showGuessTexts;
+    var guessType;
+    var guessNum = 0;
+    var guessing = false;
+    var guessObjBase
+    var guessObj;
+    var guessFlag;
+    var guessedType;
+    var oldLen;
+    var commandObj;
     var nodes=[];
     var keyPressed = false;
     var pressedKey = "";
@@ -105,6 +165,9 @@ pre {
         }
         saves.history.push(text);
         hisNum = saves.history.length;
+        guessedText.innerText = "";
+        guessType.innerText = "";
+        oldLen = null;
         form.contentEditable = false;
         form.removeEventListener('keydown', logKey)
         checker = true;
@@ -123,27 +186,204 @@ pre {
         }
         getSelection().collapse(form.childNodes[0], select);
       }else if(e.key=="ArrowUp"){
-        hisNum-=1;
-        if(hisNum<0){
-          hisNum = 0;
-        }
-        form.innerText = saves.history[hisNum];
-        form.focus();
-        getSelection().collapse(form.childNodes[0], form.innerText.length);
-      }else if(e.key=="ArrowDown"){
-        hisNum+=1;
-        if(hisNum==saves.history.length){
-          hisNum-=1;
-          form.innerText="";
+        if(showGuessTexts.length){
           form.focus();
+          guessNum+=1;
+          if(guessNum == showGuessTexts.length){
+            guessNum-=1;
+          }
+          guessedText.innerText = showGuessTexts[guessNum]
+          getSelection().collapse(form.childNodes[0], form.innerText.length);
         }else{
+          hisNum-=1;
+          if(hisNum<0){
+            hisNum = 0;
+          }
           form.innerText = saves.history[hisNum];
           form.focus();
           getSelection().collapse(form.childNodes[0], form.innerText.length);
         }
+      }else if(e.key=="ArrowDown"){
+        if(showGuessTexts.length){
+          form.focus();
+          guessNum-=1;
+          if(guessNum == -1){
+            guessNum=0;
+          }
+          guessedText.innerText = showGuessTexts[guessNum]
+          getSelection().collapse(form.childNodes[0], form.innerText.length);
+        }else{
+          hisNum+=1;
+          if(hisNum==saves.history.length){
+            hisNum-=1;
+            form.innerText="";
+            form.focus();
+          }else{
+            form.innerText = saves.history[hisNum];
+            form.focus();
+            getSelection().collapse(form.childNodes[0], form.innerText.length);
+          }
+        }
+      }else if(e.key=="Tab"){
+        form.innerText+=guessedText.innerText;
+        guessedText.innerText = "";
+        guessTexts = []
+        select=form.innerText.length;
+        form.focus()
+        getSelection().collapse(form.childNodes[0], select);
       }
       selection=getSelect();
     }
+    
+    async function guess(e){
+      var formText = form.innerText.split(" ").join(" ")
+      var nowText = formText.split("|").pop().split(" ").filter(Boolean)
+      var index = 0
+      var nowLen = nowText.length
+      console.log(formText);
+      if(formText.endsWith(" ") || formText==="" || formText.endsWith("|")){
+        nowLen += 1
+      }
+      if(nowLen !== oldLen){
+        guessObj = guessObjBase
+        guessedType = ""
+        guessFlag = false;
+        while(true){
+	      if(nowLen === index){
+	        if(guessObj.hasOwnProperty("|type|")){
+	          guessedType = "<"+guessObj["|type|"]+">"
+	        }
+	        if(guessObj.hasOwnProperty("|list|")){
+	          guessTexts = guessObj["|list|"]
+	          flag = true
+	          break;
+	        }else if(guessObj.hasOwnProperty("|command|")){
+	          if(!guessObj.hasOwnProperty("|parameter|")){
+	            guessObj["|parameter|"] = []
+	          }
+	          guessObj["|list|"] = (await command(guessObj["|command|"], guessObj["|parameter|"])).map(obj => obj.str);
+	          guessTexts = guessObj["|list|"]
+	          flag = true
+	          break;
+	        }else{
+	          guessTexts = []
+	          break;
+	        }
+          }else{
+            if(guessObj.hasOwnProperty("|type|")){
+              index += 1
+              if(nowLen === index){
+                continue;
+              }
+            }
+            if(guessObj.hasOwnProperty("|next|")){
+              if(typeof(guessObj["|next|"])=="string"){
+                guessObj = guessBack(guessObj, guessObj["|next|"])
+              }else{
+                guessObj["|next|"]["|parent|"] = function(){
+                  return guessObj;
+                }
+                guessObj = guessObj["|next|"]
+              }
+            }else if(guessObj.hasOwnProperty(nowText[index-1])){
+              if(typeof(guessObj[nowText[index-1]])=="string"){
+                guessObj = guessBack(guessObj, guessObj[nowText[index-1]])
+                if(!guessObj){
+                  break;
+                }
+              }else{
+                guessObj[nowText[index-1]]["|parent|"] = function(){
+                  return guessObj;
+                }
+                guessObj = guessObj[nowText[index-1]]
+              }
+            }else{
+              break;
+            }
+          }
+        }
+      }
+      if(flag && guessTexts && !(formText.endsWith(" ") || formText==="" || formText.endsWith("|"))){
+        var lastText = nowText.slice(-1)[0]
+        if(!lastText){
+          lastText = ""
+        }
+        showGuessTexts=guessTexts.filter(str => str.startsWith(lastText)).sort().map(str => str.replace(lastText, ""))
+        console.log(showGuessTexts)
+        guessNum = 0;
+        if(showGuessTexts.length){
+          guessedText.innerText = showGuessTexts[guessNum]
+          guessType.innerText = ""
+        }else{
+          guessedText.innerText = "";
+          guessType.innerText = "";
+        }
+      }else{
+        if(formText.endsWith(" ") || formText==="" || formText.endsWith("|")){
+          guessedText.innerText = "";
+          guessType.innerText = guessedType;
+        }
+      }
+      oldLen = nowLen;
+    }
+    
+    async function command(name, parameter){
+      commandObj = {"command":name, "parameter":parameter}
+      checker = "command"
+      await commandWait()
+      checker = false;
+      return commandObj.output;
+    }
+    
+    async function commandWait(){
+      await (new Promise(function(resolve, reject){
+        setTimeout(function(){
+          if(commandObj.output){
+            resolve()
+          }else{
+            reject()
+          }
+        }, 100);
+      })).then(function(){
+      }).catch(commandWait)
+    }
+    
+    function commandGet(str){
+      commandObj.output = JSON.parse(str)
+      return 0;
+    }
+    
+    function guessBack(obj, str, list){
+      var backNum = 0
+      while(str.startsWith("|")){
+        if(str.startsWith("|")){
+          backNum+=1;
+          str = str.slice(1)
+        }
+      }
+      for(var n=0;n<backNum;n++){
+        obj = obj["|patent|"]()
+      }
+      if(typeof(obj[str])=="string"){
+        if(!list){
+          var list = [str]
+          return guessBack(obj, obj[str], list);
+        }else if(list.includes(str)){
+          return null;
+        }else{
+          list.push(str)
+          return guessBack(obj, obj[str], list);
+        }
+      }else if(!obj[str]){
+        return null;
+      }else{
+        obj[str]["|parent|"]=function(){
+          return obj;
+        }
+        return obj[str];
+      }
+    }
+    
     function give(str){
       elements = JSON.parse(str)
       return 0;
@@ -230,6 +470,10 @@ pre {
         form.className = "line";
         form.removeEventListener('keydown', getKey)
       }
+      if(guessing){
+        form.removeEventListener('keyup', guess)
+        guessing = false;
+      }
     }
     function keyEvent(str){
       form.dispatchEvent(new KeyboardEvent("keydown",{"key":str}));
@@ -264,13 +508,24 @@ pre {
       var left = document.createElement("span");
       left.innerHTML = `${elements.name}:${elements.space}:${elements.pass.replace(elements.doc, "Document")} $ `;
       var right = document.createElement("span");
-      right.contentEditable = true;
-      right.className = "form"
+      commandLine = document.createElement("span");
+      guessedText = document.createElement("span");
+      guessType = document.createElement("span");
+      right.append(commandLine);
+      right.append(guessedText);
+      right.append(guessType);
+      commandLine.contentEditable = true;
+      commandLine.className = "form"
+      guessedText.className = "guessedText"
+      guessType.className = "guessType"
       line.className = "terminalLine"
       line.append(left);
       line.append(right);
-      form = right;
+      form = commandLine;
       form.addEventListener('keydown', logKey);
+      form.addEventListener('keyup', guess);
+      guessing = true
+      guessObjBase = structuredClone(saves.guessedTexts);
       terminal.append(line);
       terminal.scrollTop = terminal.scrollHeight;
       form.focus();
