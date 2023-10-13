@@ -155,7 +155,7 @@ return (async function(){
 		            }
 		          }
 		          if(urlList[parameter[n]].guessedTexts){
-		            saves.guessedTexts["|next|"][parameter[n]]=urlList[parameter[n]].guessedTexts;
+		            saves.guessedTexts["|next|"][urlList[parameter[n]].name]=urlList[parameter[n]].guessedTexts;
 		            await fmi.writeString(doci + "/tsfm-ex/saves.json", JSON.stringify(saves, null, "\t"))
 		          }
 		          await Print([{
@@ -229,8 +229,8 @@ return (async function(){
 		        await fmi.remove(scripts[parameter[n]].path);
 		        delete scripts[parameter[n]];
 		        await fmi.writeString(doci+"/tsfm-ex/scripts.json", JSON.stringify(scripts, null, "\t"))
-		        if(saves.guessedTexts["|next|"][parameter[n]]){
-		          delete saves.guessedTexts["|next|"][parameter[n]]
+		        if(saves.guessedTexts["|next|"][urlList[parameter[n]].name]){
+		          delete saves.guessedTexts["|next|"][urlList[parameter[n]].name]
 		        }
 		        await fmi.writeString(doci+"/tsfm-ex/saves.json", JSON.stringify(saves, null, "\t"))
 		        await Print([{
@@ -314,7 +314,7 @@ return (async function(){
 		  case "-v":
 		    result.push({
 		      "style":"",
-		      "str":"6.4"
+		      "str":"6.5"
 		    })
 		  break;
 		  case "help":
