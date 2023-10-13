@@ -66,8 +66,156 @@
     "creater":"Yukí (cy-1818)",
     "describe":"script manager",
     "document":"https://github.com/cy-1818/Scriptable_Scripts/blob/main/tsfm-ex/tsfm-ex/README.md",
-    "version":"6.3",
-    "update":true
+    "version":"6.5",
+    "update":true,
+    "guessedTexts":{
+    "|type|": "option",
+    "|list|": [
+        "install",
+        "delete",
+        "search",
+        "list",
+        "update",
+        "addURL",
+        "removeURL",
+        "package",
+        "name",
+        "version",
+        "help",
+        "installOnly",
+        "deleteOnly",
+        "commandlist",
+        "Scriptablelist",
+        "Modulelist",
+        "additionlist",
+        "AddDepend",
+        "DelDepend",
+        "-i",
+        "-d",
+        "-s",
+        "-l",
+        "-u",
+        "-a",
+        "-r",
+        "-p",
+        "-n",
+        "-v",
+        "-h",
+        "-io",
+        "-do",
+        "-cl",
+        "-Sl",
+        "-Ml",
+        "-al",
+        "-AD",
+        "-DD"
+    ],
+    "|next|": {
+        "-p": "package",
+        "-io": "installOnly",
+        "-al": "additionlist",
+        "DelDepend": {
+            "|type|": "script name",
+            "|command|": "script",
+            "|parameter|": [
+                "list"
+            ],
+            "|next|": {
+                "|type|": "script name",
+                "|command|": "script",
+                "|parameter|": [
+                    "list"
+                ]
+            }
+        },
+        "-do": "deleteOnly",
+        "-r": "removeURL",
+        "-d": "delete",
+        "-cl": "commandlist",
+        "Scriptablelist": "list",
+        "-DD": "DelDepend",
+        "-s": "search",
+        "search": {
+            "|type|": "String"
+        },
+        "-u": "update",
+        "-v": "version",
+        "-h": "help",
+        "-Ml": "Modulelist",
+        "-AD": "AddDepend",
+        "installOnly": "install",
+        "-i": "install",
+        "name": {
+            "|type|": "command",
+            "|command|": "script",
+            "|parameter|": [
+                "commandlist"
+            ],
+            "|next|": {
+                "|type|": "shortcut"
+            }
+        },
+        "addURL": {
+            "|type|": "URL"
+        },
+        "Modulelist": "list",
+        "removeURL": {
+            "|type|": "URL"
+        },
+        "delete": {
+            "|type|": "script name",
+            "|command|": "script",
+            "|parameter|": [
+                "list"
+            ],
+            "|next|": "|delete"
+        },
+        "-l": "list",
+        "AddDepend": {
+            "|type|": "script name",
+            "|command|": "script",
+            "|parameter|": [
+                "list"
+            ],
+            "|next|": {
+                "|type|": "script name",
+                "|command|": "script",
+                "|parameter|": [
+                    "list"
+                ]
+            }
+        },
+        "install": {
+            "|type|": "script name",
+            "|command|": "script",
+            "|parameter|": [
+                "search"
+            ],
+            "|next|": "|install"
+        },
+        "deleteOnly": "delete",
+        "package": {
+            "|type|": "name",
+            "|next|": {
+                "|type|": "path",
+                "|next|": {
+                    "|type|": "type",
+                    "|list|": [
+                        "Scriptable",
+                        "Module",
+                        "command",
+                        "additional"
+                    ]
+                }
+            }
+        },
+        "-n": "name",
+        "commandlist": "list",
+        "-Sl": "Scriptablelist",
+        "-a": "addURL",
+        "additionlist": "list"
+    }
+}
   },
   "pwd":{
     "url":"https://raw.githubusercontent.com/cy-1818/Scriptable_Scripts/main/tsfm-ex/tsfm-ex/pwd.js",
@@ -96,7 +244,7 @@
     "creater":"Yukí (cy-1818)",
     "describe":"tsfm-ex's terminal",
     "document":"https://github.com/cy-1818/Scriptable_Scripts/blob/main/tsfm-ex/tsfm-ex/README.md",
-    "version":"7.6",
+    "version":"8.0",
     "update":true
   },
   "commands-json":{
@@ -142,7 +290,7 @@
     "creater":"Yukí (cy-1818)",
     "describe":"terminal styled file manager extra",
     "document":"https://github.com/cy-1818/Scriptable_Scripts/blob/main/tsfm-ex/README.md",
-    "version":"7.6",
+    "version":"8.0",
     "update":true
   },
   "utsm":{
