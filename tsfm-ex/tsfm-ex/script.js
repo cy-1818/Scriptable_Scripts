@@ -314,7 +314,7 @@ return (async function(){
 		  case "-v":
 		    result.push({
 		      "style":"",
-		      "str":"6.4"
+		      "str":"6.6"
 		    })
 		  break;
 		  case "help":
@@ -358,6 +358,7 @@ You can use -i, -d, -s, -l, -u, -a, -r, -p, -n, -v, -h, -io, -do, -cl, -Sl, -Ml,
 	  }]);
 	}
 	if(firstRun){
+	  await Command("script", ["install", "tsfm-ex"]);
 	  await Command("script", ["package", "scripts-json", "tsfm-ex/scripts.json", "additional"]);
 	  await Command("script", ["AddDepend", "script", "scripts-json"]);
 	}
