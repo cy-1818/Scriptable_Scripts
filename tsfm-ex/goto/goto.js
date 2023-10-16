@@ -1,7 +1,7 @@
 return(async function(){
   var goto = eval(await fmi.readString(doci+"/tsfm-ex/goto_interpreter.js"));
   var result = [];
-  if(parameter[0]!="-h"&&parameter[0]!="-v"){
+  if(parameter[0]!="-h" && parameter[0]!="-v" && parameter[0]){
     if(parameter[0]=="-a"){
       goto.getInput=(async function(){
         var ans;
@@ -74,7 +74,12 @@ return(async function(){
         }
       }
     }
-  }else if(parameter[0]=="-h"){
+  }else if(parameter[0]=="-v"){
+    result.push({
+      "style":"",
+      "str":"1.4"
+    });
+  }else{
     var text = `
 goto [program file path] [parameters] : run goto program.
 goto -a [program file path]           : run goto program asynchronously.
@@ -88,11 +93,6 @@ goto -v                               : show version.
         "str":text[n]
       });
     }
-  }else{
-    result.push({
-      "style":"",
-      "str":"1.3"
-    });
   }
   return result;
 })()
