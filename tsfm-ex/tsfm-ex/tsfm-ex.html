@@ -154,6 +154,13 @@ pre {
     var saves;
     var hisNum;
     var keyboardHeight=0;
+    Object.prototype["|parent|"] = {}
+    Object.prototype["|writeParent|"] = function(obj){
+      this["|parent|"].obj = obj
+    }
+    Object.prototype["|getParent|"] = function(){
+      return this["|parent|"].obj
+    }
     function logKey(e) {
       console.log(e.key);
       if(e.key=="Enter"){
@@ -278,23 +285,19 @@ pre {
             }
             if(guessObj.hasOwnProperty("|next|")){
               if(typeof(guessObj["|next|"])=="string"){
-                guessObj = guessBack(guessObj, guessObj["|next|"])
+                guessObj = guessBack(guessObj, guessObj["|next|"], [])
               }else{
-                guessObj["|next|"]["|parent|"] = function(){
-                  return guessObj;
-                }
+                guessObj["|next|"]["|writeParent|"](guessObj)
                 guessObj = guessObj["|next|"]
               }
             }else if(guessObj.hasOwnProperty(nowText[index-1])){
               if(typeof(guessObj[nowText[index-1]])=="string"){
-                guessObj = guessBack(guessObj, guessObj[nowText[index-1]])
+                guessObj = guessBack(guessObj, guessObj[nowText[index-1]], [])
                 if(!guessObj){
                   break;
                 }
               }else{
-                guessObj[nowText[index-1]]["|parent|"] = function(){
-                  return guessObj;
-                }
+                guessObj[nowText[index-1]]["|writeParent|"](guessObj)
                 guessObj = guessObj[nowText[index-1]]
               }
             }else{
@@ -362,7 +365,7 @@ pre {
         }
       }
       for(var n=0;n<backNum;n++){
-        obj = obj["|patent|"]()
+        obj = obj["|getParent|"]()
       }
       if(typeof(obj[str])=="string"){
         if(!list){
@@ -377,9 +380,7 @@ pre {
       }else if(!obj[str]){
         return null;
       }else{
-        obj[str]["|parent|"]=function(){
-          return obj;
-        }
+        obj[str]["|writeParent|"](obj)
         return obj[str];
       }
     }
