@@ -251,7 +251,7 @@
     "creater":"Yukí (cy-1818)",
     "describe":"tsfm-ex's terminal",
     "document":"https://github.com/cy-1818/Scriptable_Scripts/blob/main/tsfm-ex/tsfm-ex/README.md",
-    "version":"8.0",
+    "version":"8.1",
     "update":true
   },
   "commands-json":{
@@ -297,7 +297,7 @@
     "creater":"Yukí (cy-1818)",
     "describe":"terminal styled file manager extra",
     "document":"https://github.com/cy-1818/Scriptable_Scripts/blob/main/tsfm-ex/README.md",
-    "version":"8.0",
+    "version":"8.1",
     "update":true
   },
   "utsm":{
@@ -532,7 +532,7 @@
     "creater":"Yukí (cy-1818)",
     "describe":"run goto in tsfm-ex",
     "document":"https://github.com/cy-1818/Scriptable_Scripts/blob/main/tsfm-ex/goto/README.md",
-    "version":"1.3",
+    "version":"1.4",
     "update":true
   },
   "goto-interpreter":{
