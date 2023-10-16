@@ -40,7 +40,7 @@ elements = {
 	"space":space,
 	"output":[{
 		"style":"",
-		"str":saves.welcome ? saves.welcome : "welcome to tsfm-ex! this is tsfm-ex version 8.0."
+		"str":saves.welcome ? saves.welcome : "welcome to tsfm-ex! this is tsfm-ex version 8.1."
 	}]
 }
 if(!saves.hasOwnProperty("guessedTexts")){
