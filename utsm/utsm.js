@@ -268,6 +268,8 @@ if(!(fmi.fileExists(doci+"/tsfm-ex.js") && fmi.fileExists(doci+"/tsfm-ex/command
 	fmi.writeString(doci+"/utsm/utsm.json", JSON.stringify(utsm, null, "\t"))
 	Safari.open(encodeURI("scriptable:///run/tsfm-ex?command1=script&parameter1=package|utsm-json|utsm/utsm.json|addition&command2=script&parameter2=AddDepend|utsm|utsm-json&url=scriptable:///run/utsm"))
 }else{
+	var su = importModule("SettingUI")
+	var uf = importModule("UsefulFuncs")
 	u = new UITable()
 	utsm = JSON.parse(fmi.readString(doci + "/utsm/utsm.json"));
 	utsm.searchSTR = []
@@ -302,135 +304,58 @@ if(!(fmi.fileExists(doci+"/tsfm-ex.js") && fmi.fileExists(doci+"/tsfm-ex/command
 	await load()
 }
 
-async function load(){
-	if(utsm.show == "OnNetWork"){
-		await showNetwork()
-	}else if(utsm.show == "OnLocal"){
-		await showLocal()
-	}else{
+async function load(space){
+	fmi.writeString(doci+"/utsm/utsm.json", JSON.stringify(utsm, null, "\t"))
+	if(!space)space = utsm.show;
+	utsm.show = space
+	u.removeAllRows()
+	if(utsm.show == "Setting"){
 		await showSetting()
+	}else{
+		await makeUI(space)
 	}
+	u.reload()
 }
 
-async function showNetwork(){
-	utsm.show = "OnNetWork"
-	u.removeAllRows()
+su.load = load
+
+async function makeUI(space){
 	fmi.writeString(doci+"/utsm/utsm.json", JSON.stringify(utsm, null, "\t"))
-	topLeftButton = UITableCell.text(txt("leftButton"))
-	topRightButton = UITableCell.button(txt("rightButton"))
-	topSortingButton = UITableCell.button(txt("sortingButton"))
-	topChoosingButton = UITableCell.button(txt("choosingButton"))
-	topSearchingButton = UITableCell.button(txt("searchingButton"))
-	topSettingButton = UITableCell.button(txt("settingButton"))
+	if(space == "onNetWork"){
+		topLeftButton = UITableCell.text(txt("leftButton"))
+		topRightButton = UITableCell.button(txt("rightButton"))
+		topRightButton.onTap = async function(){
+		  await load("onLocal")
+		}
+		topLeftButton.titleColor = clr("pushedButton")
+		var scriptNames = Object.keys(scripts)
+	}else{
+		topLeftButton = UITableCell.button(txt("leftButton"))
+		topRightButton = UITableCell.text(txt("rightButton"))
+		topLeftButton.onTap = async function(){
+		  await load("onNetWork")
+		}
+		topRightButton.titleColor = clr("pushedButton")
+		var scriptNames = Object.keys(localScripts)
+	}
 	topLeftButton.titleFont = font("leftButton")
 	topRightButton.titleFont = font("rightButton")
-	topSortingButton.titleFont = font("sortingButton")
-	topChoosingButton.titleFont = font("choosingButton")
-	topSearchingButton.titleFont = font("searchingButton")
-	topSettingButton.titleFont = font("settingButton")
 	topLeftButton.centerAligned()
 	topRightButton.centerAligned()
-	topSortingButton.rightAligned()
-	topChoosingButton.rightAligned()
-	topSearchingButton.rightAligned()
-	topSettingButton.rightAligned()
-	topSortingButton.widthWeight = 50
-	topChoosingButton.widthWeight = 50
-	topSearchingButton.widthWeight = 50
-	topSettingButton.widthWeight = 50
 	topLeftButton.widthWeight = (Device.screenSize().width-200)/2
 	topRightButton.widthWeight = (Device.screenSize().width-200)/2
-	topRightButton.onTap = async function(){
-	  await showLocal()
-	}
-	topSortingButton.onTap = async function(){
-	  await showBar("sorting")
-	}
-	topChoosingButton.onTap = async function(){
-	  await showBar("choosing")
-	}
-	topSearchingButton.onTap = async function(){
-	  await search()
-	}
-	topSettingButton.onTap = async function(){
-	  await showSetting()
-	}
 	topRow = new UITableRow()
 	topRow.backgroundColor = clr("topBackGround")
 	topRow.cellSpacing = 0
 	topRow.addCell(topLeftButton)
 	topRow.addCell(topRightButton)
-	topRow.addCell(topSortingButton)
-	topRow.addCell(topChoosingButton)
-	topRow.addCell(topSearchingButton)
-	topRow.addCell(topSettingButton)
+	topRow.addCell(uf.makeUITableCellButton(txt("sortingButton"), font("sortingButton"), 0, (async function(){await showBar("sorting")}), false, 50))
+	topRow.addCell(uf.makeUITableCellButton(txt("choosingButton"), font("choosingButton"), 0, (async function(){await showBar("choosing")}), false, 50))
+	topRow.addCell(uf.makeUITableCellButton(txt("searchingButton"), font("searchingButton"), 0, (async function(){await search()}), false, 50))
+	topRow.addCell(uf.makeUITableCellButton(txt("settingButton"), font("settingButton"), 0, (async function(){await load("Setting")}), false, 50))
 	topRow.isHeader = true
 	u.addRow(topRow)
-	topLeftButton.titleColor = clr("pushedButton")
-	var scriptNames = Object.keys(scripts)
 	await showScripts(scriptNames)
-	u.reload()
-	return 0;
-}
-
-async function showLocal(){
-	utsm.show = "OnLocal"
-	u.removeAllRows()
-	fmi.writeString(doci+"/utsm/utsm.json", JSON.stringify(utsm, null, "\t"))
-	topLeftButton = UITableCell.button(txt("leftButton"))
-	topRightButton = UITableCell.text(txt("rightButton"))
-	topSortingButton = UITableCell.button(txt("sortingButton"))
-	topChoosingButton = UITableCell.button(txt("choosingButton"))
-	topSearchingButton = UITableCell.button(txt("searchingButton"))
-	topSettingButton = UITableCell.button(txt("settingButton"))
-	topLeftButton.titleFont = font("leftButton")
-	topRightButton.titleFont = font("rightButton")
-	topSortingButton.titleFont = font("sortingButton")
-	topChoosingButton.titleFont = font("choosingButton")
-	topSearchingButton.titleFont = font("searchingButton")
-	topSettingButton.titleFont = font("settingButton")
-	topLeftButton.centerAligned()
-	topRightButton.centerAligned()
-	topSortingButton.rightAligned()
-	topChoosingButton.rightAligned()
-	topSearchingButton.rightAligned()
-	topSettingButton.rightAligned()
-	topSortingButton.widthWeight = 50
-	topChoosingButton.widthWeight = 50
-	topSearchingButton.widthWeight = 50
-	topSettingButton.widthWeight = 50
-	topLeftButton.widthWeight = (Device.screenSize().width-200)/2
-	topRightButton.widthWeight = (Device.screenSize().width-200)/2
-	topLeftButton.onTap = async function(){
-	  await showNetwork()
-	}
-	topSortingButton.onTap = async function(){
-	  await showBar("sorting")
-	}
-	topChoosingButton.onTap = async function(){
-	  await showBar("choosing")
-	}
-	topSearchingButton.onTap = async function(){
-	  await search()
-	}
-	topSettingButton.onTap = async function(){
-	  await showSetting()
-	}
-	topRow = new UITableRow()
-	topRow.backgroundColor = clr("topBackGround")
-	topRow.cellSpacing = 0
-	topRow.addCell(topLeftButton)
-	topRow.addCell(topRightButton)
-	topRow.addCell(topSortingButton)
-	topRow.addCell(topChoosingButton)
-	topRow.addCell(topSearchingButton)
-	topRow.addCell(topSettingButton)
-	topRow.isHeader = true
-	u.addRow(topRow)
-	topRightButton.titleColor = clr("pushedButton")
-	var scriptNames = Object.keys(localScripts)
-	await showScripts(scriptNames)
-	u.reload()
 	return 0;
 }
 
@@ -458,7 +383,7 @@ async function showScripts(names){
 			}else{
 				var chooseTypeButton = UITableCell.button(txt("checkBoxOn")+txt(utsm.types[n]))
 			}
-			chooseTypeButton.onTap = ChooseTypeButtonOnTap(utsm.types[n])
+			chooseTypeButton.onTap = su.ToggleButton(utsm.types[n], utsm.unchoosedType)
 			chooseTypeRow.addCell(chooseTypeButton)
 		}
 		chooseTypeRow.backgroundColor = clr("barBackGround")
@@ -470,7 +395,7 @@ async function showScripts(names){
 			}else{
 				var chooseCreaterButton = UITableCell.button(txt("checkBoxOn")+txt(utsm.creaters[n]))
 			}
-			chooseCreaterButton.onTap = ChooseCreaterButtonOnTap(utsm.creaters[n])
+			chooseCreaterButton.onTap = su.ToggleButton(utsm.creaters[n], utsm.unchoosedCreater)
 			chooseCreaterRow.addCell(chooseCreaterButton)
 		}
 		chooseCreaterRow.backgroundColor = clr("barBackGround")
@@ -478,23 +403,9 @@ async function showScripts(names){
 	}
 	if(utsm.searchSTR.join()){
 		var searchSTRRow = new UITableRow()
-		var searchTextCell = UITableCell.text(txt("searchText")+" : ")
-		var searchSTRCell = UITableCell.text(utsm.searchSTR.join(" "))
-		var searchStopButton = UITableCell.button(txt("searchStop"))
-		searchTextCell.leftAligned()
-		searchSTRCell.leftAligned()
-		searchStopButton.rightAligned()
-		searchTextCell.titleColor = clr("searchText")
-		searchSTRCell.titleColor = clr("searchSTR")
-		searchTextCell.titleFont = font("searchText")
-		searchSTRCell.titleFont = font("searchText")
-		searchStopButton.onTap = async function(){
-			utsm.searchSTR = []
-			await load()
-		}
-		searchSTRRow.addCell(searchTextCell)
-		searchSTRRow.addCell(searchSTRCell)
-		searchSTRRow.addCell(searchStopButton)
+		searchSTRRow.addCell(uf.makeUITableCellText(txt("searchText")+" : ", clr("searchText"), font("searchText"), 2))
+		searchSTRRow.addCell(uf.makeUITableCellText(utsm.searchSTR.join(" "), clr("searchSTR"), font("searchText"), 2))
+		searchSTRRow.addCell(uf.makeUITableCellButton(txt("searchStop"), null, 0, async function(){utsm.searchSTR = [];await load()}))
 		searchSTRRow.backgroundColor = clr("searchBackGround")
 		u.addRow(searchSTRRow)
 	}
@@ -524,6 +435,7 @@ async function showScripts(names){
 		for(var i=0;i<utsm.searchSTR.length;i++){
 			if(!names[n].includes(utsm.searchSTR[i])){
 				searchFlag = true;
+				break;
 			}
 		}
 		if(searchFlag){
@@ -557,14 +469,8 @@ async function showScripts(names){
 				utsm.types.push(localScripts[names[n]].type)
 			}
 			var scriptSubRow = new UITableRow()
-			var localCell = UITableCell.text(txt("local"))
-			var typeCell = UITableCell.text(txt("type")+txt(localScripts[names[n]].type))
-			localCell.titleFont = font("local")
-			typeCell.titleFont = font("type")
-			localCell.titleColor = clr("local")
-			typeCell.titleColor = clr("type")
-			scriptSubRow.addCell(localCell)
-			scriptSubRow.addCell(typeCell)
+			scriptSubRow.addCell(uf.makeUITableCellText(txt("local"), clr("local"), font("local")))
+			scriptSubRow.addCell(uf.makeUITableCellText(txt("type")+txt(localScripts[names[n]].type), clr("type"), font("type")))
 			scriptSubRow.backgroundColor = clr("scriptTitleBackGround")
 			u.addRow(scriptSubRow)
 		}else{
@@ -575,68 +481,42 @@ async function showScripts(names){
 				utsm.creaters.push(scripts[names[n]].creater)
 			}
 			var scriptSubRow = new UITableRow()
-			var createrCell = UITableCell.text(txt("createdBy")+scripts[names[n]].creater)
-			var typeCell = UITableCell.text(txt("type")+txt(scripts[names[n]].type))
-			createrCell.titleFont = font("createrName")
-			typeCell.titleFont = font("type")
-			createrCell.titleColor = clr("createrName")
-			typeCell.titleColor = clr("type")
-			scriptSubRow.addCell(createrCell)
-			scriptSubRow.addCell(typeCell)
+			scriptSubRow.addCell(uf.makeUITableCellText(txt("createdBy")+scripts[names[n]].creater, clr("createrName"), font("createrName")))
+			scriptSubRow.addCell(uf.makeUITableCellText(txt("type")+txt(scripts[names[n]].type), clr("type"), font("type")))
 			scriptSubRow.backgroundColor = clr("scriptTitleBackGround")
 			u.addRow(scriptSubRow)
 		}
 		if(localScripts.hasOwnProperty(names[n])){
 			if(localScripts[names[n]].LOCAL){
 				var ButtonsRow = new UITableRow()
-				var DeleteButton = UITableCell.button(txt("DeleteButton"))
-				DeleteButton.onTap = DeleteButtonOnTap(names[n])
 				ButtonsRow.backgroundColor = clr("scriptButtonsBackGround")
-				ButtonsRow.addCell(DeleteButton)
+				ButtonsRow.addCell(uf.makeUITableCellButton(txt("DeleteButton"), null, 0, DeleteButtonOnTap(names[n])))
 				if(localScripts[names[n]].type == "Scriptable"){
-					var RunButton = UITableCell.button(txt("RunButton"))
-					RunButton.onTap = RunButtonOnTap(scripts[names[n]].name.replace(".js", ""))
-					ButtonsRow.addCell(RunButton)
+					ButtonsRow.addCell(uf.makeUITableCellButton(txt("RunButton"), null, 0, RunButtonOnTap(scripts[names[n]].name.replace(".js", ""))))
 				}
 				u.addRow(ButtonsRow)
 			}else{
 				var ButtonsRow = new UITableRow()
-				var UpdateButton = UITableCell.button(txt("UpdateButton"))
-				var DeleteButton = UITableCell.button(txt("DeleteButton"))
-				UpdateButton.onTap = InstallButtonOnTap(names[n])
-				ButtonsRow.addCell(UpdateButton)
+				ButtonsRow.addCell(uf.makeUITableCellButton(txt("UpdateButton"), null, 0, InstallButtonOnTap(names[n])))
 				if(scripts[names[n]]["document-"+utsm.lang]){
-					var WebsiteButton = UITableCell.button(txt("WebsiteButton"))
-					WebsiteButton.onTap = WebsiteButtonOnTap(scripts[names[n]]["document-"+utsm.lang])
-					ButtonsRow.addCell(WebsiteButton)
+					ButtonsRow.addCell(uf.makeUITableCellButton(txt("WebsiteButton"), null, 0, WebsiteButtonOnTap(scripts[names[n]]["document-"+utsm.lang])))
 				}else if(scripts[names[n]].document){
-					var WebsiteButton = UITableCell.button(txt("WebsiteButton"))
-					WebsiteButton.onTap = WebsiteButtonOnTap(scripts[names[n]].document)
-					ButtonsRow.addCell(WebsiteButton)
+					ButtonsRow.addCell(uf.makeUITableCellButton(txt("WebsiteButton"), null, 0, WebsiteButtonOnTap(scripts[names[n]].document)))
 				}
-				DeleteButton.onTap = DeleteButtonOnTap(names[n])
-				ButtonsRow.addCell(DeleteButton)
+				ButtonsRow.addCell(uf.makeUITableCellButton(txt("DeleteButton"), null, 0, DeleteButtonOnTap(names[n])))
 				ButtonsRow.backgroundColor = clr("scriptButtonsBackGround")
 				if(scripts[names[n]].type == "Scriptable"){
-					var RunButton = UITableCell.button(txt("RunButton"))
-					RunButton.onTap = RunButtonOnTap(scripts[names[n]].name.replace(".js", ""))
-					ButtonsRow.addCell(RunButton)
+					ButtonsRow.addCell(uf.makeUITableCellButton(txt("RunButton"), null, 0, RunButtonOnTap(scripts[names[n]].name.replace(".js", ""))))
 				}
 				u.addRow(ButtonsRow)
 			}
 		}else{
 			var ButtonsRow = new UITableRow()
-			var InstallButton = UITableCell.button(txt("InstallButton"))
-			InstallButton.onTap = InstallButtonOnTap(names[n])
-			ButtonsRow.addCell(InstallButton)
+			ButtonsRow.addCell(uf.makeUITableCellButton(txt("InstallButton"), null, 0, InstallButtonOnTap(names[n])))
 			if(scripts[names[n]]["document-"+utsm.lang]){
-				var WebsiteButton = UITableCell.button(txt("WebsiteButton"))
-				WebsiteButton.onTap = WebsiteButtonOnTap(scripts[names[n]]["document-"+utsm.lang])
-				ButtonsRow.addCell(WebsiteButton)
+				ButtonsRow.addCell(uf.makeUITableCellButton(txt("WebsiteButton"), null, 0, WebsiteButtonOnTap(scripts[names[n]]["document-"+utsm.lang])))
 			}else if(scripts[names[n]].document){
-				var WebsiteButton = UITableCell.button(txt("WebsiteButton"))
-				WebsiteButton.onTap = WebsiteButtonOnTap(scripts[names[n]].document)
-				ButtonsRow.addCell(WebsiteButton)
+				ButtonsRow.addCell(uf.makeUITableCellButton(txt("WebsiteButton"), null, 0, WebsiteButtonOnTap(scripts[names[n]].document)))
 			}
 			ButtonsRow.backgroundColor = clr("scriptButtonsBackGround")
 			u.addRow(ButtonsRow)
@@ -652,34 +532,9 @@ function SortButtonOnTap(name){
 	}
 }
 
-function ChooseTypeButtonOnTap(name){
-	return async function(){
-		var ind = utsm.unchoosedType.indexOf(name)
-		if(ind == -1){
-			utsm.unchoosedType.push(name)
-		}else{
-			utsm.unchoosedType.splice(ind, 1)
-		}
-		await load()
-	}
-}
-
-function ChooseCreaterButtonOnTap(name){
-	return async function(){
-		var ind = utsm.unchoosedCreater.indexOf(name)
-		if(ind == -1){
-			utsm.unchoosedCreater.push(name)
-		}else{
-			utsm.unchoosedCreater.splice(ind, 1)
-		}
-		await load()
-	}
-}
-
 function InstallButtonOnTap(name){
 	return function(){
 		utsm.cache = true
-		fmi.writeString(doci+"/utsm/utsm.json", JSON.stringify(utsm, null, "\t"))
 		Safari.open(encodeURI(`scriptable:///run/tsfm-ex?command=script&parameter=install|${name}&url=scriptable:///run/utsm`))
 	}
 }
@@ -728,37 +583,14 @@ async function showSetting(){
 	utsm.show = "Setting"
 	u.removeAllRows()
 	fmi.writeString(doci+"/utsm/utsm.json", JSON.stringify(utsm, null, "\t"))
-	topLeftButton = UITableCell.button(txt("leftButton"))
-	topRightButton = UITableCell.button(txt("rightButton"))
-	topSettingButton = UITableCell.text(txt("settingButton"))
-	topLeftButton.titleFont = font("leftButton")
-	topRightButton.titleFont = font("rightButton")
-	topSettingButton.titleFont = font("settingButton")
-	topLeftButton.centerAligned()
-	topRightButton.centerAligned()
-	topSettingButton.rightAligned()
-	topSettingButton.widthWeight = 200
-	topLeftButton.widthWeight = (Device.screenSize().width-200)/2
-	topRightButton.widthWeight = (Device.screenSize().width-200)/2
-	topLeftButton.onTap = async function(){
-	  await showNetwork()
-	}
-	topRightButton.onTap = async function(){
-	  await showLocal()
-	}
-	topSettingButton.titleColor = clr("pushedButton")
 	topRow = new UITableRow()
 	topRow.backgroundColor = clr("topBackGround")
-	topRow.addCell(topLeftButton)
-	topRow.addCell(topRightButton)
-	topRow.addCell(topSettingButton)
+	topRow.addCell(uf.makeUITableCellButton(txt("leftButton"), font("leftButton"), 1, (async function(){await load("onNetWork")}), false, (Device.screenSize().width-200)/2))
+	topRow.addCell(uf.makeUITableCellButton(txt("rightButton"), font("rightButton"), 1, (async function(){await load("onLocal")}), false, (Device.screenSize().width-200)/2))
+	topRow.addCell(uf.makeUITableCellText(txt("settingButton"), clr("pushedButton"), font("settingButton"), 0, 200))
 	topRow.isHeader = true
 	u.addRow(topRow)
 	var setLangRow = new UITableRow()
-	var setLangCell = UITableCell.text(txt("setLang"))
-	setLangCell.titleColor = clr("setLang")
-	setLangCell.titleFont = font("setLang")
-	setLangCell.leftAligned()
 	setLangRow.height = height("setLang")
 	setLangRow.backgroundColor = clr("settingBackGround")
 	setLangRow.dismissOnSelect = false
@@ -771,48 +603,30 @@ async function showSetting(){
 		fmi.writeString(doci+"/utsm/utsm.json", JSON.stringify(utsm, null, "\t"))
 		Safari.open("scriptable:///run/utsm")
 	}
-	setLangRow.addCell(setLangCell)
+	setLangRow.addCell(uf.makeUITableCellText(txt("setLang"), clr("setLang"), font("setLang"), 2))
 	u.addRow(setLangRow)
 	if(!translatedTexts){
 		var translateTextRow = new UITableRow()
-		var translateTextCell = UITableCell.button(txt("Create").replace("[lang]", utsm.lang))
-		translateTextCell.centerAligned()
-		translateTextCell.titleColor = clr("Create")
-		translateTextCell.titleFont = font("Create")
-		translateTextCell.onTap = function(){
-			translatedTexts = {}
-			var texts = Object.keys(utsm.text)
-			for(var n=0;n<texts.length;n++){
-				translatedTexts[texts[n]] = utsm.text[texts[n]].text
-			}
-			fmi.writeString(doci + "/utsm/" + utsm.lang + "-texts.json", JSON.stringify(translatedTexts, null, "\t"))
-		}
 		translateTextRow.backgroundColor = clr("settingSubBackGround")
 		translateTextRow.addCell(translateTextCell)
-		u.addRow(translateTextRow)
+		u.addRow(uf.makeUITableCellButton(txt("Create").replace("[lang]", utsm.lang), font("Create"), 1, (function(){translatedTexts = {};var texts = Object.keys(utsm.text);for(var n=0;n<texts.length;n++){translatedTexts[texts[n]] = utsm.text[texts[n]].text}fmi.writeString(doci + "/utsm/" + utsm.lang + "-texts.json", JSON.stringify(translatedTexts, null, "\t"))})))
 	}else{
 		var editTranslatedTopRow = new UITableRow()
 		if(utsm.settingBar.includes("editTranslatedText")){
-			var editTranslatedTopCell = UITableCell.text(txt("editTranslatedTop")+txt("opened"))
-			editTranslatedTopCell.titleFont = font("editTranslatedTop")
-			editTranslatedTopCell.titleColor = clr("editTranslatedTop")
 			editTranslatedTopRow.onSelect = SettingBarOnSelect("editTranslatedText")
 			editTranslatedTopRow.dismissOnSelect = false
 			editTranslatedTopRow.backgroundColor = clr("settingBarBackGround")
 			editTranslatedTopRow.height = height("settingBar")
-			editTranslatedTopRow.addCell(editTranslatedTopCell)
+			editTranslatedTopRow.addCell(uf.makeUITableCellText(txt("editTranslatedTop")+txt("opened"), clr("editTranslatedTop"), font("editTranslatedTop")))
 			u.addRow(editTranslatedTopRow)
 			var texts = Object.keys(utsm.text)
 			for(var n = 0;n<texts.length;n++){
 				var editTranslatedTextRow = new UITableRow()
-				var editTranslatedTextCell = UITableCell.text(texts[n])
-				editTranslatedTextCell.titleFont = font("editTranslatedText")
-				editTranslatedTextCell.titleColor = clr("editTranslatedText")
 				editTranslatedTextRow.onSelect = EditTranslatedTextOnSelect(texts[n])
 				editTranslatedTextRow.dismissOnSelect = false
 				editTranslatedTextRow.backgroundColor = clr("settingBackGround")
 				editTranslatedTextRow.height = height("editTranslatedText")
-				editTranslatedTextRow.addCell(editTranslatedTextCell)
+				editTranslatedTextRow.addCell(uf.makeUITableCellText(texts[n], clr("editTranslatedText"), font("editTranslatedText")))
 				u.addRow(editTranslatedTextRow)
 				var translatedTextRow = new UITableRow()
 				if(translatedTexts[texts[n]]){
@@ -878,10 +692,10 @@ async function showSetting(){
 			editColorRow.onSelect = EditColorRowOnSelect(colors[n])
 			u.addRow(editColorRow)
 			if(utsm.edittingColor.includes(colors[n])){
+				log("startadd")
 				var colorEditorRow = new UITableRow()
-				ColorEditor("red", colors[n], colorEditorRow)
-				ColorEditor("green", colors[n], colorEditorRow)
-				ColorEditor("blue", colors[n], colorEditorRow)
+				su.ColorEditor(utsm.color, colors[n], colorEditorRow, font("colorEditor"), txt("leftDoubleArrow"), txt("leftArrow"), txt("rightArrow"), txt("rightDoubleArrow"))
+				log(utsm.color[colors[n]])
 				colorEditorRow.height = height("colorEditor")
 				colorEditorRow.backgroundColor = clr("settingSubBackGround")
 				u.addRow(colorEditorRow)
@@ -972,7 +786,6 @@ async function showSetting(){
 		editTextTopRow.addCell(editTextTopCell)
 		u.addRow(editTextTopRow)
 	}
-	u.reload()
 	return 0;
 }
 
@@ -1020,46 +833,7 @@ function EditColorRowOnSelect(name){
 		}else{
 			utsm.edittingColor.splice(ind, 1)
 		}
-		await load()
-	}
-}
-
-function ColorEditor(color, name, row){
-	var colorNum = clr(name)[color]*255
-	var colorEditorLeftDoubleArrow = UITableCell.button(txt("leftDoubleArrow"))
-	var colorEditorLeftArrow = UITableCell.button(txt("leftArrow"))
-	var colorEditorCenter = UITableCell.text(String(colorNum))
-	var colorEditorRightArrow = UITableCell.button(txt("rightArrow"))
-	var colorEditorRightDoubleArrow = UITableCell.button(txt("rightDoubleArrow"))
-	colorEditorLeftDoubleArrow.onTap = ColorEditorOnTap(color, name, colorNum-10)
-	colorEditorLeftArrow.onTap = ColorEditorOnTap(color, name, colorNum-1)
-	colorEditorRightArrow.onTap = ColorEditorOnTap(color, name, colorNum+1)
-	colorEditorRightDoubleArrow.onTap = ColorEditorOnTap(color, name, colorNum+10)
-	colorEditorCenter.titleColor = clr("colorEditor"+color)
-	colorEditorCenter.titleFont = font("colorEditor"+color)
-	row.addCell(colorEditorLeftDoubleArrow)
-	row.addCell(colorEditorLeftArrow)
-	row.addCell(colorEditorCenter)
-	row.addCell(colorEditorRightArrow)
-	row.addCell(colorEditorRightDoubleArrow)
-}
-
-function ColorEditorOnTap(color, name, num){
-	return async function(){
-		if(num<0){
-			num = 0
-		}else if(num>255){
-			num = 255
-		}
-		num = Math.floor(num)
-		var oldColor = clr(name)
-		var colorObj = {
-			"red":oldColor.red*255,
-			"green":oldColor.green*255,
-			"blue":oldColor.blue*255
-		}
-		colorObj[color] = num
-		utsm.color[name] = "#" + colorObj.red.toString(16).padStart(2, "0") + colorObj.green.toString(16).padStart(2, "0") + colorObj.blue.toString(16).padStart(2, "0")
+		log(name)
 		await load()
 	}
 }
