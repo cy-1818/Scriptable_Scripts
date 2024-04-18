@@ -4,7 +4,7 @@
 var widget = new ListWidget();
 var uf = importModule("UsefulFuncs");
 var grs = importModule("getRecentSchedule")
-var now = new Date("2024/4/16 13:00")
+var now = new Date()
 var rs = (await grs(uf.dayStartTime(now.getTime()), 1))
 var ds = rs[uf.dayTimeSTR(now)]
 var nowNum = now.getHours()*60 + now.getMinutes()
