@@ -623,7 +623,7 @@
     "type":"Scriptable",
     "name":"scheduleWidget.js",
     "dependence":[
-      "getRecentSchedule"
+      "getRecentSchedule",
       "UsefulFuncs"
     ],
     "creater":"Yukí (cy-1818)",
