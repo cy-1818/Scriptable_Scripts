@@ -306,12 +306,14 @@
     "name":"utsm.js",
     "dependence":[
       "tsfm-ex",
-      "script"
+      "script",
+      "SettingUI",
+      "UsefulFuncs"
     ],
     "creater":"Yukí (cy-1818)",
     "describe":"UITable script manager",
     "document":"https://github.com/cy-1818/Scriptable_Scripts/blob/main/utsm/README.md",
-    "version":"1.0",
+    "version":"2.0",
     "update":true
   },
   "tsfm":{
@@ -346,7 +348,7 @@
   },
   "WidgetSize":{
     "url":"https://raw.githubusercontent.com/cy-1818/Scriptable_Scripts/main/WidgetSize/WidgetSize.js",
-    "type":"Scriptable",
+    "type":"Module",
     "name":"WidgetSize.js",
     "creater":"Yukí (cy-1818)",
     "describe":"module to get size of widget",
@@ -356,12 +358,32 @@
   },
   "FormatPath":{
     "url":"https://raw.githubusercontent.com/cy-1818/Scriptable_Scripts/main/FormatPath/FormatPath.js",
-    "type":"Scriptable",
+    "type":"Module",
     "name":"FormatPath.js",
     "creater":"Yukí (cy-1818)",
     "describe":"module to format path",
     "document":"https://github.com/cy-1818/Scriptable_Scripts/blob/main/FormatPath/README.md",
     "version":"1.1",
+    "update":true
+  },
+  "SettingUI":{
+    "url":"https://raw.githubusercontent.com/cy-1818/Scriptable_Scripts/main/Modules/SettingUI.js",
+    "type":"Module",
+    "name":"SettingUI.js",
+    "creater":"Yukí (cy-1818)",
+    "describe":"module for setting on UITable",
+    "document":"https://github.com/cy-1818/Scriptable_Scripts/blob/main/Modules/README.md",
+    "version":"1.0",
+    "update":true
+  },
+  "UsefulFuncs":{
+    "url":"https://raw.githubusercontent.com/cy-1818/Scriptable_Scripts/main/Modules/UsefulFuncs.js",
+    "type":"Module",
+    "name":"UsefulFuncs.js",
+    "creater":"Yukí (cy-1818)",
+    "describe":"module including many functions",
+    "document":"https://github.com/cy-1818/Scriptable_Scripts/blob/main/Modules/README.md",
+    "version":"1.0",
     "update":true
   },
   "MultiWidget":{
@@ -381,7 +403,7 @@
   },
   "MultiWidgetManual":{
     "url":"https://raw.githubusercontent.com/cy-1818/Scriptable_Scripts/main/MultiWidget/MultiWidgetManual.js",
-    "type":"Scriptable",
+    "type":"Module",
     "name":"MultiWidgetManual.js",
     "creater":"Yukí (cy-1818)",
     "describe":"MultiWidget's manual",
@@ -554,6 +576,60 @@
     "describe":"show file's contents",
     "document":"https://github.com/cy-1818/Scriptable_Scripts/blob/main/tsfm-ex/show/README.md",
     "version":"1.3",
+    "update":true
+  },
+  "RecentScheduleManager":{
+    "url":"https://raw.githubusercontent.com/cy-1818/Scriptable_Scripts/main/ScheduleManager/RecentScheduleManager.js",
+    "type":"Scriptable",
+    "name":"RecentScheduleManager.js",
+    "dependence":[
+      "getRecentSchedule",
+      "SchoolScheduleManager",
+      "SettingUI",
+      "UsefulFuncs"
+    ],
+    "creater":"Yukí (cy-1818)",
+    "describe":"recent schedule manager.",
+    "document":"https://github.com/cy-1818/Scriptable_Scripts/blob/main/ScheduleManager/README.md",
+    "version":"1.0",
+    "update":true
+  },
+  "SchoolScheduleManager":{
+    "url":"https://raw.githubusercontent.com/cy-1818/Scriptable_Scripts/main/ScheduleManager/SchoolScheduleManager.js",
+    "type":"Scriptable",
+    "name":"SchoolScheduleManager.js",
+    "creater":"Yukí (cy-1818)",
+    "describe":"school schedule manager.",
+    "document":"https://github.com/cy-1818/Scriptable_Scripts/blob/main/ScheduleManager/README.md",
+    "version":"1.0",
+    "update":true
+  },
+  "getRecentSchedule":{
+    "url":"https://raw.githubusercontent.com/cy-1818/Scriptable_Scripts/main/ScheduleManager/getRecentSchedule.js",
+    "type":"Module",
+    "name":"getRecentSchedule.js",
+    "dependence":[
+      "SchoolScheduleManager",
+      "SettingUI"
+    ],
+    "creater":"Yukí (cy-1818)",
+    "describe":"module to get recent schedule",
+    "document":"https://github.com/cy-1818/Scriptable_Scripts/blob/main/ScheduleManager/README.md",
+    "version":"1.0",
+    "update":true
+  },
+  "scheduleWidget":{
+    "url":"https://raw.githubusercontent.com/cy-1818/Scriptable_Scripts/main/ScheduleManager/scheduleWidget.js",
+    "type":"Scriptable",
+    "name":"scheduleWidget.js",
+    "dependence":[
+      "getRecentSchedule"
+      "UsefulFuncs"
+    ],
+    "creater":"Yukí (cy-1818)",
+    "describe":"widget shows schedule.",
+    "document":"https://github.com/cy-1818/Scriptable_Scripts/blob/main/ScheduleManager/README.md",
+    "version":"1.0",
     "update":true
   }
 }
